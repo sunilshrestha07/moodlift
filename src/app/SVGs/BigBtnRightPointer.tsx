@@ -1,4 +1,5 @@
 import React from "react";
+import { svgProp } from "../types";
 
 const BigBtnRightPointer = (prop: svgProp) => {
     return (

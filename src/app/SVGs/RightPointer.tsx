@@ -1,4 +1,5 @@
 import React from "react";
+import { svgProp } from "../types";
 
 const RightPointer = (prop: svgProp) => {
     return (
