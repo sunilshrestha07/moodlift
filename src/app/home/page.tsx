@@ -53,7 +53,7 @@ const HomePage = () => {
                 <div className="absolute top-0 right-0 h-full w-full bg-[#B1B0FF]/30"></div>
 
                 <div className="md:hidden relative z-10">
-                    {/* To show in mobile view */}
+                    {/* To show in mobile view adsf */}
                     <div className=" h-[50vh] w-full">
                         <AIGreetHistory />
                     </div>
