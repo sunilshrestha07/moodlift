@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Section from "@/components/Section";
 import { ReduxProvider } from "../../redux/features/ReduxProvider";
+import DailyStepper from "@/components/DailySteps";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
         <ReduxProvider>
           <Navbar />
           <Section />
+          <DailyStepper />
           {children}
         </ReduxProvider>
       </body>
