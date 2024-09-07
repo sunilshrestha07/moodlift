@@ -2,6 +2,8 @@ import dbConnect from "@/lib/db";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
 
+// TESTING DONE
+
 export async function GET() {
   try {
     await dbConnect();
@@ -15,12 +17,12 @@ export async function GET() {
 
   const user = await User.find();
 
-  if (!user) {
+  if (user.length === 0) {
     return NextResponse.json(
       { message: "No user found, try creating a user first" },
       { status: 404 }
     );
   }
 
-  return NextResponse.json({ user, message: "Users found" }, { status: 200 });
+  return NextResponse.json({user, message: "Users found" }, { status: 200 });
 }

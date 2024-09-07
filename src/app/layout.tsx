@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import Navbar from "../components/Navbar";
-import Section from "@/components/Section";
 import { ReduxProvider } from "../../redux/features/ReduxProvider";
 import DailyStepper from "@/components/DailySteps";
+import Section from "@/components/Section";
 
 const poppins = Poppins({
   subsets: ["latin"],

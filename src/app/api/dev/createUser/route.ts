@@ -2,9 +2,11 @@ import dbConnect from "@/lib/db";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
 
+// TESTING DONE
+
 export async function POST(req: Request) {
     try {
-        console.log("Hello is this working");
+        // console.log("Hello is this working");
         await dbConnect();
         try {
             const user = await req.json();
