@@ -42,10 +42,17 @@ const Mentalhealth: React.FC = () => {
         }
     };
 
+    type initialQsnType = {
+        age: number;
+        gender: string;
+        traumaticEvents: string;
+        mentalHealthConditions: string[];
+    };
+
     const handleConfirm = () => {
         if (selectedOptions.length > 0) {
             // Create the object with age, gender, and mental health conditions
-            const userData = {
+            const userData: initialQsnType = {
                 age: age,
                 gender: gender,
                 traumaticEvents: traumaticEvents,
@@ -54,20 +61,22 @@ const Mentalhealth: React.FC = () => {
 
             // Log the object
             console.log("User Data:", userData);
+            sendDailyQsn(userData);
 
             // Move to next step
             dispatch(setCurrentStep(currentStep + 1));
         }
     };
+    const userId = useSelector((state: RootState) => state.userSlice._id);
 
-    const sendDailyQsn = async (dailyQuestionsState: DailyQuestionsState) => {
+    const sendDailyQsn = async (userData: initialQsnType) => {
         try {
-            const res = await fetch(`/api/user/${userId}/saveActivity`, {
+            const res = await fetch(`/api/user/${userId}/saveInitialQsn`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ activity: dailyQuestionsState }),
+                body: JSON.stringify({ record: userData }),
             });
 
             if (!res.ok) {
