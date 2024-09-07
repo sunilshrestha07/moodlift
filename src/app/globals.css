@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body {
+  background-color: #b1b0ff57;
+  /* margin-left: 20px;
+  margin-right: 20px; */
+  box-sizing: border-box;
+}
+
+@media (min-width: 762) {
+  body {
+    background-color: #b1b0ff57;
+    /* margin-left: 56px;
+    margin-right: 56px; */
+  }
+}

@@ -15,12 +15,12 @@ export async function GET() {
 
   const user = await User.find();
 
-  if (!user) {
+  if (user.length === 0) {
     return NextResponse.json(
       { message: "No user found, try creating a user first" },
       { status: 404 }
     );
   }
 
-  return NextResponse.json({ user, message: "Users found" }, { status: 200 });
+  return NextResponse.json({ message: "Users found" }, { status: 200 });
 }
