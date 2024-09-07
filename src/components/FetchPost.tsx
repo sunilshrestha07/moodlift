@@ -10,6 +10,7 @@ import trophy from "@/public/trophy.png";
 import celebration from "@/public/party.png";
 import thoughts from "@/public/thought.png";
 import more from "@/public/more.png";
+import anonymous from "@/public/anonymous.png"
 
 // images
 const thoughtImg = trophy;
@@ -21,16 +22,15 @@ export default function Allpost({ refetchdata }: any) {
    const [message, setMessage] = useState<{ [key: string]: string }>({});
    const [showDelete, setShowDelete] = useState<boolean>(true);
    const [selectedPostid, setSelectedPostid] = useState<string>("");
-   const [isuploading, setIsuploading] = useState<{ [key: string]: boolean }>(
-      {}
-   );
+   const [isuploading, setIsuploading] = useState<{ [key: string]: boolean }>({});
    const [showcommentdelete, setShowcommentdelete] = useState<boolean>(false);
    const [selectedCommentId, setSelectedCommentId] = useState<string>("");
    const [showAllcomments, setShowAllcomments] = useState<boolean>(false);
    const [extendedPostId, setExtendedPostId] = useState<string>("");
    const [isLiking, setIsLiking] = useState<boolean>(false);
-   const [isfetching, setIsfetching] = useState<boolean>(true);
-
+   const [isfetching, setIsfetching] = useState<boolean>(false);
+   const currentUser = useSelector((state: RootState) => state.userSlice._id);
+   const dispatch = useDispatch();
 
    const initalcomment = 1;
 
@@ -41,7 +41,6 @@ export default function Allpost({ refetchdata }: any) {
    };
 
    //current user
-   const currentUser = "66dc1612c278523b93c657e2";
 
    //fetch data
    const fetchData = async () => {
@@ -59,66 +58,89 @@ export default function Allpost({ refetchdata }: any) {
    };
    useEffect(() => {
       fetchData();
+   }, []);
+
+
+   //new fetch
+   const refetch = async () => {
+      try {
+         const res = await axios.get("/api/post");
+         if (res.status === 200) {
+            setPost(res.data.posts);
+         }
+      } catch (error) {
+         console.log(error);
+      }
+   };
+   useEffect(() => {
+      fetchData();
    }, [refetchdata]);
 
    //handel like
    const handelLike = async (postId: string, userId: string) => {
-      setIsLiking(true);
-
-      // Optimistic UI update
-      setPost((prevPosts) =>
-         prevPosts.map((post) =>
-            post._id === postId
-               ? {
-                    ...post,
-                    totallikes: post.Likes.includes(userId)
-                       ? post.totallikes - 1
-                       : post.totallikes + 1,
-                    Likes: post.Likes.includes(userId)
-                       ? post.Likes.filter((id: string) => id !== userId)
-                       : [...post.Likes, userId],
-                 }
-               : post
+       setIsLiking(true);
+   
+       // Optimistic UI update
+       setPost(prevPosts =>
+         prevPosts.map(post =>
+           post._id === postId
+             ? {
+                 ...post,
+                 totallikes: post.Likes.includes(userId)
+                   ? post.totallikes - 1
+                   : post.totallikes + 1,
+                 Likes: post.Likes.includes(userId)
+                   ? post.Likes.filter(id => id !== userId)
+                   : [...post.Likes, userId]
+               }
+             : post
          )
-      );
-
-      const formdata = {
-         userId,
-      };
-
-      try {
-         const res = await axios.put(`/api/post/${postId}`, formdata);
+       );
+   
+       const formdata = {
+         userId
+       };
+   
+       try {
+         const res = await axios.put(`/api/post/postId`, formdata);
          if (res.status === 200) {
-            fetchData();
+           refetch(); // Fetch the latest data to ensure consistency
          }
-      } catch (error: any) {
+       } catch (error: any) {
          console.log("Error liking post", error.message);
-      } finally {
+       } finally {
          setIsLiking(false);
-      }
+       }
    };
 
    //handel comment submit
-   const handelcommentSubmit = async (post: string, user: string) => {
-      const formdata = {
-         message: message[post],
-         user: user,
-         post: post,
-      };
-      console.log(formdata);
-      setIsuploading((prev) => ({ ...prev, [post]: true }));
+const handelcommentSubmit = async (post: string, user: string) => {
+   if(currentUser){
       try {
-         const res = await axios.post("/api/comments", formdata);
+         setIsuploading((prev) => ({ ...prev, [post]: true }));
+         const formdata = {
+                        user,
+                        post,
+                        message: message[post] || "",
+                    };
+
+                    const res = await axios.post("/api/comments", formdata);
          if (res.status === 200) {
-            fetchData();
-            setIsuploading((prev) => ({ ...prev, [post]: false }));
-            setMessage((prev) => ({ ...prev, [post]: "" }));
+           refetch(); // Fetch the latest data to ensure consistency
+           setMessage((prevMessage) => ({ ...prevMessage, [post]: "" }));
+               setIsuploading((prev) => ({ ...prev, [post]: false }));
          }
-      } catch (error: any) {
-         console.log("Error submitting comment", error.message);
+       } catch (error: any) {
          setIsuploading((prev) => ({ ...prev, [post]: false }));
-      }
-   };
+           console.log("Error submitting comment", error.message);
+       } finally {
+         setIsLiking(false);
+         setIsuploading((prev) => ({ ...prev, [post]: false }));
+       }
+   }
+};
+
+  
 
    //handel show delete
    const handelshowDeletePost = (id: string) => {
@@ -132,7 +154,7 @@ export default function Allpost({ refetchdata }: any) {
          const res = await axios.delete(`api/post/${id}`);
          if (res.status === 200) {
             setShowDelete(false);
-            fetchData();
+            refetch();
          }
       } catch (error: any) {
          console.log("Error deleting user", error.message);
@@ -150,7 +172,7 @@ export default function Allpost({ refetchdata }: any) {
       try {
          const res = await axios.delete(`api/comments/${id}`);
          if (res.status === 200) {
-            fetchData();
+            refetch();
          }
       } catch (error: any) {
          console.log("Error deleting comment", error.message);
@@ -178,21 +200,39 @@ export default function Allpost({ refetchdata }: any) {
                                  <div className="p-5">
                                     <div className="flex flex-row justify-between">
                                        <div className=" flex items-end gap-3 ">
-                                          {item.user.avatar ? (
-                                             <img
-                                                className=" w-[30px] sm:w-[40px] aspect-square overflow-hidden object-cover rounded-full"
-                                                src={item.user.avatar}
-                                                alt=""
-                                             />
+                                          {item.isAnonymous ? (
+                                             <div className="">
+                                                 <img
+                                                      className=" w-[30px] sm:w-[40px] aspect-square overflow-hidden object-cover rounded-full"
+                                                      src={anonymous.src}
+                                                      alt=""
+                                                   />
+                                             </div>
+                                          ):(
+                                             <div className="">
+                                                { item.user.avatar ? (
+                                                   <img
+                                                      className=" w-[30px] sm:w-[40px] aspect-square overflow-hidden object-cover rounded-full"
+                                                      src={item.user.avatar}
+                                                      alt=""
+                                                   />
                                           ) : (
                                              <div className="w-[30px] sm:w-[40px] aspect-square overflow-hidden object-cover rounded-full bg-blue-500">
                                                 {item.user.name.slice(0, 1)}
                                              </div>
                                           )}
+                                             </div>
+                                          )}
                                           <div className="">
-                                             <p className="capitalize font-medium text-sm sm:text-xl">
-                                                {item.user.name}
-                                             </p>
+                                             {item.isAnonymous ? (
+                                                <p className="capitalize font-medium text-sm sm:text-xl">
+                                                   Anonymous
+                                                </p>
+                                             ):(
+                                                <p className="capitalize font-medium text-sm sm:text-xl">
+                                                   {item.user.name}
+                                                </p>
+                                             )}
                                           </div>
                                        </div>
                                        <div className=" flex flex-row items-end">
