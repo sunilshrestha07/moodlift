@@ -8,6 +8,7 @@ import homePageSlice from "./features/homePageSlice";
 import initialQsnSlice from "./features/initialQsnSlice";
 import popupSlice from "./features/popupSlice";
 import pagesSlice from "./features/pagesSlice";
+import graphDataSlice from "./features/graphDataSlice";
 
 // Configuration for Redux Persist
 const persistConfig = {
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
     dailyQuestionsSlice,
     homePageSlice,
     graphSlice,
+    graphDataSlice,
 });
 
 // Create a persisted reducer

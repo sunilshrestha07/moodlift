@@ -1,40 +1,44 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-// import { setStressLevel } from "./dailyQuestionsSlice";
 
 interface InitialState {
-    date: string;
-    energyLevel: number;
-    mood: number;
-    stressLevel: number;
-    sleepQuality: number;
+    date: string[];
+    energyLevel: number[];
+    mood: number[];
+    stressLevel: number[];
+    sleepQuality: number[];
+    doneGraphData: boolean;
 }
 
 const initialState: InitialState = {
-    date: "",
-    energyLevel: 0,
-    mood: 0,
-    stressLevel: 0,
-    sleepQuality: 0,
+    date: [],
+    energyLevel: [],
+    mood: [],
+    stressLevel: [],
+    sleepQuality: [],
+    doneGraphData: false,
 };
 
-const initialQsnsSlice = createSlice({
-    name: "initialQsnsSlice",
+const graphDataSlice = createSlice({
+    name: "graphData",
     initialState,
     reducers: {
-        setGraphDate: (state, action: PayloadAction<string>) => {
+        setGraphDate: (state, action: PayloadAction<string[]>) => {
             state.date = action.payload;
         },
-        setGraphEnergyLevel: (state, action: PayloadAction<number>) => {
+        setGraphEnergyLevel: (state, action: PayloadAction<number[]>) => {
             state.energyLevel = action.payload;
         },
-        setGraphMood: (state, action: PayloadAction<number>) => {
+        setGraphMood: (state, action: PayloadAction<number[]>) => {
             state.mood = action.payload;
         },
-        setGraphStressLevel: (state, action: PayloadAction<number>) => {
+        setGraphStressLevel: (state, action: PayloadAction<number[]>) => {
             state.stressLevel = action.payload;
         },
-        setgraphSleepQuality: (state, action: PayloadAction<number>) => {
+        setGraphSleepQuality: (state, action: PayloadAction<number[]>) => {
             state.sleepQuality = action.payload;
+        },
+        setDoneGraphData: (state) => {
+            state.doneGraphData = true;
         },
     },
 });
@@ -44,7 +48,8 @@ export const {
     setGraphEnergyLevel,
     setGraphMood,
     setGraphStressLevel,
-    setgraphSleepQuality,
-} = initialQsnsSlice.actions;
+    setGraphSleepQuality,
+    setDoneGraphData,
+} = graphDataSlice.actions;
 
-export default initialQsnsSlice.reducer;
+export default graphDataSlice.reducer;

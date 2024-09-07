@@ -15,10 +15,12 @@ import Stepper from "@/components/Stepper";
 import NewUserPopup from "../NewUserPopups/NewUserPopup";
 import { toggleLoginPopup } from "../../../redux/features/popupSlice";
 import {
+    setDoneGraphData,
     setGraphDate,
     setGraphEnergyLevel,
+    setGraphMood,
     setGraphStressLevel,
-    setgraphSleepQuality,
+    setGraphSleepQuality,
 } from "../../../redux/features/graphDataSlice";
 
 const HomePage = () => {
@@ -49,15 +51,27 @@ const HomePage = () => {
             const res = await fetch(`/api/chatbot/${fakeUserId}/getMess`);
             const data = await res.json();
             const dataForGraph = data.messObject;
+            const dates: string[] = [];
+            const moods: number[] = [];
+            const stressLevels: number[] = [];
+            const energyLevels: number[] = [];
+            const sleepQualities: number[] = [];
 
             dataForGraph.forEach((element: any) => {
-                console.log(element);
-                dispatch(setGraphDate(element.date));
-                dispatch(setGraphStressLevel(element.date));
-                dispatch(setGraphEnergyLevel(element.date));
-                dispatch(setgraphSleepQuality(element.date));
+                dates.push(element.date);
+                moods.push(element.mood);
+                stressLevels.push(element.stressLevel);
+                energyLevels.push(element.energyLevel);
+                sleepQualities.push(element.SleepQuality);
             });
 
+            dispatch(setGraphDate(dates));
+            dispatch(setGraphMood(moods));
+            dispatch(setGraphStressLevel(stressLevels));
+            dispatch(setGraphEnergyLevel(energyLevels));
+            dispatch(setGraphSleepQuality(sleepQualities));
+
+            dispatch(setDoneGraphData());
             // console.log(dataForGraph);
         };
         fetchLineData();

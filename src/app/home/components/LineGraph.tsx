@@ -23,73 +23,85 @@ import {
     setStressSelected,
 } from "../../../../redux/features/graphSlice";
 
-const fakeData1 = {
-    labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    datasets: [
-        {
-            label: "After",
-            data: [3, 5, 2, 7, 4, 8, 5],
-            borderColor: "Blue",
-            borderWidth: 4,
-        },
-    ],
-};
-const fakeData2 = {
-    labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    datasets: [
-        {
-            label: "After",
-            data: [6, 5, 3, 7, 6, 9, 8],
-            borderColor: "Blue",
-            borderWidth: 4,
-        },
-    ],
-};
-const fakeData3 = {
-    labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-    datasets: [
-        {
-            label: "After",
-            data: [2, 5, 6, 4, 8, 6, 3],
-            borderColor: "Blue",
-            borderWidth: 4,
-        },
-    ],
-};
-const fakeData4 = {
-    labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T", "W", "T", "F", "S"],
-    datasets: [
-        {
-            label: "After",
-            data: [1, 7, 4, 6, 4, 5, 6, 3, 5, 2],
-            borderColor: "Blue",
-            borderWidth: 4,
-        },
-    ],
-};
+// const fakeData1 = {
+//     labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+//     datasets: [
+//         {
+//             label: "After",
+//             data: [3, 5, 2, 7, 4, 8, 5],
+//             borderColor: "Blue",
+//             borderWidth: 4,
+//         },
+//     ],
+// };
+// const fakeData2 = {
+//     labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+//     datasets: [
+//         {
+//             label: "After",
+//             data: [6, 5, 3, 7, 6, 9, 8],
+//             borderColor: "Blue",
+//             borderWidth: 4,
+//         },
+//     ],
+// };
+// const fakeData3 = {
+//     labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+//     datasets: [
+//         {
+//             label: "After",
+//             data: [2, 5, 6, 4, 8, 6, 3],
+//             borderColor: "Blue",
+//             borderWidth: 4,
+//         },
+//     ],
+// };
+// const fakeData4 = {
+//     labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T", "W", "T", "F", "S"],
+//     datasets: [
+//         {
+//             label: "After",
+//             data: [1, 7, 4, 6, 4, 5, 6, 3, 5, 2],
+//             borderColor: "Blue",
+//             borderWidth: 4,
+//         },
+//     ],
+// };
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 const LineGraph = () => {
     const lineRef = useRef<HTMLDivElement>(null);
-    const [graphWidth, setGraphWidth] = useState(0);
-    const [graphHeight, setGraphHeight] = useState(0);
+    // const [graphWidth, setGraphWidth] = useState(0);
+    // const [graphHeight, setGraphHeight] = useState(0);
 
-    useEffect(() => {
-        const graphObserver = new ResizeObserver((entries) => {
-            if (entries[0]) {
-                const { height, width } = entries[0].contentRect;
-                setGraphHeight(height);
-                setGraphWidth(width);
-                // console.log({ width: width, height: height });
-            }
-        });
-        if (lineRef.current) {
-            graphObserver.observe(lineRef.current);
-        }
+    // useEffect(() => {
+    //     const graphObserver = new ResizeObserver((entries) => {
+    //         if (entries[0]) {
+    //             const { height, width } = entries[0].contentRect;
+    //             setGraphHeight(height);
+    //             setGraphWidth(width);
+    //             // console.log({ width: width, height: height });
+    //         }
+    //     });
+    //     if (lineRef.current) {
+    //         graphObserver.observe(lineRef.current);
+    //     }
 
-        return () => {
-            graphObserver.disconnect();
-        };
-    }, []);
+    //     return () => {
+    //         graphObserver.disconnect();
+    //     };
+    // }, []);
+
+    const isGraphDone = useSelector((state: RootState) => state.graphDataSlice.doneGraphData);
+    const mood = useSelector((state: RootState) => state.graphDataSlice.mood);
+    const graphDate = useSelector((state: RootState) => state.graphDataSlice.date);
+    const energyLevel = useSelector((state: RootState) => state.graphDataSlice.energyLevel);
+    const sleepQuality = useSelector((state: RootState) => state.graphDataSlice.sleepQuality);
+    const stressLevel = useSelector((state: RootState) => state.graphDataSlice.stressLevel);
+
+    // const dates = [];
+    // useEffect(() => {
+
+    // }, [isGraphDone]);
 
     const options = {
         responsive: true,
@@ -142,10 +154,190 @@ const LineGraph = () => {
     return (
         <div ref={lineRef} className="col-span-1  ">
             <div className="md:h-[85%] h-[100%] w-full bg-white p-4 rounded-md ">
-                {isMoodSelected && <Line options={options} data={fakeData1} />}
-                {isSleepSelected && <Line options={options} data={fakeData2} />}
-                {isEnergySelected && <Line options={options} data={fakeData3} />}
-                {isStressSelected && <Line options={options} data={fakeData4} />}
+                {isMoodSelected && isGraphDone && (
+                    <Line
+                        options={options}
+                        data={{
+                            labels: [
+                                graphDate[0],
+                                graphDate[1],
+                                graphDate[2],
+                                graphDate[3],
+                                graphDate[4],
+                                graphDate[5],
+                                graphDate[6],
+                                graphDate[7],
+                                graphDate[8],
+                                graphDate[9],
+                                graphDate[10],
+                                graphDate[11],
+                                graphDate[12],
+                                graphDate[13],
+                            ],
+                            datasets: [
+                                {
+                                    label: "Mood pattern",
+                                    data: [
+                                        mood[0],
+                                        mood[1],
+                                        mood[2],
+                                        mood[3],
+                                        mood[4],
+                                        mood[5],
+                                        mood[6],
+                                        mood[7],
+                                        mood[8],
+                                        mood[9],
+                                        mood[10],
+                                        mood[11],
+                                        mood[12],
+                                        mood[13],
+                                    ],
+                                    borderColor: "Blue",
+                                    borderWidth: 4,
+                                },
+                            ],
+                        }}
+                    />
+                )}
+                {isSleepSelected && isGraphDone && (
+                    <Line
+                        options={options}
+                        data={{
+                            labels: [
+                                graphDate[0],
+                                graphDate[1],
+                                graphDate[2],
+                                graphDate[3],
+                                graphDate[4],
+                                graphDate[5],
+                                graphDate[6],
+                                graphDate[7],
+                                graphDate[8],
+                                graphDate[9],
+                                graphDate[10],
+                                graphDate[11],
+                                graphDate[12],
+                                graphDate[13],
+                            ],
+                            datasets: [
+                                {
+                                    label: "Sleep quality",
+                                    data: [
+                                        sleepQuality[0],
+                                        sleepQuality[1],
+                                        sleepQuality[2],
+                                        sleepQuality[3],
+                                        sleepQuality[4],
+                                        sleepQuality[5],
+                                        sleepQuality[6],
+                                        sleepQuality[7],
+                                        sleepQuality[8],
+                                        sleepQuality[9],
+                                        sleepQuality[10],
+                                        sleepQuality[11],
+                                        sleepQuality[12],
+                                        sleepQuality[13],
+                                    ],
+                                    borderColor: "Blue",
+                                    borderWidth: 4,
+                                },
+                            ],
+                        }}
+                    />
+                )}
+                {isEnergySelected && isGraphDone && (
+                    <Line
+                        options={options}
+                        data={{
+                            labels: [
+                                graphDate[0],
+                                graphDate[1],
+                                graphDate[2],
+                                graphDate[3],
+                                graphDate[4],
+                                graphDate[5],
+                                graphDate[6],
+                                graphDate[7],
+                                graphDate[8],
+                                graphDate[9],
+                                graphDate[10],
+                                graphDate[11],
+                                graphDate[12],
+                                graphDate[13],
+                            ],
+                            datasets: [
+                                {
+                                    label: "Energy level",
+                                    data: [
+                                        energyLevel[0],
+                                        energyLevel[1],
+                                        energyLevel[2],
+                                        energyLevel[3],
+                                        energyLevel[4],
+                                        energyLevel[5],
+                                        energyLevel[6],
+                                        energyLevel[7],
+                                        energyLevel[8],
+                                        energyLevel[9],
+                                        energyLevel[10],
+                                        energyLevel[11],
+                                        energyLevel[12],
+                                        energyLevel[13],
+                                    ],
+                                    borderColor: "Blue",
+                                    borderWidth: 4,
+                                },
+                            ],
+                        }}
+                    />
+                )}
+                {isStressSelected && isGraphDone && (
+                    <Line
+                        options={options}
+                        data={{
+                            labels: [
+                                graphDate[0],
+                                graphDate[1],
+                                graphDate[2],
+                                graphDate[3],
+                                graphDate[4],
+                                graphDate[5],
+                                graphDate[6],
+                                graphDate[7],
+                                graphDate[8],
+                                graphDate[9],
+                                graphDate[10],
+                                graphDate[11],
+                                graphDate[12],
+                                graphDate[13],
+                            ],
+                            datasets: [
+                                {
+                                    label: "Stress level",
+                                    data: [
+                                        stressLevel[0],
+                                        stressLevel[1],
+                                        stressLevel[2],
+                                        stressLevel[3],
+                                        stressLevel[4],
+                                        stressLevel[5],
+                                        stressLevel[6],
+                                        stressLevel[7],
+                                        stressLevel[8],
+                                        stressLevel[9],
+                                        stressLevel[10],
+                                        stressLevel[11],
+                                        stressLevel[12],
+                                        stressLevel[13],
+                                    ],
+                                    borderColor: "Blue",
+                                    borderWidth: 4,
+                                },
+                            ],
+                        }}
+                    />
+                )}
             </div>
 
             <div className=" h-[15%] w-full flex py-3 px-2">
