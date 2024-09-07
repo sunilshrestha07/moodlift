@@ -22,5 +22,5 @@ export async function GET() {
     );
   }
 
-  return NextResponse.json({ message: "Users found" }, { status: 200 });
+  return NextResponse.json({user, message: "Users found" }, { status: 200 });
 }
