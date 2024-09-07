@@ -14,6 +14,14 @@ import Recommendations from "./components/Recommendations";
 import Stepper from "@/components/Stepper";
 import NewUserPopup from "../NewUserPopups/NewUserPopup";
 import { toggleLoginPopup } from "../../../redux/features/popupSlice";
+import {
+    setDoneGraphData,
+    setGraphDate,
+    setGraphEnergyLevel,
+    setGraphMood,
+    setGraphStressLevel,
+    setGraphSleepQuality,
+} from "../../../redux/features/graphDataSlice";
 
 const HomePage = () => {
     const loginPopupStatus = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen);
@@ -29,10 +37,44 @@ const HomePage = () => {
     );
     const isAuthenticated = useSelector((state: RootState) => state.userSlice.isAuthenticated);
     const currentUser = useSelector((state: RootState) => state.userSlice.name);
+
+    const userId = useSelector((state: RootState) => state.userSlice._id);
+
     useEffect(() => {
         if (currentUser) {
             dispatch(toggleLoginPopup());
         }
+
+        const fetchLineData = async () => {
+            const fakeUserId = "66dc9faf6b4ba10f4bc4c9d4";
+            // const data = await fetch(`/api/chatbot/${userId}/getMess`);
+            const res = await fetch(`/api/chatbot/${fakeUserId}/getMess`);
+            const data = await res.json();
+            const dataForGraph = data.messObject;
+            const dates: string[] = [];
+            const moods: number[] = [];
+            const stressLevels: number[] = [];
+            const energyLevels: number[] = [];
+            const sleepQualities: number[] = [];
+
+            dataForGraph.forEach((element: any) => {
+                dates.push(element.date);
+                moods.push(element.mood);
+                stressLevels.push(element.stressLevel);
+                energyLevels.push(element.energyLevel);
+                sleepQualities.push(element.SleepQuality);
+            });
+
+            dispatch(setGraphDate(dates));
+            dispatch(setGraphMood(moods));
+            dispatch(setGraphStressLevel(stressLevels));
+            dispatch(setGraphEnergyLevel(energyLevels));
+            dispatch(setGraphSleepQuality(sleepQualities));
+
+            dispatch(setDoneGraphData());
+            // console.log(dataForGraph);
+        };
+        fetchLineData();
     }, []);
 
     return (
