@@ -92,7 +92,7 @@ const Steps = () => {
 
         <div className="border-t-2 w-full border-gray-300"></div>
 
-        <div className="flex flex-col items-center space-y-8 mt-[4vh] lg:mt-[6vh]">
+        <div className="flex flex-col items-center space-y-8 mt-[4vh] lg:mt-[6vh] mb-[25vh] sm:mb-[50vh]">
           <p className="text-gray-800 text-center text-sm sm:text-base md:text-lg lg:text-xl">
             You’re ready? Let’s get you going.
           </p>
