@@ -19,9 +19,19 @@ const MessageForBruno = () => {
 
     const isDone = useSelector((state: RootState) => state.dailyQuestionsSlice.isDoneAsking);
 
-    useEffect(() => {
-        const sendDailyQsn = async () => {};
-    }, [isDone]);
+    const userData = useSelector((state: RootState) => state.userSlice);
+    console.log(userData);
+
+    const sendDailyQsn = async (dailyQuestionsState: DailyQuestionsState) => {
+        //   const res = await fetch(`/api/user/${userData}/saveActivity`, {
+        //       method: "POST",
+        //       headers: {
+        //           "Content-Type": "application/json",
+        //       },
+        //       body: JSON.stringify(),
+        //   });
+        console.log({ toSEndToBackend: dailyQuestionsState });
+    };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMessage(e.target.value);
@@ -41,6 +51,7 @@ const MessageForBruno = () => {
 
     useEffect(() => {
         const data = getAllQuestionsData(dailyQuestionsState);
+        sendDailyQsn(dailyQuestionsState);
         console.log({ data: dailyQuestionsState });
     }, [qsnDone]);
     return (

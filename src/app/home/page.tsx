@@ -17,7 +17,7 @@ import { toggleLoginPopup } from "../../../redux/features/popupSlice";
 
 const HomePage = () => {
     const loginPopupStatus = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen);
-    const isUserAuthorized = useSelector((state: RootState) => state.userSlice.isAuthenticated);
+    // const isUserAuthorized = useSelector((state: RootState) => state.userSlice.isAuthenticated);
     const isReportOpen = useSelector((state: RootState) => state.homePageSlice.isReportActive);
     const isRecommendationActive = useSelector(
         (state: RootState) => state.homePageSlice.isRecommendationActive

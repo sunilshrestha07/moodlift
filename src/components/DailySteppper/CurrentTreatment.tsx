@@ -21,17 +21,6 @@ const CurrentTreatment = () => {
         // setQuestionsDone(true);
     };
 
-    // useEffect(() => {
-    //     if (currentStep === 12) {
-    //         // Small delay to ensure state has updated before aggregating data
-    //         setTimeout(() => {
-    //             // console.log("Final state at step 13:", dailyQuestionsState);
-    //             const allData = getAllQuestionsData(dailyQuestionsState);
-    //             // console.log("All questions data:", allData);
-    //         }, 100);
-    //     }
-    // }, [currentStep, dailyQuestionsState]);
-
     return (
         <div>
             <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
