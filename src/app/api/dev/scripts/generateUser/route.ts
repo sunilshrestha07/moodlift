@@ -60,7 +60,7 @@ function generateRandomUser() {
         currentTreatment: faker.helpers.arrayElement([
           "Therapy",
           "Medication",
-          "Both",
+          "Therapy and Medication",
           "None",
         ]),
       },
