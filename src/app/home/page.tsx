@@ -10,6 +10,7 @@ import { RootState } from "../../../redux/store";
 import SignupPopup from "@/components/SignupPopup";
 import { pagePadding } from "../globalStyles";
 import DailyStepper from "@/components/DailySteps";
+import Recommendations from "./components/Recommendations";
 
 const HomePage = () => {
     // const { data: session, status } = useSession();
@@ -77,6 +78,7 @@ const HomePage = () => {
                     <div className="h-[2px] w-full bg-black/20 mt-12 rounded-sm"></div>
                     <MainBigButtons />
                     <DailyStepper />
+                    <Recommendations />
                 </div>
             </div>
         </div>

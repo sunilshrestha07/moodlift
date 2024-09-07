@@ -7,7 +7,6 @@ const MainBigButtons = () => {
         <div className="flex  gap-2 md:gap-6 justify-between ">
             <TodayReportBtn />
             <PreviousRecommendationsBtn />
-            {/* <PreviousRecommendationsBtn /> */}
         </div>
     );
 };
