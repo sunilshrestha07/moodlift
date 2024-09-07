@@ -28,77 +28,70 @@ export async function POST(request: Request) {
 
 
 //fetching the posts
+//fetching the posts
 export async function GET(request: Request) {
-   try {
-       await dbConnect();
-       try {
-           // Fetch all posts
-           const posts = await Post.find().sort({createdAt: -1});
+    try {
+        await dbConnect();
+        try {
+            // Fetch all posts
+            const posts = await Post.find().sort({ createdAt: -1 });
 
-           // Fetch the user and comments for each post
-           const postsWithDetails = await Promise.all(
-               posts.map(async (post) => {
-                   // Skip posts without an owner
-                   if (!post.owner?._id) {
-                       return null;
-                   }
+            // Fetch the user and comments for each post
+            const postsWithDetails = await Promise.all(
+                posts.map(async (post) => {
+                    // Skip posts without an owner
+                    if (!post.owner?._id) {
+                        return null;
+                    }
 
-                   //fetch likes count
-                   const likesCount = (post.Likes || []).length;
+                    // Fetch likes count
+                    const likesCount = (post.Likes || []).length;
 
-                   // Fetch the owner details
-                   const user = await User.findById(post.owner._id);
-                   if (!user) {
-                       return null;
-                   }
+                    // Fetch the owner details and select only the required fields
+                    const user = await User.findById(post.owner._id).select('_id name avatar email isCertified');
+                    if (!user) {
+                        return null;
+                    }
 
-                   const { email, password, ...userWithoutSensitiveData } = user.toObject();
+                    // Fetch the comments for this post along with user details for each comment
+                    const commentsWithUserDetails = await Promise.all(
+                        post.Comments.map(async (commentId: string) => {
+                            const comment = await Comment.findById(commentId);
+                            if (comment) {
+                                const commentUser = await User.findById(comment.user).select('_id name avatar email isCertified');
+                                if (commentUser) {
+                                    return {
+                                        ...comment.toObject(),
+                                        user: commentUser.toObject(),
+                                    };
+                                }
+                            }
+                            return null;
+                        })
+                    );
 
-                   // Fetch the comments for this post along with user details for each comment
-                   const commentsWithUserDetails = await Promise.all(
-                       post.Comments.map(async (commentId: string) => {
-                           const comment = await Comment.findById(commentId);
-                           if (comment) {
-                               const commentUser = await User.findById(comment.user);
-                               if (commentUser) {
-                                   const {
-                                       email,
-                                       password,
-                                       ...commentUserWithoutSensitiveData
-                                   } = commentUser.toObject();
+                    // Return the post with the owner and enriched comments
+                    return {
+                        ...post.toObject(),
+                        user: user.toObject(),
+                        allcomments: commentsWithUserDetails.filter(Boolean),
+                        totallikes: likesCount,
+                    };
+                })
+            );
 
-                                   return {
-                                       ...comment.toObject(),
-                                       user: commentUserWithoutSensitiveData,
-                                   };
-                               }
-                           }
-                           return null;
-                       })
-                   );
+            // Filter out null entries (posts without users)
+            const validPostsWithDetails = postsWithDetails.filter(Boolean);
 
-                   // Return the post with the owner and enriched comments
-                   return {
-                       ...post.toObject(),
-                       user: userWithoutSensitiveData,
-                       allcomments: commentsWithUserDetails.filter(Boolean),
-                       totallikes: likesCount,
-                   };
-               })
-           );
-
-           // Filter out null entries (posts without users)
-           const validPostsWithDetails = postsWithDetails.filter(Boolean);
-
-           return NextResponse.json({ posts: validPostsWithDetails }, { status: 200 });
-       } catch (error: any) {
-           return NextResponse.json({
-               message: `Error getting posts: ${error.message}`,
-           });
-       }
-   } catch (error: any) {
-       return NextResponse.json({
-           message: `Error connecting to db: ${error.message}`,
-       });
-   }
+            return NextResponse.json({ posts: validPostsWithDetails }, { status: 200 });
+        } catch (error: any) {
+            return NextResponse.json({
+                message: `Error getting posts: ${error.message}`,
+            });
+        }
+    } catch (error: any) {
+        return NextResponse.json({
+            message: `Error connecting to db: ${error.message}`,
+        });
+    }
 }
