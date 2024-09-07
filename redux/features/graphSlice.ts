@@ -3,14 +3,45 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 const graphSlice = createSlice({
     name: "graphSlice",
     initialState: {
-        selectedGraph: "mood",
+        isMoodSelected: true,
+        isSleepSelected: false,
+        isStressSelected: false,
+        isEnergySelected: false,
+        title: "Mood pattern",
     },
     reducers: {
-        toggleLoginPopup: (state, action: PayloadAction<string>) => {
-            state.selectedGraph = action.payload;
+        setMoodSelected: (state) => {
+            state.isMoodSelected = true;
+            state.isSleepSelected = false;
+            state.isStressSelected = false;
+            state.isEnergySelected = false;
+            state.title = "Mood pattern";
+        },
+
+        setSleepSelected: (state) => {
+            state.isMoodSelected = false;
+            state.isSleepSelected = true;
+            state.isStressSelected = false;
+            state.isEnergySelected = false;
+            state.title = "Sleep pattern";
+        },
+        setStressSelected: (state) => {
+            state.isMoodSelected = false;
+            state.isSleepSelected = false;
+            state.isStressSelected = true;
+            state.isEnergySelected = false;
+            state.title = "Stress pattern";
+        },
+        setEnergySelected: (state) => {
+            state.isMoodSelected = false;
+            state.isSleepSelected = false;
+            state.isStressSelected = false;
+            state.isEnergySelected = true;
+            state.title = "Energy pattern";
         },
     },
 });
 
-export const { toggleLoginPopup } = graphSlice.actions;
+export const { setMoodSelected, setSleepSelected, setStressSelected, setEnergySelected } =
+    graphSlice.actions;
 export default graphSlice.reducer;

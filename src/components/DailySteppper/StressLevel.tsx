@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../../redux/store";
 import { setStressLevel, setCurrentStep } from "../../../redux/features/dailyQuestionsSlice"; // Update import based on your slice
 
-export const buttonStyles = `shrink-0 text-xs md:text-sm 2xl:text-lg px-3 md:px-12 2xl:px-16 py-4 sm:py-6 bg-white border shadow-smallButtonShadow rounded-lg text-black hover:bg-blue-100 focus:bg-blue-100 transition duration-300`;
+export const buttonStyles = `shrink-0 text-xs md:text-sm 2xl:text-lg px-6 sm:px-10 md:px-12 2xl:px-16 py-4 sm:py-6 bg-white border shadow-smallButtonShadow rounded-lg text-black hover:bg-blue-100 focus:bg-blue-100 transition duration-300`;
 
-export const smallButtonsPaddingStyles = "flex flex-wrap gap-6 mb-4 sm:pr-8";
+export const smallButtonsPaddingStyles = "flex flex-wrap gap-4 sm:gap-5 md:gap-6 mt-8 mb-4 sm:pr-8";
 
 const StressLevel = () => {
     const dispatch = useDispatch<AppDispatch>();

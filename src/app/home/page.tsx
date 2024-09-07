@@ -67,9 +67,11 @@ const HomePage = () => {
                     <div className="h-[45vh] mt-6">
                         <MobileLineGraph />
                     </div>
-                    <div className="mt-10">
+                    <div className="mt-20">
                         <MainBigButtons />
                     </div>
+                    {isReportOpen && <DailyStepper />}
+                    {isRecommendationActive && <Recommendations />}
                     {/*  */}
                 </div>
 
