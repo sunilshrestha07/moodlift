@@ -23,8 +23,6 @@ export default function MakePost() {
    const [isUploading, setIsUploading] = useState<boolean>(false);
    const [refetchdata, setRefetchdata] = useState<boolean>(false);
 
-   const dispatch = useDispatch();
-
    const handleAchievementChange = (item: string) => {
       if (selectedAchievements.includes(item)) {
          setSelectedAchievements(

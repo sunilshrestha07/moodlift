@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import Navbar from "../components/Navbar";
-import { ReduxProvider } from "../../redux/features/ReduxProvider";
+import  ReduxProvider  from "../../redux/features/ReduxProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
