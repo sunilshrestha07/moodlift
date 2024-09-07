@@ -18,6 +18,7 @@ import SocialEngagement from "./DailySteppper/SocialEngagement";
 import Loneliness from "./DailySteppper/Loneliness";
 import CurrentTreatment from "./DailySteppper/CurrentTreatment";
 import { setCurrentStep } from "../../redux/features/dailyQuestionsSlice"; // Update import based on your slice
+import MessageForBruno from "./DailySteppper/MessageForBruno";
 
 const DailyStepper = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -73,6 +74,8 @@ const DailyStepper = () => {
                 return <Loneliness />;
             case 12:
                 return <CurrentTreatment />;
+            case 13:
+                return <MessageForBruno />;
             default:
                 return null;
         }

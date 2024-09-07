@@ -15,7 +15,9 @@ export interface DailyQuestionsState {
     socialEngagement: string;
     loneliness: string;
     currentTreatment: string;
+    messageForBruno: string;
     currentStep: number;
+    isDoneAsking: boolean;
 }
 
 const initialState: DailyQuestionsState = {
@@ -32,7 +34,9 @@ const initialState: DailyQuestionsState = {
     socialEngagement: "",
     loneliness: "",
     currentTreatment: "",
+    messageForBruno: "",
     currentStep: 0,
+    isDoneAsking: false,
 };
 
 const dailyQuestionsSlice = createSlice({
@@ -81,6 +85,10 @@ const dailyQuestionsSlice = createSlice({
         setCurrentStep: (state, action: PayloadAction<number>) => {
             state.currentStep = action.payload;
         },
+        setMessageForBruno: (state, action: PayloadAction<string>) => {
+            state.messageForBruno = action.payload;
+            state.isDoneAsking = true;
+        },
     },
 });
 
@@ -98,6 +106,7 @@ export const {
     setSocialEngagement,
     setLoneliness,
     setCurrentTreatment,
+    setMessageForBruno,
     setCurrentStep,
 } = dailyQuestionsSlice.actions;
 
