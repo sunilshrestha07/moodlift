@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
+import { ReduxProvider } from "../../redux/features/ReduxProvider";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -19,7 +20,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${poppins.className}`}>{children}</body>
+            <body className={`${poppins.className}`}>
+                <ReduxProvider>{children}</ReduxProvider>
+            </body>
         </html>
     );
 }
