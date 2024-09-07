@@ -8,10 +8,8 @@ import homePageSlice from './features/homePageSlice'
 import initialQsnSlice from './features/initialQsnSlice'
 import popupSlice from './features/popupSlice'
 import pagesSlice from './features/pagesSlice'
-import localStorage from "redux-persist/es/storage";
-// import pagesSlice from './features/pagesSlice'
 
-// Combine your reducers into a root reducer
+
 const rootReducer = combineReducers({
     userSlice,
     popupSlice,
@@ -25,7 +23,7 @@ const rootReducer = combineReducers({
 // Configuration for Redux Persist
 const persistConfig = {
     key: 'root',
-    storage: localStorage,
+    storage,
     version: 1,
 };
 
