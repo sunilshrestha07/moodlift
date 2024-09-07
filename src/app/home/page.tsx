@@ -12,38 +12,9 @@ import { pagePadding } from "../globalStyles";
 import DailyStepper from "@/components/DailySteps";
 import Recommendations from "./components/Recommendations";
 import Stepper from "@/components/Stepper";
+import { toggleLoginPopup } from "../../../redux/features/popupSlice";
 
 const HomePage = () => {
-    // const { data: session, status } = useSession();
-
-    // useEffect(() => {
-    //     if (status === "authenticated" && session?.user) {
-    //         // Automatically send user data to the signup route
-    //         const sendUserData = async () => {
-    //             try {
-    //                 const res = await fetch("/api/user/googlesignin", {
-    //                     method: "POST",
-    //                     headers: {
-    //                         "Content-Type": "application/json",
-    //                     },
-    //                     body: JSON.stringify(session.user),
-    //                 });
-
-    //                 if (!res.ok) {
-    //                     throw new Error("Failed to send user data");
-    //                 }
-
-    //                 const response = await res.json();
-    //                 // dispatch(setUser(response.userData));
-    //                 console.log({ response: response.userData });
-    //             } catch (error) {
-    //                 console.error("Error sending user data:", error);
-    //             }
-    //         };
-
-    //         sendUserData();
-    //     }
-    // }, [session, status]);
 
     const loginPopupStatus = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen);
     const isUserAuthorized = useSelector((state: RootState) => state.userSlice.isAuthenticated);
@@ -52,7 +23,12 @@ const HomePage = () => {
         (state: RootState) => state.homePageSlice.isRecommendationActive
     );
     const dispatch = useDispatch();
-    const currentUser = useSelector((state: RootState) => state.userSlice);
+    const currentUser = useSelector((state: RootState) => state.userSlice.name);
+    useEffect(() => {
+        if(currentUser){
+          dispatch(toggleLoginPopup())
+        }
+      },[])
 
     return (
         <div>
