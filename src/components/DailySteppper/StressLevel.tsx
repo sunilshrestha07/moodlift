@@ -22,7 +22,7 @@ const StressLevel = () => {
     const handleStressLevelSelect = (level: number) => {
         console.log("Setting stress level to:", level);
         dispatch(setStressLevel(level));
-        dispatch(setCurrentStep(currentStep + 1)); // Move to next step
+        dispatch(setCurrentStep(currentStep + 1)); // Movea to next step
     };
 
     // Button styles
