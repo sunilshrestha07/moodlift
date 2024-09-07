@@ -1,5 +1,5 @@
 // src/redux/features/dailyQuestionsSlice.ts
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface DailyQuestionsState {
     mood: string;
@@ -36,7 +36,7 @@ const initialState: DailyQuestionsState = {
 };
 
 const dailyQuestionsSlice = createSlice({
-    name: "dailyQuestionsSlice",
+    name: "dailyQuestions",
     initialState,
     reducers: {
         setMood: (state, action: PayloadAction<string>) => {
@@ -76,8 +76,10 @@ const dailyQuestionsSlice = createSlice({
             state.loneliness = action.payload;
         },
         setCurrentTreatment: (state, action: PayloadAction<string>) => {
+            console.log("Current treatment set to:", action.payload);
             state.currentTreatment = action.payload;
         },
+        
         setCurrentStep: (state, action: PayloadAction<number>) => {
             state.currentStep = action.payload;
         },
@@ -98,7 +100,7 @@ export const {
     setSocialEngagement,
     setLoneliness,
     setCurrentTreatment,
-    setCurrentStep,
+    setCurrentStep
 } = dailyQuestionsSlice.actions;
 
 export default dailyQuestionsSlice.reducer;
