@@ -19,7 +19,11 @@ const postSchema = new mongoose.Schema({
     }],
     achievements:[{
         type:String
-    }]
+    }],
+    isAnonymous: {
+        type: Boolean,
+        default: false,
+    }
 },{timestamps:true})
 
 const Post =mongoose.models.Post ||  mongoose.model("Post",postSchema)
