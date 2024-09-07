@@ -69,8 +69,6 @@ const fakeData4 = {
 };
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 const LineGraph = () => {
-    const userId = useSelector((state: RootStateType) => state.userSlice._id);
-
     const lineRef = useRef<HTMLDivElement>(null);
     const [graphWidth, setGraphWidth] = useState(0);
     const [graphHeight, setGraphHeight] = useState(0);
@@ -87,15 +85,6 @@ const LineGraph = () => {
         if (lineRef.current) {
             graphObserver.observe(lineRef.current);
         }
-
-        const fetchLineData = async () => {
-            const fakeUserId = "66dc9faf6b4ba10f4bc4c9d4";
-            // const data = await fetch(`/api/chatbot/${userId}/getMess`);
-            const res = await fetch(`/api/chatbot/${fakeUserId}/getMess`);
-            const data = await res.json();
-            console.log({ dataForGraph: data.messObject });
-        };
-        fetchLineData();
 
         return () => {
             graphObserver.disconnect();

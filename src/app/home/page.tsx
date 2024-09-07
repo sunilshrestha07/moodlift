@@ -14,6 +14,12 @@ import Recommendations from "./components/Recommendations";
 import Stepper from "@/components/Stepper";
 import NewUserPopup from "../NewUserPopups/NewUserPopup";
 import { toggleLoginPopup } from "../../../redux/features/popupSlice";
+import {
+    setGraphDate,
+    setGraphEnergyLevel,
+    setGraphStressLevel,
+    setgraphSleepQuality,
+} from "../../../redux/features/graphDataSlice";
 
 const HomePage = () => {
     const loginPopupStatus = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen);
@@ -29,10 +35,32 @@ const HomePage = () => {
     );
     const isAuthenticated = useSelector((state: RootState) => state.userSlice.isAuthenticated);
     const currentUser = useSelector((state: RootState) => state.userSlice.name);
+
+    const userId = useSelector((state: RootState) => state.userSlice._id);
+
     useEffect(() => {
         if (currentUser) {
             dispatch(toggleLoginPopup());
         }
+
+        const fetchLineData = async () => {
+            const fakeUserId = "66dc9faf6b4ba10f4bc4c9d4";
+            // const data = await fetch(`/api/chatbot/${userId}/getMess`);
+            const res = await fetch(`/api/chatbot/${fakeUserId}/getMess`);
+            const data = await res.json();
+            const dataForGraph = data.messObject;
+
+            dataForGraph.forEach((element: any) => {
+                console.log(element);
+                dispatch(setGraphDate(element.date));
+                dispatch(setGraphStressLevel(element.date));
+                dispatch(setGraphEnergyLevel(element.date));
+                dispatch(setgraphSleepQuality(element.date));
+            });
+
+            // console.log(dataForGraph);
+        };
+        fetchLineData();
     }, []);
 
     return (
