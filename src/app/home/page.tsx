@@ -63,6 +63,7 @@ const HomePage = () => {
                     <div className="mt-10">
                         <MainBigButtons />
                     </div>
+                    {/*  */}
                 </div>
 
                 {/* To show in desktop view */}

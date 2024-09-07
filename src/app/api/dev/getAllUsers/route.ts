@@ -2,6 +2,8 @@ import dbConnect from "@/lib/db";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
 
+// TESTING DONE
+
 export async function GET() {
   try {
     await dbConnect();
@@ -22,5 +24,5 @@ export async function GET() {
     );
   }
 
-  return NextResponse.json({ message: "Users found" }, { status: 200 });
+  return NextResponse.json({user, message: "Users found" }, { status: 200 });
 }
