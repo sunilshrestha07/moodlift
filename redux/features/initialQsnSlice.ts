@@ -15,7 +15,7 @@ const initialState: InitialState = {
     traumaticEvents: "",
     previousDiagnoses: [],
     currentStep: 0,
-    isInitialQuestionVisible: false,
+    isInitialQuestionVisible: true,
 };
 
 const initialQsnsSlice = createSlice({

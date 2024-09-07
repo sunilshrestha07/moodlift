@@ -20,14 +20,6 @@ export default function Page() {
                 {!currentUser && loginPopupStatus && <SignupPopup />}
 
                 {loginPopupStatus && <SignupPopup />}
-
-                <div className=" items-center mb-10">
-                    {" "}
-                    {/* <Initstep /> */}
-                    <div className="py-10">
-                        <DailySteps />
-                    </div>
-                </div>
             </div>
         </>
     );

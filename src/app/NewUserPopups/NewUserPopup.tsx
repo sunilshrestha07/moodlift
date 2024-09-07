@@ -6,6 +6,7 @@ import avatarFront from "@/public/avatar/avatarFrontHappy.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { toggleIsInitialQuestionVisible } from "../../../redux/features/initialQsnSlice";
+import Initstep from "@/components/Initstep";
 
 const NewUserPopup = () => {
     const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const NewUserPopup = () => {
                             Before that, please complete the given process
                         </p>
                     </div>
+                    <Initstep />
                 </div>
             </div>
         </>
