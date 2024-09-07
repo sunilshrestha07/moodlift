@@ -45,17 +45,18 @@ const HomePage = () => {
     //     }
     // }, [session, status]);
 
-    const loginPopupStatus = useSelector((state: RootState) => state.popupReducer.isLoginPopupOpen);
-    const isUserAuthorized = useSelector((state: RootState) => state.userReducer.isAuthenticated);
+    const loginPopupStatus = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen);
+    const isUserAuthorized = useSelector((state: RootState) => state.userSlice.isAuthenticated);
     const isReportOpen = useSelector((state: RootState) => state.homePageSlice.isReportActive);
     const isRecommendationActive = useSelector(
         (state: RootState) => state.homePageSlice.isRecommendationActive
     );
     const dispatch = useDispatch();
+    const currentUser = useSelector((state: RootState) => state.userSlice);
 
     return (
         <div>
-            {loginPopupStatus && <SignupPopup />}
+            {!currentUser && loginPopupStatus && <SignupPopup />}
             <div className={`relative ${pagePadding} bg-[#E4F3FF] min-h-[100vh] py-6`}>
                 <div className="absolute top-0 right-0 h-full w-full bg-[#B1B0FF]/30"></div>
 
