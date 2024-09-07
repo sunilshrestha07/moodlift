@@ -23,8 +23,8 @@ export async function POST(request: Request) {
                 { message: "user created successfully", user: newuser },
                 { status: 200 }
             );
-        } catch (error :any) {
-            return NextResponse.json({ message: `Error creating user ${error.message}` }, { status: 500 });
+        } catch (error) {
+            return NextResponse.json({ message: "Error creating user" }, { status: 500 });
         }
     } catch (error) {
         return NextResponse.json({ message: "Error connecting to db" }, { status: 500 });

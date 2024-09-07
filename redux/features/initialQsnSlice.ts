@@ -6,6 +6,7 @@ interface InitialState {
     traumaticEvents: string;
     previousDiagnoses: string[];
     currentStep: number;
+    isInitialQuestionVisible: boolean;
 }
 
 const initialState: InitialState = {
@@ -14,6 +15,7 @@ const initialState: InitialState = {
     traumaticEvents: "",
     previousDiagnoses: [],
     currentStep: 0,
+    isInitialQuestionVisible: true,
 };
 
 const initialQsnsSlice = createSlice({
@@ -35,10 +37,19 @@ const initialQsnsSlice = createSlice({
         setCurrentStep: (state, action: PayloadAction<number>) => {
             state.currentStep = action.payload;
         },
+        toggleIsInitialQuestionVisible: (state) => {
+            state.isInitialQuestionVisible = !state.isInitialQuestionVisible;
+        },
     },
 });
 
-export const { setAge, setGender, setTraumaticEvents, setPreviousDiagnosis, setCurrentStep } =
-    initialQsnsSlice.actions;
+export const {
+    setAge,
+    setGender,
+    setTraumaticEvents,
+    setPreviousDiagnosis,
+    setCurrentStep,
+    toggleIsInitialQuestionVisible,
+} = initialQsnsSlice.actions;
 
 export default initialQsnsSlice.reducer;

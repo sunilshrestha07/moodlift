@@ -7,6 +7,7 @@ import {
   setCurrentStep,
 } from "../../../redux/features/initialQsnSlice";
 import { buttonStyles, smallButtonsPaddingStyles } from "./Gender"; // Reuse styles from Gender component
+// import Traumatic from "./Traumatic";
 
 const options = [
   "No",
@@ -32,6 +33,9 @@ const Mentalhealth: React.FC = () => {
   const gender = useSelector(
     (state: RootState) => state.initialQsnSlice.gender
   );
+  const traumaticEvents = useSelector(
+    (state: RootState) => state.initialQsnSlice.traumaticEvents
+  );
 
   const handleOptionClick = (option: string) => {
     if (selectedOptions.includes(option)) {
@@ -51,6 +55,7 @@ const Mentalhealth: React.FC = () => {
       const userData = {
         age: age,
         gender: gender,
+        traumaticEvents: traumaticEvents,
         mentalHealthConditions: selectedOptions,
       };
 

@@ -1,4 +1,3 @@
-// src/app/components/DailySteppper/Loneliness.tsx
 "use client";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,8 +18,7 @@ const Loneliness = () => {
     (state: RootState) => state.dailyQuestionsSlice.loneliness
   );
 
-  const handleLonelinessSelect = (loneliness: string) => {
-    // console.log("Setting loneliness to:", loneliness);
+  const handleLonelinessSelect = (loneliness: number) => {
     dispatch(setLoneliness(loneliness));
     dispatch(setCurrentStep(currentStep + 1));
   };
@@ -28,24 +26,23 @@ const Loneliness = () => {
   return (
     <div>
       <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-        How often have you felt lonely or isolated in the past week?
+        On a scale of 1 to 10, how often have you felt lonely or isolated in the
+        past week? (1 being never and 10 being always)
       </label>
       <div className={smallButtonsPaddingStyles}>
-        {["Never", "Rarely", "Sometimes", "Often", "Always"].map(
-          (loneliness) => (
-            <button
-              key={loneliness}
-              className={`${buttonStyles}`}
-              onClick={() => handleLonelinessSelect(loneliness)}
-              style={{
-                backgroundColor:
-                  selectedLoneliness === loneliness ? "#dbeafe" : "white",
-              }}
-            >
-              {loneliness}
-            </button>
-          )
-        )}
+        {Array.from({ length: 10 }, (_, index) => index + 1).map((value) => (
+          <button
+            key={value}
+            className={`${buttonStyles}`}
+            onClick={() => handleLonelinessSelect(value)}
+            style={{
+              backgroundColor:
+                selectedLoneliness === value ? "#dbeafe" : "white",
+            }}
+          >
+            {value}
+          </button>
+        ))}
       </div>
     </div>
   );

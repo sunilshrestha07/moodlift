@@ -10,33 +10,27 @@ import popupSlice, { toggleLoginPopup } from "../../redux/features/popupSlice";
 import Initstep from "@/components/Initstep";
 
 export default function Page() {
-  const loginPopupStatus = useSelector(
-    (state: RootState) => state.popupSlice.isLoginPopupOpen
-  );
-  const dispatch = useDispatch();
+    const loginPopupStatus = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen);
 
-  const currentUser = useSelector((state: RootState) => state.userSlice.name);
-  useEffect(() => {
-    if (currentUser) {
-      dispatch(toggleLoginPopup());
-    }
-  }, []);
+    // const currentUser = useSelector((state: RootState) => state.userSlice);
+    const dispatch = useDispatch();
 
-  return (
-    <>
-      <div className="">
-        <Section />
-        <Steps />
-        {!currentUser && loginPopupStatus && <SignupPopup />}
+    const currentUser = useSelector((state: RootState) => state.userSlice.name);
+    useEffect(() => {
+        if (currentUser) {
+            dispatch(toggleLoginPopup());
+        }
+    }, []);
 
-        <div className=" items-center mb-10">
-          {" "}
-          {/* <Initstep /> */}
-          <div className="py-10">
-            <Initstep />
-          </div>
-        </div>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div className="">
+                <Section />
+                <Steps />
+                {!currentUser && loginPopupStatus && <SignupPopup />}
+
+                {/* {loginPopupStatus && <SignupPopup />} */}
+            </div>
+        </>
+    );
 }

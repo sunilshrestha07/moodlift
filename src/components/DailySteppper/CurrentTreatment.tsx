@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../../redux/store";
 import {
@@ -27,15 +27,15 @@ const CurrentTreatment = () => {
     dispatch(setCurrentTreatment(treatment));
   };
 
-  useEffect(() => {
-    if (currentStep === 12) {
-      // Small delay to ensure state has updated before aggregating data
-      setTimeout(() => {
-        const allData = getAllQuestionsData(dailyQuestionsState);
-        console.log("All questions data:", allData);
-      }, 100);
-    }
-  }, [currentStep, dailyQuestionsState]);
+  // useEffect(() => {
+  //   if (currentStep === 12) {
+  //     // Small delay to ensure state has updated before aggregating data
+  //     setTimeout(() => {
+  //       const allData = getAllQuestionsData(dailyQuestionsState);
+  //       console.log("All questions data:", allData);
+  //     }, 100);
+  //   }
+  // }, [currentStep, dailyQuestionsState]);
 
   return (
     <div>
@@ -44,12 +44,7 @@ const CurrentTreatment = () => {
         health (e.g., therapy, medication)?
       </label>
       <div className={smallButtonsPaddingStyles}>
-        {[
-          "Yes, and it’s helpful",
-          "Yes, but it’s not helpful",
-          "No, but I’m considering it",
-          "No, and I’m not considering it",
-        ].map((treatment) => (
+        {["Yes", "No"].map((treatment) => (
           <button
             key={treatment}
             className={`${buttonStyles}`}
