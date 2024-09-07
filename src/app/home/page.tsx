@@ -52,9 +52,9 @@ const HomePage = () => {
     }
 
     const fetchLineData = async () => {
-      const fakeUserId = "66dc9faf6b4ba10f4bc4c9d4";
-      // const data = await fetch(`/api/chatbot/${userId}/getMess`);
-      const res = await fetch(`/api/chatbot/${fakeUserId}/getMess`);
+      // const fakeUserId = "66dcc15413487515fad3cc28";
+      const res = await fetch(`/api/chatbot/${userId}/getMess`);
+      // const res = await fetch(`/api/chatbot/${fakeUserId}/getMess`);
       const data = await res.json();
       const dataForGraph = data.messObject;
       const dates: string[] = [];

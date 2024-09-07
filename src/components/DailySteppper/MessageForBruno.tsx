@@ -1,90 +1,95 @@
-// src/app/components/DailySteppper/Loneliness.tsx
-"use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../../redux/store";
-import { buttonStyles, smallButtonsPaddingStyles } from "./StressLevel";
+import { smallButtonsPaddingStyles } from "./StressLevel";
 import {
   DailyQuestionsState,
   setMessageForBruno,
+  setIsDoneAsking,
 } from "../../../redux/features/dailyQuestionsSlice";
 import Image from "next/image";
 import frontAvatar from "@/public/avatar/avatarFrontHappy.svg";
-import { getAllQuestionsData } from "./aggregateQuestionsData";
 
 const MessageForBruno = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [message, setMessage] = useState("");
-  const [qsnDone, setQsnDone] = useState(false);
-
-  const isDone = useSelector(
-    (state: RootState) => state.dailyQuestionsSlice.isDoneAsking
-  );
-
-  const userData = useSelector((state: RootState) => state.userSlice);
-  console.log(userData);
+  const userId = useSelector((state: RootState) => state.userSlice._id);
+  const dailyQuestionsState = useSelector(
+    (state: RootState) => state.dailyQuestionsSlice
+  ) as DailyQuestionsState;
 
   const sendDailyQsn = async (dailyQuestionsState: DailyQuestionsState) => {
-    //   const res = await fetch(`/api/user/${userData}/saveActivity`, {
-    //       method: "POST",
-    //       headers: {
-    //           "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(),
-    //   });
-    console.log({ toSEndToBackend: dailyQuestionsState });
+    try {
+      const res = await fetch(`/api/user/${userId}/saveActivity`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ activity: dailyQuestionsState }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to save activity");
+      }
+
+      const data = await res.json();
+      console.log("Activity saved successfully:", data);
+    } catch (error) {
+      console.error("Error saving activity:", error);
+      // Handle error (e.g., show an error message to the user)
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
 
-  const dailyQuestionsState = useSelector(
-    (state: RootState) => state.dailyQuestionsSlice
-  ) as DailyQuestionsState;
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setMessageForBruno(message));
 
-    setMessage(""); // Clear the input after submission
-    setQsnDone(!qsnDone);
+    // Update the dailyQuestionsState with the new message
+    const updatedState = {
+      ...dailyQuestionsState,
+      messageForBruno: message,
+    };
+
+    // Send the updated state to the API
+    await sendDailyQsn(updatedState);
+
+    // Clear the input and mark questions as done
+    setMessage("");
+    dispatch(setIsDoneAsking(true));
   };
 
-  useEffect(() => {
-    const data = getAllQuestionsData(dailyQuestionsState);
-    sendDailyQsn(dailyQuestionsState);
-    console.log({ data: dailyQuestionsState });
-  }, [qsnDone]);
   return (
     <div>
-      <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
+      <label
+        htmlFor="messageForBruno"
+        className="block text-xs sm:text-sm lg:text-lg font-medium mb-2"
+      >
         <div className="flex items-center">
-          <div>Do You have any message for Bruno?</div>
+          <div>Do you have any message for Bruno?</div>
           <div>
             <Image src={frontAvatar} alt="frontAvatar" className="h-6 w-6" />
           </div>
         </div>
       </label>
       <div className={`${smallButtonsPaddingStyles}`}>
-        <form onSubmit={handleSubmit} className="flex flex-col  ">
+        <form onSubmit={handleSubmit} className="flex flex-col">
           <input
+            id="messageForBruno"
             type="text"
+            value={message}
             onChange={handleChange}
-            className={`items-start border-[0.8em] rounded-md border-[#D9D9D9] bg-[#D9D9D9] w-[30vw] h-[5rem] focus:outline-none ${
-              window.innerWidth >= 1024
-                ? "placeholder-opacity-100"
-                : "placeholder-opacity-0"
-            }`}
-            placeholder={
-              window.innerWidth >= 1024
-                ? "(Message) Let Bruno understand you"
-                : ""
-            }
+            className="`items-start border-[0.8em] rounded-md border-[#D9D9D9] bg-[#D9D9D9] w-[30vw] h-[5rem] focus:outline-none  p-2"
+            aria-label="Message for Bruno"
           />
-
           <div className="flex justify-end mt-4">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-300">
+            <button
+              type="submit"
+              className="bg-slate-400 p-4 mt-2 rounded hover:bg-slate-500 transition-colors"
+            >
               Next
             </button>
           </div>

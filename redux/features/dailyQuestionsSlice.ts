@@ -28,7 +28,7 @@ const initialState: DailyQuestionsState = {
     sleepQuality: 0,
     sleepHours: 0,
     sleepDisturbance: "",
-    anxietySymptoms: "", 
+    anxietySymptoms: "",
     physicalActivity: "",
     energyLevels: 0,
     eatingHabits: "",
@@ -89,7 +89,9 @@ const dailyQuestionsSlice = createSlice({
         },
         setMessageForBruno: (state, action: PayloadAction<string>) => {
             state.messageForBruno = action.payload;
-            state.isDoneAsking = true;
+        },
+        setIsDoneAsking: (state, action: PayloadAction<boolean>) => {
+            state.isDoneAsking = action.payload;
         },
     },
 });
@@ -110,6 +112,7 @@ export const {
     setCurrentTreatment,
     setMessageForBruno,
     setCurrentStep,
+    setIsDoneAsking,
 } = dailyQuestionsSlice.actions;
 
 export default dailyQuestionsSlice.reducer;

@@ -1,7 +1,7 @@
 import { DailyQuestionsState } from "../../../redux/features/dailyQuestionsSlice";
 
 export const getAllQuestionsData = (state: DailyQuestionsState) => {
-    console.log("State passed to getAllQuestionsData:", state);
+    // console.log("State passed to getAllQuestionsData:", state);
 
     return {
         mood: state.mood,
