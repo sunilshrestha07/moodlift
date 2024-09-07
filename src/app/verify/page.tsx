@@ -5,8 +5,14 @@ import { verify } from "../../../interface";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../../firebase";
 import { v4 } from "uuid";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import SignupPopup from "@/components/SignupPopup";
 
 export default function Component() {
+   const currentUser = useSelector((state: RootState) => state.userSlice.name);
+   const currentUserId = useSelector((state: RootState) => state.userSlice._id);
     const [formData, setFormData] = useState<verify[]>([]);
     const [profileImage, setProfileImage] = useState<File | null>(null);
     const [educationImage, setEducationImage] = useState<File | null>(null);
@@ -16,6 +22,7 @@ export default function Component() {
     const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
     const [educationImageUrl, setEducationImageUrl] = useState<string | null>(null);
     const [otherImageUrl, setOtherImageUrl] = useState<string | null>(null);
+    const loginPopupStatus = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen);
   
     // Handle image selection
     const handleImageChange = (
@@ -69,6 +76,16 @@ export default function Component() {
         educationImageUrl,
         otherImageUrl,
       };
+      // console.log(completeFormData);
+      const res = await axios.put(`/api/certified/${currentUserId}`, completeFormData);
+      console.log(res.data);
+      if(res.status === 200) {
+        setIsUploading(false);
+        setFormData([]);
+        setProfileImage(null);
+        setEducationImage(null);
+        setOtherImage(null);
+      }
       } catch (error :any) {
         setIsUploading(false);
         console.log(`Error uploading documents: ${error.message}`);
@@ -77,6 +94,7 @@ export default function Component() {
 
    return (
       <div className=" flex justify-center w-full mt-10 ">
+         {!currentUser && loginPopupStatus && <SignupPopup />}
          <div className=" pt-6 sm:pt-8 md:pt-10 w-[85%] bg-white  rounded-lg mb-10">
             <div className="flex flex-col items-center">
                <h1 className=" text-xl sm:text-2xl md:text-3xl font-bold mb-2">
@@ -98,7 +116,7 @@ export default function Component() {
                            Full Name
                         </label>
                         <input
-                           id="name"
+                           id="fullname"
                            onChange={handleChange}
                            placeholder="Enter your full name"
                            className="rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
@@ -109,7 +127,7 @@ export default function Component() {
                            Email
                         </label>
                         <input
-                           id="email"
+                           id="officialemail"
                            onChange={handleChange}
                            type="email"
                            placeholder="Enter your email"
@@ -298,12 +316,16 @@ export default function Component() {
                         />
                      </div>
                   </div>
-                  <div className="mt-6 flex  items-center justify-end ">
+                  <div className="mt-6 flex  items-center justify-start ">
                      <button
                         type="submit"
-                        className="rounded-md bg-primary px-6 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus:outline-none focus:ring-1 focus:ring-primary bg-button"
+                        className="rounded-md bg-primary px-8 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus:outline-none focus:ring-1 focus:ring-primary bg-button "
                      >
-                        Submit
+                       {isUploading ? (
+                        <span className="loader"></span>
+                       ):(
+                        " Submit"
+                       )}
                      </button>
                   </div>
                </form>

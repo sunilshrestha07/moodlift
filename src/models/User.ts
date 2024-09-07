@@ -63,6 +63,53 @@ const userSchema = new mongoose.Schema(
                 currentTreatment: String,
             },
         ],
+        isCertified:{
+            type:Boolean,
+            default:false
+        },
+        verificationDocuments:[
+            {
+                fullname: {
+                    type: String,
+                  },
+                  officialemail: {
+                    type: String,
+                  },
+                  phone: {
+                    type: Number,
+                  },
+                  address: {
+                    type: String,
+                  },
+                  licence: {
+                    type: String,
+                  },
+                  expiryDate: {
+                    type: Date,
+                  },
+                  province: {
+                    type: String,
+                  },
+                  licenceImage: {
+                    type: String,
+                  },
+                  educationImage: {
+                    type: String,
+                  },
+                  photoId: {
+                    type: String,
+                  },
+                  workplace: {
+                    type: String,
+                  },
+                  experience: {
+                    type: Number,
+                  },
+                  specializations: {
+                    type: String,
+                  },
+            }
+        ]
     },
     { timestamps: true }
 );
