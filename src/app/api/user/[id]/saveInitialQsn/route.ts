@@ -18,10 +18,10 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     }
 
     const body = await req.json();
-    const activity = body.activity;
+    const data = body.record;
 
-    if (!activity) {
-        return NextResponse.json({ message: "Activity data not provided" }, { status: 400 });
+    if (!data) {
+        return NextResponse.json({ message: "record data not provided" }, { status: 400 });
     }
 
     try {
@@ -32,18 +32,20 @@ export async function POST(req: Request, { params }: { params: { id: string } })
         }
 
         // Add the new activity
-        user.activityInfo.push(activity);
+        user.gender = data.gender;
+        user.age = data.age;
+        user.pastExperiences = data.pastExperiences;
+        user.previousDiagnosis = data.previousDiagnosis;
 
         // Sort the activityInfo array by date
-        user.activityInfo.sort(
-            (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()
-        );
+        //   user.activityInfo.sort(
+        //       (a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        //   );
 
         await user.save();
 
         return NextResponse.json({
-            message: "Activity added successfully",
-            activityInfo: user.activityInfo,
+            message: "data added successfully",
         });
     } catch (error: any) {
         console.error("Error updating user:", error.message);
