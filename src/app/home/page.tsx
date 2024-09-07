@@ -12,6 +12,7 @@ import { pagePadding } from "../globalStyles";
 import DailyStepper from "@/components/DailySteps";
 import Recommendations from "./components/Recommendations";
 import Stepper from "@/components/Stepper";
+import NewUserPopup from "../NewUserPopups/NewUserPopup";
 
 const HomePage = () => {
     const loginPopupStatus = useSelector((state: RootState) => state.popupReducer.isLoginPopupOpen);
@@ -25,6 +26,8 @@ const HomePage = () => {
     return (
         <div>
             {loginPopupStatus && <SignupPopup />}
+            <NewUserPopup />
+
             <div className={`relative ${pagePadding} bg-[#E4F3FF] min-h-[100vh] py-6`}>
                 <div className="absolute top-0 right-0 h-full w-full bg-[#B1B0FF]/30"></div>
 

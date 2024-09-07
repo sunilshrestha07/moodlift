@@ -13,25 +13,24 @@ import { RootState } from "../../redux/store";
 import DailySteps from "@/components/DailySteps";
 
 export default function Page() {
-  const loginPopupStatus = useSelector(
-    (state: RootState) => state.popupReducer.isLoginPopupOpen
-  );
+    const loginPopupStatus = useSelector((state: RootState) => state.popupReducer.isLoginPopupOpen);
 
-  return (
-    <>
-      <div className="">
-        <Section />
-        <Steps />
-        {loginPopupStatus && <SignupPopup />}
+    return (
+        <>
+            <div className="">
+                <Section />
+                <Steps />
 
-        <div className=" items-center mb-10">
-          {" "}
-          {/* <Initstep /> */}
-          <div className="py-10">
-            <DailySteps />
-          </div>
-        </div>
-      </div>
-    </>
-  );
+                {loginPopupStatus && <SignupPopup />}
+
+                <div className=" items-center mb-10">
+                    {" "}
+                    {/* <Initstep /> */}
+                    <div className="py-10">
+                        <DailySteps />
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 }

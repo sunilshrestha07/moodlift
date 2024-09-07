@@ -1,0 +1,33 @@
+<svg width="198" height="262" viewBox="0 0 198 262" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="155.355" cy="49.2656" r="23.1889" transform="rotate(59.761 155.355 49.2656)" fill="#1A182C"/>
+<rect x="147.206" y="48.1677" width="19.3722" height="36.5578" transform="rotate(18.9777 147.206 48.1677)" fill="#1A182C"/>
+<ellipse cx="166.681" cy="41.6521" rx="5.44426" ry="6.99977" transform="rotate(-23.2207 166.681 41.6521)" fill="white"/>
+<mask id="mask0_140_542" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="5" y="69" width="194" height="193">
+<circle cx="101.957" cy="165.592" r="96.0524" fill="#1A182C"/>
+</mask>
+<g mask="url(#mask0_140_542)">
+<circle cx="101.957" cy="165.592" r="96.0524" fill="#1A182C"/>
+<g style="mix-blend-mode:screen">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M191.775 167.982C188.894 182.254 182.549 195.682 172.584 207.055C138.603 245.84 75.3914 246.033 31.398 207.488C14.5023 192.685 2.89833 174.32 -3.06158 155.117C-6.89401 187.18 6.30616 222.429 34.7946 247.389C78.087 285.321 140.291 285.13 173.731 246.963C192.69 225.325 198.333 196.126 191.775 167.982Z" fill="#1B1929"/>
+</g>
+</g>
+<ellipse cx="147.678" cy="139.475" rx="26.9534" ry="30.3983" transform="rotate(2.17896 147.678 139.475)" fill="white"/>
+<ellipse cx="15.1326" cy="21.1921" rx="15.1326" ry="21.1921" transform="matrix(0.995303 0.0968047 -0.09913 0.995075 135.507 115.869)" fill="#111111"/>
+<ellipse cx="6.0126" cy="7.7999" rx="6.0126" ry="7.7999" transform="matrix(0.959566 -0.281484 0.179001 0.983849 150.889 117.535)" fill="white"/>
+<ellipse cx="10.8812" cy="8.97891" rx="10.8812" ry="8.97891" transform="matrix(0.976718 0.214528 -0.316065 0.948738 139.507 146.952)" fill="white"/>
+<ellipse cx="61.9845" cy="137.03" rx="30.848" ry="30.3984" transform="rotate(-13.948 61.9845 137.03)" fill="white"/>
+<ellipse cx="62.6068" cy="136.471" rx="15.9235" ry="21.1922" transform="rotate(-0.503963 62.6068 136.471)" fill="#111111"/>
+<ellipse cx="72.2857" cy="121.629" rx="5.11864" ry="7.11081" transform="rotate(-13.948 72.2857 121.629)" fill="white"/>
+<ellipse cx="62.13" cy="156.938" rx="8.04218" ry="12.1254" transform="rotate(92.2295 62.13 156.938)" fill="white"/>
+<ellipse cx="1.87464" cy="1.84732" rx="1.87464" ry="1.84732" transform="matrix(-0.970515 0.241041 0.241041 0.970515 61.8022 114.392)" fill="white"/>
+<ellipse cx="1.87464" cy="1.84732" rx="1.87464" ry="1.84732" transform="matrix(-0.999277 -0.0380208 -0.0380208 0.999277 145.825 117.761)" fill="white"/>
+<ellipse cx="102.838" cy="170.799" rx="7.38865" ry="6.99977" transform="rotate(15.915 102.838 170.799)" fill="white"/>
+<rect x="38.8677" y="58.2809" width="18.7878" height="30.7437" transform="rotate(-8.76754 38.8677 58.2809)" fill="#1A182C"/>
+<circle cx="49.7979" cy="49.1364" r="26.0762" fill="#1A182C"/>
+<mask id="mask1_140_542" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="28" y="25" width="46" height="47">
+<circle cx="50.9423" cy="48.3178" r="22.7731" transform="rotate(31.085 50.9423 48.3178)" fill="#1A182C"/>
+</mask>
+<g mask="url(#mask1_140_542)">
+<ellipse cx="62.4603" cy="38.8089" rx="5.77722" ry="6.80678" transform="rotate(-30.0732 62.4603 38.8089)" fill="white"/>
+</g>
+</svg>
