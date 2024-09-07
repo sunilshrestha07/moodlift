@@ -1,7 +1,7 @@
 // src/redux/features/dailyQuestionsSlice.ts
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface DailyQuestionsState {
+export interface DailyQuestionsState {
     mood: string;
     moodDuration: string;
     stressLevel: number;

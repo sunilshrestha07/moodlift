@@ -16,7 +16,11 @@ const Navbar = () => {
         dispatch(toggleLoginPopup());
     };
 
+<<<<<<< HEAD
     const userData = useSelector((state: RootState) => state.userReducer);
+=======
+  const userData = useSelector((state: RootState) => state.userSlice);
+>>>>>>> 972e1b747e0be4dab67e946bb60f96a045345441
 
     // State to manage the dropdown visibility
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -82,6 +86,7 @@ const Navbar = () => {
                                 Login
                             </button>
 
+<<<<<<< HEAD
                             <div className="rounded-full box-border w-8 h-8 sm:w-10 sm:h-10 bg-[#D9D9D9]">
                                 {(userData.isAuthenticated && (
                                     <Image
@@ -97,6 +102,23 @@ const Navbar = () => {
                                     />
                                 )}
                             </div>
+=======
+              <div className="rounded-full box-border w-8 h-8 sm:w-10 sm:h-10 bg-[#D9D9D9]">
+                {(userData.avatar && (
+                  <img
+                    src={userData.avatar}
+                    className="rounded-full w-full h-full object-cover"
+                    alt="User Image"
+                  />
+                )) || (
+                  <img
+                    src={userSvg}
+                    className="rounded-full h-[100%] w-[100%] object-contain"
+                    alt="User Icon"
+                  />
+                )}
+              </div>
+>>>>>>> 972e1b747e0be4dab67e946bb60f96a045345441
 
                             <button
                                 className="cursor-pointer right-2 mt-1 text-xl sm:hidden"

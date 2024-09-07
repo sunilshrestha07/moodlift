@@ -31,8 +31,8 @@ export default function Oauth() {
       const res = await axios.post("/api/googleSignin", userData);
 
       if (res.status === 200) {
-        router.push("/home");
         dispatch(setUserForGoogleSignup(res.data));
+        router.push("/home");
       }
     } catch (error: any) {
       console.error('Error during Google sign-in:', error);
