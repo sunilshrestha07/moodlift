@@ -70,6 +70,8 @@ const HomePage = () => {
                     <div className="mt-20">
                         <MainBigButtons />
                     </div>
+                    {isReportOpen && <DailyStepper />}
+                    {isRecommendationActive && <Recommendations />}
                     {/*  */}
                 </div>
 
