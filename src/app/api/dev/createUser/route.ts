@@ -2,6 +2,8 @@ import dbConnect from "@/lib/db";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
 
+// TESTING DONE
+
 export async function POST(req: Request) {
     try {
         // console.log("Hello is this working");
