@@ -1,3 +1,4 @@
+"use client";
 import DailyStepper from "@/components/DailySteps";
 import Section from "@/components/Section";
 

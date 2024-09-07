@@ -3,14 +3,14 @@ import React from "react";
 import { BigBtnStyle } from "../homePageSpecificStyles";
 import LeftPointer from "@/app/SVGs/LeftPointer";
 import BigBtnRightPointer from "@/app/SVGs/BigBtnRightPointer";
-import { setActivePanel } from "../../../../redux/features/homePageSlice";
+import { setRecommendationActive } from "../../../../redux/features/homePageSlice";
 import { useDispatch } from "react-redux";
 
 const PreviousRecommendationsBtn = () => {
     const dispatch = useDispatch();
 
     const activateRecommendationPanel = () => {
-        dispatch(setActivePanel("recommendation"));
+        dispatch(setRecommendationActive());
     };
     return (
         <div className={`${BigBtnStyle} `} onClick={activateRecommendationPanel}>
