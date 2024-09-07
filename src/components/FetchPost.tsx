@@ -7,12 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { toggleLoginPopup } from "../../redux/features/popupSlice";
 import logo from "@/public/icons/LOGO.svg";
+import trophy from "@/public/trophy.png"
+import celebration from "@/public/party.png"
+import thoughts from "@/public/thought.png"
+import more from "@/public/more.png"
 
 
 // images
-const thoughtImg = "@/trophy.png";
-const celebrationImg = "@/party.png";
-const achievementImg = "@/trophy.png";
+const thoughtImg = trophy
+const celebrationImg = celebration
+const achievementImg = thoughts
 
 export default function Allpost({ refetchdata }: any) {
    const [post, setPost] = useState<Post[]>([]);
@@ -44,7 +48,7 @@ export default function Allpost({ refetchdata }: any) {
    };
 
    //current user
-   const currentUser = "66dbf916f1a2c8cd6dbed774";
+   const currentUser = "66dc1612c278523b93c657e2";
 
    //fetch data
    const fetchData = async () => {
@@ -59,14 +63,11 @@ export default function Allpost({ refetchdata }: any) {
       }
    };
    useEffect(() => {
-      fetchData();
+      fetchData()
    }, [refetchdata]);
 
    //handel like
    const handelLike = async (postId: string, userId: string) => {
-      if (!isUserAuthorized) {
-         dispatch(toggleLoginPopup());
-      } else {
          setIsLiking(true);
 
          // Optimistic UI update
@@ -100,7 +101,6 @@ export default function Allpost({ refetchdata }: any) {
          } finally {
             setIsLiking(false);
          }
-      }
    };
 
    //handel comment submit
@@ -110,14 +110,14 @@ export default function Allpost({ refetchdata }: any) {
          user: user,
          post : post,
       };
+      console.log(formdata);
       setIsuploading((prev) => ({ ...prev, [post]: true }));
       try {
          const res = await axios.post("/api/comments", formdata);
          if (res.status === 200) {
-            setIsuploading((prev) => ({ ...prev, [post]: false }));
             fetchData();
+            setIsuploading((prev) => ({ ...prev, [post]: false }));
             setMessage((prev) => ({ ...prev, [post]: "" }));
-
          }
       } catch (error: any) {
          console.log("Error submitting comment", error.message);
@@ -205,7 +205,7 @@ export default function Allpost({ refetchdata }: any) {
                                              {currentUser === item.user._id && (
                                                 <img
                                                    className=" w-[25px] sm:w-[30px] cursor-pointer"
-                                                   src="/more.png"
+                                                   src={more.src}
                                                    alt=""
                                                    onClick={() =>
                                                       handelshowDeletePost(
@@ -264,12 +264,12 @@ export default function Allpost({ refetchdata }: any) {
                                                    className=" w-3 sm:w-4 aspect-square object-contain"
                                                    src={
                                                       item === "Celebration"
-                                                         ? celebrationImg
+                                                         ? celebrationImg.src
                                                          : item === "Thoughts"
-                                                         ? thoughtImg
-                                                         : achievementImg
+                                                         ? thoughtImg.src
+                                                         : achievementImg.src
                                                    }
-                                                   alt=""
+                                                   alt="sdfjl"
                                                 />
                                              </div>
                                           </div>
@@ -359,7 +359,7 @@ export default function Allpost({ refetchdata }: any) {
                                           >
                                              {isuploading[item._id] ? (
                                                 <div className="">
-                                                   <span className="loader"></span>
+                                                   <span className="loaderblack"></span>
                                                 </div>
                                              ) : (
                                                 "Comment"
@@ -418,7 +418,7 @@ export default function Allpost({ refetchdata }: any) {
                                                                   <div className="">
                                                                      <img
                                                                         className="w-[30px] aspect-square cursor-pointer"
-                                                                        src="/more.png"
+                                                                        src={more.src}
                                                                         alt=""
                                                                         onClick={() =>
                                                                            handelcommentdeleteshow(
