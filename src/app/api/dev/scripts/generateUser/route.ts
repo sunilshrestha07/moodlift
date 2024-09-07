@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import { faker } from "@faker-js/faker";
 import User from "@/models/User"; // Adjust the import path as needed
+import dbConnect from "@/lib/db";
 
 // Function to generate random data using Faker
 function generateRandomUser() {
@@ -60,7 +61,7 @@ function generateRandomUser() {
         currentTreatment: faker.helpers.arrayElement([
           "Therapy",
           "Medication",
-          "Therapy and Medication",
+          "Both",
           "None",
         ]),
       },
@@ -69,6 +70,7 @@ function generateRandomUser() {
 }
 
 export async function GET() {
+  await dbConnect();
   try {
     // Generate random user data
     const randomUserData = generateRandomUser();
@@ -85,10 +87,10 @@ export async function GET() {
       { randomUserData, message: "user created" },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error generating random user:", error);
     return NextResponse.json(
-      { error: "Failed to generate random user" },
+      { error: `Failed to generate random user ${error.message}` },
       { status: 500 }
     );
   }
