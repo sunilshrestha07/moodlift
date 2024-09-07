@@ -26,7 +26,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className={`${navbarPadding} sticky top-4 z-50`}>
+        <div className={navbarPadding}>
             <header className="relative w-full min-w-min box-border bg-white mt-4 rounded-[90px] md:rounded-[99px]">
                 <div className="px-2 py-1 md:px-3">
                     <div className="object-contain flex justify-between items-center relative">
@@ -82,19 +82,23 @@ const Navbar = () => {
                                 Login
                             </button>
 
-                            <div className="rounded-full box-border w-8 h-8 sm:w-10 sm:h-10 bg-[#D9D9D9]">
-                                {(userData.avatar && (
-                                    <img
-                                        src={userData.avatar}
-                                        className="rounded-full w-full h-full object-cover"
-                                        alt="User Image"
-                                    />
-                                )) || (
-                                    <img
-                                        src={userSvg}
-                                        className="rounded-full h-[100%] w-[100%] object-contain"
-                                        alt="User Icon"
-                                    />
+                            <div className="rounded-full box-border w-8 h-8 sm:w-10 sm:h-10 bg-[#D9D9D9] overflow-hidden">
+                                {userData.avatar ? (
+                                    <div className="">
+                                        <img
+                                            src={userData.avatar}
+                                            className="rounded-full w-full h-full object-cover"
+                                            alt="User Image"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="">
+                                        <img
+                                            src={userSvg.src}
+                                            className="rounded-full h-[100%] w-[100%] object-contain overflow-hidden"
+                                            alt="User Icon"
+                                        />
+                                    </div>
                                 )}
                             </div>
 

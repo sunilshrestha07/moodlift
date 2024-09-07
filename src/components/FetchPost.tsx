@@ -31,15 +31,7 @@ export default function Allpost({ refetchdata }: any) {
    const [isLiking, setIsLiking] = useState<boolean>(false);
    const [isfetching, setIsfetching] = useState<boolean>(true);
 
-   // const loginPopupStatus = useSelector(
-   //    (state: RootState) => state.popupReducer.isLoginPopupOpen
-   // );
-   // const isUserAuthorized = useSelector(
-   //    (state: RootState) => state.userReducer.isAuthenticated
-   // );
-   // const dispatch = useDispatch();
 
-   //initial count of comment
    const initalcomment = 1;
 
    //handel less or more

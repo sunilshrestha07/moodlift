@@ -10,7 +10,6 @@ import popupSlice from "./features/popupSlice";
 import pagesSlice from "./features/pagesSlice";
 // import pagesSlice from './features/pagesSlice'
 
-// Combine your reducers into a root reducer
 const rootReducer = combineReducers({
     userSlice,
     popupSlice,
@@ -24,7 +23,7 @@ const rootReducer = combineReducers({
 // Configuration for Redux Persist
 const persistConfig = {
     key: "root",
-    storage: storage,
+    storage,
     version: 1,
 };
 

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const popupSlice = createSlice({
     name: "popupSlice",
     initialState: {
-        isLoginPopupOpen: false,
+        isLoginPopupOpen: true,
     },
     reducers: {
         toggleLoginPopup: (state) => {
