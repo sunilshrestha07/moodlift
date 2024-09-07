@@ -85,7 +85,7 @@ const Navbar = () => {
               <div className="rounded-full box-border w-8 h-8 sm:w-10 sm:h-10 bg-[#D9D9D9]">
                 {(userData.isAuthenticated && (
                   <Image
-                    src={userData.image}
+                    src={userData.avatar}
                     className="rounded-full w-full h-full object-cover"
                     alt="User Image"
                   />
