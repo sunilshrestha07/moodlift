@@ -4,13 +4,13 @@
 "use client";
 import Section from "@/components/Section";
 import SignupPopup from "@/components/SignupPopup";
-
 import Steps from "@/components/Steps";
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 // import Initstep from "@/components/Initstep";
-import DailySteps from "@/components/DailySteps";
+// import DailySteps from "@/components/DailySteps";
+import Initstep from "@/components/Initstep";
 
 export default function Page() {
   const loginPopupStatus = useSelector(
@@ -22,15 +22,8 @@ export default function Page() {
       <div className="">
         <Section />
         <Steps />
+        <Initstep />
         {loginPopupStatus && <SignupPopup />}
-
-        <div className=" items-center mb-10">
-          {" "}
-          {/* <Initstep /> */}
-          <div className="py-10">
-            <DailySteps />
-          </div>
-        </div>
       </div>
     </>
   );
