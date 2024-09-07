@@ -21,8 +21,8 @@ const NewUserPopup = () => {
                     className="h-full w-full bg-black/10 absolute px-[5vw]"
                     onClick={handlePopupToggle}
                 ></div>
-                <div className=" space-y-5 ">
-                    <div className="flex gap-4 items-center justify-center">
+                <div className=" space-y-5 relative z-20">
+                    <div className="flex flex-wrap gap-4 items-center justify-center">
                         <Image
                             src={avatarFront}
                             alt="avatar"
@@ -36,12 +36,12 @@ const NewUserPopup = () => {
                                 give you recommendation and feedback accordingly.
                             </p>
                         </div>
-                    </div>
-                    <div className="bg-white px-4 py-3 md:px-6 md:py-6 rounded-xl">
-                        {/* <h1 className=" text-lg font-semibold">Hi there</h1> */}
-                        <p className="text-xs md:text-sm">
-                            Before that, please complete the given process
-                        </p>
+                        <div className="bg-white w-[75%] px-4 py-3 md:px-6 md:py-6 rounded-xl">
+                            {/* <h1 className=" text-lg font-semibold">Hi there</h1> */}
+                            <p className="text-xs md:text-sm">
+                                Before that, please complete the given process
+                            </p>
+                        </div>
                     </div>
                     <Initstep />
                 </div>
