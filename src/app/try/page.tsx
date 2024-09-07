@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 
 
 export default function page() {
-  const isPopupVisible = useSelector((state: RootState) => state.popupReducer.isLoginPopupOpen)
+  const isPopupVisible = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen)
   return (
     <>
     <div className="">
