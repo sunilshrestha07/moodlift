@@ -1,1 +1,1 @@
-export const BigBtnStyle = `bg-white px-4 py-6 md:px-6 md:py-6 rounded-xl min-w-[5rem] max-w-[45rem] gap-1 md:gap-3 w-full items-center justify-center text-center flex  text-xs sm:text-sm lg:text-lg`;
+export const BigBtnStyle = `bg-white px-4 py-6 md:px-6 md:py-6 rounded-xl min-w-[5rem] max-w-[45rem] gap-1 md:gap-3 w-full items-center justify-center text-center flex  text-xs sm:text-sm lg:text-lg flex items-center gap-2 md:gap-8`;

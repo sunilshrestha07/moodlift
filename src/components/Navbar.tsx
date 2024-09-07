@@ -9,8 +9,8 @@ const Navbar = () => {
     const paddingforPage = ``;
     return (
         <>
-            <div className={`${navbarPadding} `}>
-                <header className="relative w-full min-w-min box-border bg-white mt-4 rounded-[90px] md:rounded-[99px]  ">
+            <div className={`${navbarPadding} sticky top-0 z-50 `}>
+                <header className="relative w-full min-w-min box-border bg-white mt-4 rounded-[90px] md:rounded-[99px] shadow-navbarShadow ">
                     <div className="md:px-1 lg:px-4 ">
                         <div className="  object-contain flex justify-between  items-center ">
                             <a href="/" className="md:flex-shrink-0">
