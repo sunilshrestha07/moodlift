@@ -1,3 +1,4 @@
+import SleepQuality from "@/components/DailySteppper/SleepQuality";
 import dbConnect from "@/lib/db";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
@@ -59,7 +60,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
             stressLevel: activity.stressLevel,
             mood: activity.mood,
             energyLevel: activity.energyLevel,
-            eatingHabit: activity.eatingHabit,
+            SleepQuality: activity.sleepQuality,
         }));
 
         return NextResponse.json({ message: "Data retrieved successfully", messObject });
