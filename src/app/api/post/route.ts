@@ -8,14 +8,15 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
     try {
         await dbConnect();
-        const {owner,content,achievements} = await request.json();
+        const {owner,content,achievements,isAnonymous} = await request.json();
         if(!owner || !content){
             return NextResponse.json({ message: "Missing required fields" }, { status: 400 });
         }
         const newPost = new Post({
             owner,
             content,
-            achievements
+            achievements,
+            isAnonymous
         });
         await newPost.save();
         return NextResponse.json({ message: "Post created successfully", post: newPost }, { status: 200 });

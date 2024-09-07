@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import DailySteps from "@/components/DailySteps";
 import popupSlice, { toggleLoginPopup } from "../../redux/features/popupSlice";
+import Initstep from "@/components/Initstep";
 
 export default function Page() {
     const loginPopupStatus = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen);
