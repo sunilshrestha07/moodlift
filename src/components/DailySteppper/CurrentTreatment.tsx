@@ -8,37 +8,29 @@ import { getAllQuestionsData } from "./aggregateQuestionsData";
 import { DailyQuestionsState } from "../../../redux/features/dailyQuestionsSlice";
 
 const CurrentTreatment = () => {
-    const [questionsDone, setQuestionsDone] = useState(false);
+    // const [questionsDone, setQuestionsDone] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const currentStep = useSelector((state: RootState) => state.dailyQuestionsSlice.currentStep);
     const selectedCurrentTreatment = useSelector(
         (state: RootState) => state.dailyQuestionsSlice.currentTreatment
     );
 
-    const dailyQuestionsState = useSelector(
-        (state: RootState) => state.dailyQuestionsSlice
-    ) as DailyQuestionsState;
-
     const handleCurrentTreatmentSelect = (treatment: string) => {
         dispatch(setCurrentTreatment(treatment));
-
-        setQuestionsDone(true);
+        dispatch(setCurrentStep(currentStep + 1));
+        // setQuestionsDone(true);
     };
-    useEffect(() => {
-        const allData = getAllQuestionsData(dailyQuestionsState);
-        console.log({ alldata: allData });
-    }, [questionsDone]);
 
-    useEffect(() => {
-        if (currentStep === 12) {
-            // Small delay to ensure state has updated before aggregating data
-            setTimeout(() => {
-                console.log("Final state at step 13:", dailyQuestionsState);
-                const allData = getAllQuestionsData(dailyQuestionsState);
-                console.log("All questions data:", allData);
-            }, 100);
-        }
-    }, [currentStep, dailyQuestionsState]);
+    // useEffect(() => {
+    //     if (currentStep === 12) {
+    //         // Small delay to ensure state has updated before aggregating data
+    //         setTimeout(() => {
+    //             // console.log("Final state at step 13:", dailyQuestionsState);
+    //             const allData = getAllQuestionsData(dailyQuestionsState);
+    //             // console.log("All questions data:", allData);
+    //         }, 100);
+    //     }
+    // }, [currentStep, dailyQuestionsState]);
 
     return (
         <div>
