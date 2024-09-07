@@ -2,11 +2,13 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FetchPost from "./FetchPost";
 import trophy from "@/public/trophy.png";
 import celebration from "@/public/party.png";
 import thoughts from "@/public/thought.png";
+import { RootState } from "../../redux/store";
+import anonymous from "@/public/anonymous.png"
 
 
 export default function MakePost() {
@@ -15,15 +17,13 @@ export default function MakePost() {
       { name: "Celebration", image: celebration },
       { name: "Thoughts", image: thoughts },
    ];
-
-   const currentUser = "66dc1612c278523b93c657e2";
+   const currentUser = useSelector((state: RootState) => state.userSlice._id);
 
    const [selectedAchievements, setSelectedAchievements] = useState<string[]>([]);
    const [postContent, setPostContent] = useState<string>("");
    const [isUploading, setIsUploading] = useState<boolean>(false);
    const [refetchdata, setRefetchdata] = useState<boolean>(false);
-
-   const dispatch = useDispatch();
+   const [isAnonymous, setIsAnonymous] = useState<boolean>(false); 
 
    const handleAchievementChange = (item: string) => {
       if (selectedAchievements.includes(item)) {
@@ -35,6 +35,7 @@ export default function MakePost() {
       }
    };
 
+   console.log(isAnonymous)
    const handlePostSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setRefetchdata(false);
@@ -44,13 +45,16 @@ export default function MakePost() {
             content: postContent,
             achievements: selectedAchievements,
             owner: currentUser,
+            isAnonymous: isAnonymous
          };
+         console.log(formdata);
          const res = await axios.post("/api/post", formdata);
          if (res.status === 200) {
             setSelectedAchievements([]);
             setPostContent("");
             setRefetchdata(true);
             setIsUploading(false);
+            setIsAnonymous(false);
          }
       } catch (error: any) {
          setRefetchdata(false);
@@ -67,25 +71,33 @@ export default function MakePost() {
                </div>
                <form onSubmit={handlePostSubmit}>
                   <div className="shadow-alldirection p-5 rounded-lg bg-white">
-                     <div className="flex flex-row gap-3 flex-wrap">
-                        {achievements.map((item, index) => (
-                           <div
-                              className={`px-3 sm:px-5 py-1 sm:py-2 rounded-md border-gray-200 border-2 text-xs sm:text-sm xl:text-sm flex flex-row gap-1 justify-center items-center cursor-pointer ${
-                                 selectedAchievements.includes(item.name)
-                                    ? "bg-gray-300"
-                                    : ""
-                              }`}
-                              onClick={() => handleAchievementChange(item.name)}
-                              key={index}
-                           >
-                              {item.name}
-                              <img
-                                    className=" h-3 sm:h-4 object-contain"
-                                    src={item.image.src}
-                                    alt=""
-                                 />
-                           </div>
-                        ))}
+                     <div className=" flex w-full justify-between">
+                        <div className="flex flex-row gap-3 flex-wrap">
+                           {achievements.map((item, index) => (
+                              <div
+                                 className={`px-3 sm:px-5 py-1 sm:py-2 rounded-md border-gray-200 border-2 text-xs sm:text-sm xl:text-sm flex flex-row gap-1 justify-center items-center cursor-pointer ${
+                                    selectedAchievements.includes(item.name)
+                                       ? "bg-gray-300"
+                                       : ""
+                                 }`}
+                                 onClick={() => handleAchievementChange(item.name)}
+                                 key={index}
+                              >
+                                 {item.name}
+                                 <img
+                                       className=" h-3 sm:h-4 object-contain"
+                                       src={item.image.src}
+                                       alt=""
+                                    />
+                              </div>
+                           ))}
+                        </div>
+                        <div className={`px-3 sm:px-5 py-1 sm:py-2 rounded-md border-gray-200 border-2 text-xs sm:text-sm xl:text-sm flex flex-row gap-1 justify-center items-center cursor-pointer ${isAnonymous ? "bg-gray-300" :"" }`} onClick={() => setIsAnonymous(!isAnonymous)}>
+                              <p>Anonymous</p>
+                              <div className=" flex justify-center items-center ml-1">
+                                 <img className=" h-4 sm:h-5 object-contain overflow-hidden" src={anonymous.src} alt="" />
+                              </div>
+                        </div>
                      </div>
                      <div className="my-5">
                         <textarea

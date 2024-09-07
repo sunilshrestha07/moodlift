@@ -15,6 +15,7 @@ export interface User {
   
   export interface Post {
     _id: string;
+    isAnonymous: boolean;
     content: string;
     owner: string;
     Likes: string[]; 

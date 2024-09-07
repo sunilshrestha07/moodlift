@@ -25,20 +25,12 @@ const CurrentTreatment = () => {
 
   const handleCurrentTreatmentSelect = (treatment: string) => {
     dispatch(setCurrentTreatment(treatment));
-
-    // Small delay to allow the state to update
-    setTimeout(() => {
-      dispatch(setCurrentStep(currentStep + 1));
-      console.log("Clicked treatment:", treatment);
-      console.log("Next step:", currentStep + 1);
-    }, 100);
   };
 
   useEffect(() => {
     if (currentStep === 12) {
       // Small delay to ensure state has updated before aggregating data
       setTimeout(() => {
-        console.log("Final state at step 13:", dailyQuestionsState);
         const allData = getAllQuestionsData(dailyQuestionsState);
         console.log("All questions data:", allData);
       }, 100);

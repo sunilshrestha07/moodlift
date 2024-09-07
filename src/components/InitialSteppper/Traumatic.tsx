@@ -21,6 +21,7 @@ const Traumatic = () => {
 
   // Handle traumatic event selection and move to the next step
   const handleTraumaticSelect = (value: string) => {
+    console.log("Selected traumatic event:", value); // Log the selected option
     dispatch(setTraumaticEvents(value));
     dispatch(setCurrentStep(currentStep + 1)); // Move to next step
   };

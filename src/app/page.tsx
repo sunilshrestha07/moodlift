@@ -1,29 +1,41 @@
-// export default function Home() {
-//   return <></>;
-// }
 "use client";
 import Section from "@/components/Section";
 import SignupPopup from "@/components/SignupPopup";
 import Steps from "@/components/Steps";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-// import Initstep from "@/components/Initstep";
-// import DailySteps from "@/components/DailySteps";
+import DailySteps from "@/components/DailySteps";
+import popupSlice, { toggleLoginPopup } from "../../redux/features/popupSlice";
 import Initstep from "@/components/Initstep";
 
 export default function Page() {
   const loginPopupStatus = useSelector(
-    (state: RootState) => state.popupReducer.isLoginPopupOpen
+    (state: RootState) => state.popupSlice.isLoginPopupOpen
   );
+  const dispatch = useDispatch();
+
+  const currentUser = useSelector((state: RootState) => state.userSlice.name);
+  useEffect(() => {
+    if (currentUser) {
+      dispatch(toggleLoginPopup());
+    }
+  }, []);
 
   return (
     <>
       <div className="">
         <Section />
         <Steps />
-        <Initstep />
-        {loginPopupStatus && <SignupPopup />}
+        {!currentUser && loginPopupStatus && <SignupPopup />}
+
+        <div className=" items-center mb-10">
+          {" "}
+          {/* <Initstep /> */}
+          <div className="py-10">
+            <Initstep />
+          </div>
+        </div>
       </div>
     </>
   );
