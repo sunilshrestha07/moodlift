@@ -1,12 +1,25 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import avatarFront from "@/public/avatar/avatarFrontHappy.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { toggleIsInitialQuestionVisible } from "../../../redux/features/initialQsnSlice";
 
 const NewUserPopup = () => {
+    const dispatch = useDispatch();
+    const handlePopupToggle = () => {
+        dispatch(toggleIsInitialQuestionVisible());
+    };
+
     return (
         <>
             <div className="fixed top-0 right-0 w-[100%] h-[100%] z-20 bg-black/15 backdrop-blur-md px-[5vw] py-[10vh] md:px-[8vw] md:pt-[15vh] ">
-                <div className="h-full w-full bg-black/10 absolute px-[5vw]"></div>
+                <div
+                    className="h-full w-full bg-black/10 absolute px-[5vw]"
+                    onClick={handlePopupToggle}
+                ></div>
                 <div className=" space-y-5 ">
                     <div className="flex gap-4 items-center justify-center">
                         <Image

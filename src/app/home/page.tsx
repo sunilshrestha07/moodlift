@@ -54,11 +54,14 @@ const HomePage = () => {
     );
     const dispatch = useDispatch();
     const currentUser = useSelector((state: RootState) => state.userSlice);
+    const isInitialQuestionVisible = useSelector(
+        (state: RootState) => state.initialQsnSlice.isInitialQuestionVisible
+    );
 
     return (
         <div>
             {loginPopupStatus && <SignupPopup />}
-            <NewUserPopup />
+            {isInitialQuestionVisible && <NewUserPopup />}
 
             {!currentUser && loginPopupStatus && <SignupPopup />}
             <div className={`relative ${pagePadding} bg-[#E4F3FF] min-h-[100vh] py-6`}>
