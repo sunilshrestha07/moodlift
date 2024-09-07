@@ -4,7 +4,7 @@ export type User = {
     _id?: string;
     name?: string;
     email?: string;
-    image?: string;
+    avatar?: string;
     isAuthenticated?: boolean;
 };
 
@@ -15,7 +15,7 @@ const userSlice = createSlice({
         name: "",
         email: "",
         _id: "",
-        image: "",
+        avatar: "",
     },
     reducers: {
         setAuthenticated: (state) => {
@@ -27,13 +27,13 @@ const userSlice = createSlice({
         setUserForGoogleSignup: (state, action: PayloadAction<User>) => {
             state.name = action.payload.name || "";
             state.email = action.payload.email || "";
-            state.image = action.payload.image || "";
+            state.avatar = action.payload.avatar || "";
         },
         setUserForBackendConfirmation: (state, action: PayloadAction<User>) => {
             state._id = action.payload._id || "";
             state.name = action.payload.name || "";
             state.email = action.payload.email || "";
-            state.image = action.payload.image || "";
+            state.avatar = action.payload.avatar || "";
             state.isAuthenticated = true;
         },
     },
