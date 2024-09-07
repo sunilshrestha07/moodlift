@@ -2,6 +2,8 @@ import dbConnect from "@/lib/db";
 import User from "@/models/User";
 import { NextRequest, NextResponse } from "next/server";
 
+//TESTING DONE
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }
