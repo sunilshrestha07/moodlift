@@ -14,37 +14,6 @@ import Recommendations from "./components/Recommendations";
 import Stepper from "@/components/Stepper";
 
 const HomePage = () => {
-    // const { data: session, status } = useSession();
-
-    // useEffect(() => {
-    //     if (status === "authenticated" && session?.user) {
-    //         // Automatically send user data to the signup route
-    //         const sendUserData = async () => {
-    //             try {
-    //                 const res = await fetch("/api/user/googlesignin", {
-    //                     method: "POST",
-    //                     headers: {
-    //                         "Content-Type": "application/json",
-    //                     },
-    //                     body: JSON.stringify(session.user),
-    //                 });
-
-    //                 if (!res.ok) {
-    //                     throw new Error("Failed to send user data");
-    //                 }
-
-    //                 const response = await res.json();
-    //                 // dispatch(setUser(response.userData));
-    //                 console.log({ response: response.userData });
-    //             } catch (error) {
-    //                 console.error("Error sending user data:", error);
-    //             }
-    //         };
-
-    //         sendUserData();
-    //     }
-    // }, [session, status]);
-
     const loginPopupStatus = useSelector((state: RootState) => state.popupReducer.isLoginPopupOpen);
     const isUserAuthorized = useSelector((state: RootState) => state.userReducer.isAuthenticated);
     const isReportOpen = useSelector((state: RootState) => state.homePageSlice.isReportActive);
