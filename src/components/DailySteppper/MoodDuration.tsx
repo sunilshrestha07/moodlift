@@ -1,4 +1,3 @@
-// src/app/components/DailySteppper/MoodDuration.tsx
 "use client";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,38 +20,29 @@ const MoodDuration = () => {
   );
 
   // Handle mood duration selection and move to the next step
-  const handleMoodDurationSelect = (duration: string) => {
-    // console.log("Setting mood duration to:", duration);
+  const handleMoodDurationSelect = (duration: number) => {
     dispatch(setMoodDuration(duration));
     dispatch(setCurrentStep(currentStep + 1)); // Move to next step
   };
 
-  // Button styles
-
   return (
     <div>
       <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-        How long have you been feeling your current mood (e.g., positive or
-        negative)?
+        On a scale of 1 to 10, how would you rate the duration of your current
+        mood? (1 being the shortest duration and 10 being the longest)
       </label>
       <div className={smallButtonsPaddingStyles}>
-        {[
-          "A few hours",
-          "A day or two",
-          "Several days",
-          "Over a week",
-          "More than two weeks",
-        ].map((duration) => (
+        {Array.from({ length: 10 }, (_, index) => index + 1).map((value) => (
           <button
-            key={duration}
+            key={value}
             className={`${buttonStyles}`}
-            onClick={() => handleMoodDurationSelect(duration)}
+            onClick={() => handleMoodDurationSelect(value)}
             style={{
               backgroundColor:
-                selectedMoodDuration === duration ? "#dbeafe" : "white",
-            }} // Inline style for debugging
+                selectedMoodDuration === value ? "#dbeafe" : "white",
+            }}
           >
-            {duration}
+            {value}
           </button>
         ))}
       </div>

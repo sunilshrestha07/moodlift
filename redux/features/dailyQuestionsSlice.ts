@@ -1,61 +1,63 @@
-// src/redux/features/dailyQuestionsSlice.ts
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+// Define the state interface with updated data types
 export interface DailyQuestionsState {
-    mood: string;
-    moodDuration: string;
+    mood: number;
+    moodDuration: number;
     stressLevel: number;
-    sleepQuality: string;
-    sleepHours: string;
-    anxietySymptoms: string;
+    sleepQuality: number;
+    sleepHours: number;
     sleepDisturbance: string;
+    anxietySymptoms: string; // Updated to array of strings
     physicalActivity: string;
-    energyLevels: string;
+    energyLevels: number; // Updated to number
     eatingHabits: string;
-    socialEngagement: string;
-    loneliness: string;
+    socialEngagement: number; // Updated to number
+    loneliness: number; // Updated to number
     currentTreatment: string;
     messageForBruno: string;
     currentStep: number;
     isDoneAsking: boolean;
 }
 
+// Set the initial state with appropriate types
 const initialState: DailyQuestionsState = {
-    mood: "",
-    moodDuration: "",
+    mood: 0,
+    moodDuration: 0,
     stressLevel: 0,
-    sleepQuality: "",
-    sleepHours: "",
-    anxietySymptoms: "",
+    sleepQuality: 0,
+    sleepHours: 0,
     sleepDisturbance: "",
+    anxietySymptoms: "", 
     physicalActivity: "",
-    energyLevels: "",
+    energyLevels: 0,
     eatingHabits: "",
-    socialEngagement: "",
-    loneliness: "",
+    socialEngagement: 0,
+    loneliness: 0,
     currentTreatment: "",
     messageForBruno: "",
     currentStep: 0,
     isDoneAsking: false,
 };
 
+// Create the slice with updated reducers
 const dailyQuestionsSlice = createSlice({
     name: "dailyQuestionsSlice",
     initialState,
     reducers: {
-        setMood: (state, action: PayloadAction<string>) => {
+        setMood: (state, action: PayloadAction<number>) => {
             state.mood = action.payload;
         },
-        setMoodDuration: (state, action: PayloadAction<string>) => {
+        setMoodDuration: (state, action: PayloadAction<number>) => {
             state.moodDuration = action.payload;
         },
         setStressLevel: (state, action: PayloadAction<number>) => {
             state.stressLevel = action.payload;
         },
-        setSleepQuality: (state, action: PayloadAction<string>) => {
+        setSleepQuality: (state, action: PayloadAction<number>) => {
             state.sleepQuality = action.payload;
         },
-        setSleepHours: (state, action: PayloadAction<string>) => {
+        setSleepHours: (state, action: PayloadAction<number>) => {
             state.sleepHours = action.payload;
         },
         setAnxietySymptoms: (state, action: PayloadAction<string>) => {
@@ -67,16 +69,16 @@ const dailyQuestionsSlice = createSlice({
         setPhysicalActivity: (state, action: PayloadAction<string>) => {
             state.physicalActivity = action.payload;
         },
-        setEnergyLevels: (state, action: PayloadAction<string>) => {
+        setEnergyLevels: (state, action: PayloadAction<number>) => {
             state.energyLevels = action.payload;
         },
         setEatingHabits: (state, action: PayloadAction<string>) => {
             state.eatingHabits = action.payload;
         },
-        setSocialEngagement: (state, action: PayloadAction<string>) => {
+        setSocialEngagement: (state, action: PayloadAction<number>) => {
             state.socialEngagement = action.payload;
         },
-        setLoneliness: (state, action: PayloadAction<string>) => {
+        setLoneliness: (state, action: PayloadAction<number>) => {
             state.loneliness = action.payload;
         },
         setCurrentTreatment: (state, action: PayloadAction<string>) => {
