@@ -4,15 +4,15 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { userid: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
     await dbConnect();
 
-    // Log the params to see what we're receiving
+    //taking received parameters
     console.log("Received params:", params);
 
-    const userId = params.userid;
+    const userId = params.id;
     if (!userId) {
       return NextResponse.json(
         { message: "userId not provided" },
@@ -20,7 +20,7 @@ export async function GET(
       );
     }
 
-    console.log("Attempting to find user with ID:", userId);
+    // console.log("Attempting to find user with ID:", userId);
 
     const user = await User.findById(userId);
     if (!user) {

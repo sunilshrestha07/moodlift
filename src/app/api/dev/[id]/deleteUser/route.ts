@@ -2,7 +2,7 @@ import dbConnect from "@/lib/db";
 import User from "@/models/User";
 import { NextResponse } from "next/server";
 
-//delete user
+//testing DONE
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
     const userId = params.id
     try {
