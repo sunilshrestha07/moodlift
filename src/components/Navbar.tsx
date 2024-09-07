@@ -26,7 +26,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className={navbarPadding}>
+        <div className={`${navbarPadding} sticky top-4 z-30`}>
             <header className="relative w-full min-w-min box-border bg-white mt-4 rounded-[90px] md:rounded-[99px]">
                 <div className="px-2 py-1 md:px-3">
                     <div className="object-contain flex justify-between items-center relative">

@@ -8,8 +8,16 @@ import homePageSlice from "./features/homePageSlice";
 import initialQsnSlice from "./features/initialQsnSlice";
 import popupSlice from "./features/popupSlice";
 import pagesSlice from "./features/pagesSlice";
-// import pagesSlice from './features/pagesSlice'
 
+// Configuration for Redux Persist
+const persistConfig = {
+    key: "root",
+    storage,
+    version: 1,
+    whitelist: ["userSlice", "popupSlice"], // Only userSlice and popupSlice will be persisted
+};
+
+// Combine all reducers
 const rootReducer = combineReducers({
     userSlice,
     popupSlice,
@@ -20,14 +28,7 @@ const rootReducer = combineReducers({
     graphSlice,
 });
 
-// Configuration for Redux Persist
-const persistConfig = {
-    key: "root",
-    storage,
-    version: 1,
-};
-
-// Create a persisted reducer using the root reducer and persist configuration
+// Create a persisted reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Create the Redux store

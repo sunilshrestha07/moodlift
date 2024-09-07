@@ -28,7 +28,7 @@ export default function Page() {
                 <Steps />
                 {!currentUser && loginPopupStatus && <SignupPopup />}
 
-                {loginPopupStatus && <SignupPopup />}
+                {/* {loginPopupStatus && <SignupPopup />} */}
             </div>
         </>
     );
