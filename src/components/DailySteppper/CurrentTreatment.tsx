@@ -1,16 +1,18 @@
 "use client";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../../../redux/store";
-import {
-  setCurrentTreatment,
-  setCurrentStep,
-} from "../../../redux/features/dailyQuestionsSlice";
-import { buttonStyles, smallButtonsPaddingStyles } from "./StressLevel";
-import { getAllQuestionsData } from "./aggregateQuestionsData";
-import { DailyQuestionsState } from "../../../redux/features/dailyQuestionsSlice";
+import type { RootState, AppDispatch } from "../../../redux/store";
 
-const CurrentTreatment = () => {
+import { buttonStyles, smallButtonsPaddingStyles } from "./StressLevel";
+import { getAllQuestionsData } from "../aggregateQuestionsData";
+// import { DailyQuestionsState } from "../../../redux/features/dailyQuestionsSlice";
+import {
+  setCurrentStep,
+  setCurrentTreatment,
+  DailyQuestionsState,
+} from "../../../redux/features/dailyQuestionsSlice";
+
+const CurrentTreatment: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const currentStep = useSelector(
     (state: RootState) => state.dailyQuestionsSlice.currentStep
@@ -23,27 +25,14 @@ const CurrentTreatment = () => {
     (state: RootState) => state.dailyQuestionsSlice
   ) as DailyQuestionsState;
 
+  useEffect(() => {
+    if (currentStep === 13) {
+      console.log("Final step reached");
+    }
+  }, [currentStep]);
   const handleCurrentTreatmentSelect = (treatment: string) => {
     dispatch(setCurrentTreatment(treatment));
-
-    // Small delay to allow the state to update
-    setTimeout(() => {
-      dispatch(setCurrentStep(currentStep + 1));
-      console.log("Clicked treatment:", treatment);
-      console.log("Next step:", currentStep + 1);
-    }, 100);
   };
-
-  useEffect(() => {
-    if (currentStep === 12) {
-      // Small delay to ensure state has updated before aggregating data
-      setTimeout(() => {
-        console.log("Final state at step 13:", dailyQuestionsState);
-        const allData = getAllQuestionsData(dailyQuestionsState);
-        console.log("All questions data:", allData);
-      }, 100);
-    }
-  }, [currentStep, dailyQuestionsState]);
 
   return (
     <div>
@@ -53,10 +42,10 @@ const CurrentTreatment = () => {
       </label>
       <div className={smallButtonsPaddingStyles}>
         {[
-          "Yes, and it’s helpful",
-          "Yes, but it’s not helpful",
-          "No, but I’m considering it",
-          "No, and I’m not considering it",
+          "Yes, and it's helpful",
+          "Yes, but it's not helpful",
+          "No, but I'm considering it",
+          "No, and I'm not considering it",
         ].map((treatment) => (
           <button
             key={treatment}
