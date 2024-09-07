@@ -1,5 +1,5 @@
 import React from "react";
-import { svgProp } from "../types";
+import { svgProp } from "../../../types";
 
 const LeftPointer = (prop: svgProp) => {
     return (
