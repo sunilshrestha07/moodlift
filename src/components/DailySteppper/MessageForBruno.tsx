@@ -76,14 +76,15 @@ const MessageForBruno = () => {
         </div>
       </label>
       <div className={`${smallButtonsPaddingStyles}`}>
-        <form onSubmit={handleSubmit} className="flex flex-col">
+        <form onSubmit={handleSubmit} className="flex flex-col ">
           <input
             id="messageForBruno"
             type="text"
             value={message}
             onChange={handleChange}
-            className="`items-start border-[0.8em] rounded-md border-[#D9D9D9] bg-[#D9D9D9] w-[30vw] h-[5rem] focus:outline-none  p-2"
+            className="items-start border-[0.8em] rounded-md border-[#D9D9D9] bg-[#D9D9D9] w-[80vw] sm:w-[85vw] xl:w-[70vw] 2xl:w-[75vw] h-[5rem] focus:outline-none p-2"
             aria-label="Message for Bruno"
+            placeholder="(Message) Let Bruno understand you"
           />
           <div className="flex justify-end mt-4">
             <button
