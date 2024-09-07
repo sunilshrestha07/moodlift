@@ -32,7 +32,7 @@ export async function GET(request: Request) {
        await dbConnect();
        try {
            // Fetch all posts
-           const posts = await Post.find();
+           const posts = await Post.find().sort({createdAt: -1});
 
            // Fetch the user and comments for each post
            const postsWithDetails = await Promise.all(

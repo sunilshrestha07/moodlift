@@ -60,7 +60,7 @@ export default function MakePost() {
 
    return (
       <div className="w-full h-full flex flex-col items-center pb-10">
-         <div className="w-[80%] h-full mt-5 rounded-lg">
+         <div className="w-[90%] sm:w-[80%] h-full mt-5 rounded-lg">
             <div className="w-full">
                <div className="font-semibold text-2xl px-3 sm:px-5 mt-16 mb-6">
                   Create a Post
@@ -70,7 +70,7 @@ export default function MakePost() {
                      <div className="flex flex-row gap-3 flex-wrap">
                         {achievements.map((item, index) => (
                            <div
-                              className={`px-3 sm:px-5 py-2 rounded-md border-gray-200 border-2 text-xs sm:text-xs xl:text-sm flex flex-row gap-1 justify-center items-center cursor-pointer ${
+                              className={`px-3 sm:px-5 py-1 sm:py-2 rounded-md border-gray-200 border-2 text-xs sm:text-sm xl:text-sm flex flex-row gap-1 justify-center items-center cursor-pointer ${
                                  selectedAchievements.includes(item.name)
                                     ? "bg-gray-300"
                                     : ""
@@ -123,7 +123,7 @@ export default function MakePost() {
             </div>
          </div>
 
-         <div className="w-[80%] h-full mt-5 rounded-lg">
+         <div className=" w-[90%] sm:w-[80%] h-full mt-5 rounded-lg">
             <FetchPost refetchdata={refetchdata} />
          </div>
       </div>
