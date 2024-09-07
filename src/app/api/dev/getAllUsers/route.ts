@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    dbConnect();
+    await dbConnect();
   } catch (error) {
     console.error("Error connecting to the database:", error);
     return NextResponse.json(
