@@ -1,4 +1,3 @@
-// src/app/components/DailySteppper/SleepQuality.tsx
 "use client";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,8 +18,7 @@ const SleepQuality = () => {
     (state: RootState) => state.dailyQuestionsSlice.sleepQuality
   );
 
-  const handleSleepQualitySelect = (quality: string) => {
-    // console.log("Setting sleep quality to:", quality);
+  const handleSleepQualitySelect = (quality: number) => {
     dispatch(setSleepQuality(quality));
     dispatch(setCurrentStep(currentStep + 1));
   };
@@ -28,24 +26,23 @@ const SleepQuality = () => {
   return (
     <div>
       <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-        How would you rate the quality of your sleep over the past week?
+        On a scale of 1 to 10, how would you rate the quality of your sleep over
+        the past week? (1 being very poor and 10 being very good)
       </label>
       <div className={smallButtonsPaddingStyles}>
-        {["Very poor", "Poor", "Average", "Good", "Very good"].map(
-          (quality) => (
-            <button
-              key={quality}
-              className={`${buttonStyles}`}
-              onClick={() => handleSleepQualitySelect(quality)}
-              style={{
-                backgroundColor:
-                  selectedSleepQuality === quality ? "#dbeafe" : "white",
-              }}
-            >
-              {quality}
-            </button>
-          )
-        )}
+        {Array.from({ length: 10 }, (_, index) => index + 1).map((value) => (
+          <button
+            key={value}
+            className={`${buttonStyles}`}
+            onClick={() => handleSleepQualitySelect(value)}
+            style={{
+              backgroundColor:
+                selectedSleepQuality === value ? "#dbeafe" : "white",
+            }}
+          >
+            {value}
+          </button>
+        ))}
       </div>
     </div>
   );

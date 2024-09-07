@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema(
                 mood: Number,
                 moodDuration: Number,
                 stressLevel: Number,
-                anxietySymptoms: [{ type: String }],
+                anxietySymptoms:  String,
                 sleepQuality: Number,
                 sleepHours: Number,
                 sleepDisturbance: String,

@@ -1,4 +1,3 @@
-// src/app/components/DailySteppper/SleepHours.tsx
 "use client";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,8 +18,7 @@ const SleepHours = () => {
     (state: RootState) => state.dailyQuestionsSlice.sleepHours
   );
 
-  const handleSleepHoursSelect = (hours: string) => {
-    // console.log("Setting sleep hours to:", hours);
+  const handleSleepHoursSelect = (hours: number) => {
     dispatch(setSleepHours(hours));
     dispatch(setCurrentStep(currentStep + 1));
   };
@@ -28,26 +26,21 @@ const SleepHours = () => {
   return (
     <div>
       <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-        How many hours of sleep do you typically get each night?
+        On a scale of 1 to 10, how many hours of sleep do you typically get each
+        night?
       </label>
       <div className={smallButtonsPaddingStyles}>
-        {[
-          "Less than 4 hours",
-          "4-6 hours",
-          "6-8 hours",
-          "8-10 hours",
-          "More than 10 hours",
-        ].map((hours) => (
+        {Array.from({ length: 10 }, (_, index) => index + 1).map((value) => (
           <button
-            key={hours}
+            key={value}
             className={`${buttonStyles}`}
-            onClick={() => handleSleepHoursSelect(hours)}
+            onClick={() => handleSleepHoursSelect(value)}
             style={{
               backgroundColor:
-                selectedSleepHours === hours ? "#dbeafe" : "white",
+                selectedSleepHours === value ? "#dbeafe" : "white",
             }}
           >
-            {hours}
+            {value}
           </button>
         ))}
       </div>

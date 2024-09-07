@@ -1,4 +1,3 @@
-// src/app/components/DailySteppper/SocialEngagement.tsx
 "use client";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,8 +18,7 @@ const SocialEngagement = () => {
     (state: RootState) => state.dailyQuestionsSlice.socialEngagement
   );
 
-  const handleSocialEngagementSelect = (engagement: string) => {
-    // console.log("Setting social engagement to:", engagement);
+  const handleSocialEngagementSelect = (engagement: number) => {
     dispatch(setSocialEngagement(engagement));
     dispatch(setCurrentStep(currentStep + 1));
   };
@@ -28,27 +26,22 @@ const SocialEngagement = () => {
   return (
     <div>
       <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-        How often have you interacted with friends, family, or social groups in
-        the past week?
+        On a scale of 1 to 10, how would you rate your level of social
+        engagement over the past week? (1 being no interaction and 10 being very
+        frequent interaction)
       </label>
       <div className={smallButtonsPaddingStyles}>
-        {[
-          "Not at all",
-          "Once or twice",
-          "Several times",
-          "Daily",
-          "Multiple times per day",
-        ].map((engagement) => (
+        {Array.from({ length: 10 }, (_, index) => index + 1).map((value) => (
           <button
-            key={engagement}
+            key={value}
             className={`${buttonStyles}`}
-            onClick={() => handleSocialEngagementSelect(engagement)}
+            onClick={() => handleSocialEngagementSelect(value)}
             style={{
               backgroundColor:
-                selectedSocialEngagement === engagement ? "#dbeafe" : "white",
+                selectedSocialEngagement === value ? "#dbeafe" : "white",
             }}
           >
-            {engagement}
+            {value}
           </button>
         ))}
       </div>

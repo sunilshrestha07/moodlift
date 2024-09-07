@@ -44,12 +44,7 @@ const CurrentTreatment = () => {
         health (e.g., therapy, medication)?
       </label>
       <div className={smallButtonsPaddingStyles}>
-        {[
-          "Yes, and it’s helpful",
-          "Yes, but it’s not helpful",
-          "No, but I’m considering it",
-          "No, and I’m not considering it",
-        ].map((treatment) => (
+        {["Yes", "No"].map((treatment) => (
           <button
             key={treatment}
             className={`${buttonStyles}`}
