@@ -6,7 +6,6 @@ import dbConnect from "@/lib/db";
 
 // TESTING DONE
 
-
 // Function to generate a series of distinct dates (in UTC) for the past n days
 function generateDateSeries(days: number): Date[] {
   const dates = [];
@@ -88,7 +87,7 @@ export async function PUT(
     const distinctDates = generateDateSeries(14);
 
     // Filter out dates for which an activity already exists
-    const existingDates = user.activityInfo.map((activity:any) =>
+    const existingDates = user.activityInfo.map((activity: any) =>
       new Date(activity.date).toDateString()
     );
 

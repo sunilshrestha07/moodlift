@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema(
     },
     activityInfo: [
       {
-        date: { type: Date, default: Date.now },
+        date: { type: Date, default: Date.now() },
         mood: Number,
         moodDuration: Number,
         stressLevel: Number,
