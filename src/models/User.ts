@@ -40,13 +40,18 @@ const userSchema = new mongoose.Schema(
         noOfPosts: {
             type: Number,
         },
+        chatbotMessage: [
+            {
+                type: String,
+            },
+        ],
         activityInfo: [
             {
                 date: { type: Date, default: Date.now },
                 mood: Number,
                 moodDuration: Number,
                 stressLevel: Number,
-                anxietySymptoms:  String,
+                anxietySymptoms: [{ type: String }],
                 sleepQuality: Number,
                 sleepHours: Number,
                 sleepDisturbance: String,

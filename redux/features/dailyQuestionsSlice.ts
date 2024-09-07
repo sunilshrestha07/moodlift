@@ -7,8 +7,8 @@ export interface DailyQuestionsState {
     stressLevel: number;
     sleepQuality: number;
     sleepHours: number;
-    anxietySymptoms: string; // Updated to array of strings
     sleepDisturbance: string;
+    anxietySymptoms: string; // Updated to array of strings
     physicalActivity: string;
     energyLevels: number; // Updated to number
     eatingHabits: string;
@@ -25,8 +25,8 @@ const initialState: DailyQuestionsState = {
     stressLevel: 0,
     sleepQuality: 0,
     sleepHours: 0,
-    anxietySymptoms: "", 
     sleepDisturbance: "",
+    anxietySymptoms: "", 
     physicalActivity: "",
     energyLevels: 0,
     eatingHabits: "",
