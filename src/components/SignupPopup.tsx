@@ -5,15 +5,15 @@ import React, { useEffect, useState } from "react";
 import googleIcon from "@/public/icons/googleIcon.svg";
 import logo from "@/public/icons/LOGO.svg";
 import { useDispatch } from "react-redux";
-// import { toggleLoginPopup } from "../../redux/features/popupSlice";
+import { toggleLoginPopup } from "../../redux/features/popupSlice";
 import { signIn, useSession } from "next-auth/react";
-// import { setUserForGoogleSignup } from "../../redux/features/userSlice";
+import { setUserForGoogleSignup } from "../../redux/features/userSlice";
 
 const SignupPopup = () => {
     const [isSigningIn, setIsSigningIn] = useState(false);
     const dispatch = useDispatch();
     const deactivatePopup = (e: React.MouseEvent<HTMLDivElement>) => {
-        //   dispatch(toggleLoginPopup());
+        dispatch(toggleLoginPopup());
     };
     const { data: session, status } = useSession();
 
@@ -37,12 +37,13 @@ const SignupPopup = () => {
             console.log({ resForSignIn: res });
 
             if (res.ok) {
-                //     dispatch();
-                //   setUserForGoogleSignup({
-                //       name: session.user.name || "",
-                //       email: session.user.email || "",
-                //       image: session.user.image || "",
-                //   })
+                dispatch(
+                    setUserForGoogleSignup({
+                        name: session.user.name || "",
+                        email: session.user.email || "",
+                        image: session.user.image || "",
+                    })
+                );
             }
 
             setIsSigningIn(false);
