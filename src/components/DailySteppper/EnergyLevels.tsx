@@ -1,4 +1,3 @@
-// src/app/components/DailySteppper/EnergyLevels.tsx
 "use client";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,8 +18,7 @@ const EnergyLevels = () => {
     (state: RootState) => state.dailyQuestionsSlice.energyLevels
   );
 
-  const handleEnergyLevelsSelect = (level: string) => {
-    // console.log("Setting energy levels to:", level);
+  const handleEnergyLevelsSelect = (level: number) => {
     dispatch(setEnergyLevels(level));
     dispatch(setCurrentStep(currentStep + 1));
   };
@@ -28,20 +26,21 @@ const EnergyLevels = () => {
   return (
     <div>
       <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-        How would you rate your energy levels throughout the day?
+        On a scale of 1 to 10, how would you rate your energy levels throughout
+        the day? (1 being very low and 10 being very high)
       </label>
       <div className={smallButtonsPaddingStyles}>
-        {["Very low", "Low", "Moderate", "High", "Very high"].map((level) => (
+        {Array.from({ length: 10 }, (_, index) => index + 1).map((value) => (
           <button
-            key={level}
+            key={value}
             className={`${buttonStyles}`}
-            onClick={() => handleEnergyLevelsSelect(level)}
+            onClick={() => handleEnergyLevelsSelect(value)}
             style={{
               backgroundColor:
-                selectedEnergyLevels === level ? "#dbeafe" : "white",
+                selectedEnergyLevels === value ? "#dbeafe" : "white",
             }}
           >
-            {level}
+            {value}
           </button>
         ))}
       </div>

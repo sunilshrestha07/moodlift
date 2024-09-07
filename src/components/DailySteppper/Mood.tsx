@@ -1,4 +1,3 @@
-// src/app/components/DailySteppper/Mood.tsx
 "use client";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,36 +20,28 @@ const Mood = () => {
   );
 
   // Handle mood selection and move to the next step
-  const handleMoodSelect = (mood: string) => {
-    // console.log("Setting mood to:", mood);
+  const handleMoodSelect = (mood: number) => {
     dispatch(setMood(mood));
     dispatch(setCurrentStep(currentStep + 1)); // Move to next step
   };
 
-  // Button styles
-
   return (
     <div>
       <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-        How would you describe your overall mood over the past week?
+        On a scale of 1 to 10, how would you rate your overall mood over the
+        past week?
       </label>
       <div className={smallButtonsPaddingStyles}>
-        {[
-          "Very positive",
-          "Positive",
-          "Neutral",
-          "Negative",
-          "Very negative",
-        ].map((mood) => (
+        {Array.from({ length: 10 }, (_, index) => index + 1).map((value) => (
           <button
-            key={mood}
+            key={value}
             className={`${buttonStyles}`}
-            onClick={() => handleMoodSelect(mood)}
+            onClick={() => handleMoodSelect(value)}
             style={{
-              backgroundColor: selectedMood === mood ? "#dbeafe" : "white",
-            }} // Inline style for debugging
+              backgroundColor: selectedMood === value ? "#dbeafe" : "white",
+            }}
           >
-            {mood}
+            {value}
           </button>
         ))}
       </div>
