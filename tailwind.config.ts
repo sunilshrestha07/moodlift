@@ -11,6 +11,7 @@ const config: Config = {
             boxShadow: {
                 alldirection: "0 2px 14px -2px rgba(0, 0, 0, 0.15)",
                 buttonShadow: "0 4px 14px -2px rgba(0, 0, 0, 0.15)",
+                smallButtonShadow: "0 2px 6px 0px rgba(0, 0, 0, 0.15)",
                 navbarShadow: "0 4px 14px -2px rgba(0, 0, 0, 0.25)",
             },
             colors: {

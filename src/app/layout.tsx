@@ -26,7 +26,6 @@ export default function RootLayout({
             <body className={`${poppins.className}`}>
                 <ReduxProvider>
                     <Navbar />
-
                     {children}
                 </ReduxProvider>
             </body>
