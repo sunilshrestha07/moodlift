@@ -11,9 +11,6 @@ import { RootState } from "../../../../redux/store";
 const TodayReportBtn = () => {
     const dispatch = useDispatch();
 
-    const isRecommendationActive = useSelector(
-        (state: RootState) => state.homePageSlice.isRecommendationActive
-    );
     const isReportActive = useSelector((state: RootState) => state.homePageSlice.isReportActive);
 
     const activateTodaysReport = () => {
@@ -22,9 +19,9 @@ const TodayReportBtn = () => {
 
     return (
         <div
-            className={`cursor-pointer  px-4 py-6 md:px-6 md:py-6 rounded-xl min-w-[5rem] max-w-[45rem]  w-full  justify-center text-center   text-xs sm:text-sm lg:text-lg flex items-center gap-2 md:gap-8 ${
-                isReportActive && "bg-gray-400"
-            } bg-white `}
+            className={`cursor-pointer   px-4 py-6 md:px-6 md:py-6 rounded-xl min-w-[5rem] max-w-[45rem]  w-full  justify-center text-center   text-xs sm:text-sm lg:text-lg flex items-center gap-2 md:gap-8 ${
+                isReportActive ? "bg-gray-100" : "bg-white"
+            }  `}
             onClick={activateTodaysReport}
         >
             <div>Today&apos;s Report</div>
