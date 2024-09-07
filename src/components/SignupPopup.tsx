@@ -41,7 +41,7 @@ const SignupPopup = () => {
                     setUserForGoogleSignup({
                         name: session.user.name || "",
                         email: session.user.email || "",
-                        image: session.user.image || "",
+                        avatar: session.user.image || "",
                     })
                 );
             }
