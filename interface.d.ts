@@ -29,4 +29,18 @@ export interface User {
   }
 
 
-
+export interface verify{
+  fullname: string,
+  officialemail: string,
+  phone: number,
+  address: string,
+  licence: string,
+  expiryDate: Date,
+  province: string,
+  licanceImage: string,
+  educationImage: string,
+  photoId: string,
+  workplace: string,
+  experience: number,
+  specializations: string
+}

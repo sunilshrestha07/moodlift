@@ -59,6 +59,7 @@ function generateRandomUser() {
 }
 
 export async function GET() {
+  await dbConnect();
   try {
     // Generate random user data
     const randomUserData = generateRandomUser();
