@@ -15,7 +15,9 @@ export interface DailyQuestionsState {
     socialEngagement: number; // Updated to number
     loneliness: number; // Updated to number
     currentTreatment: string;
+    messageForBruno: string;
     currentStep: number;
+    isDoneAsking: boolean;
 }
 
 // Set the initial state with appropriate types
@@ -33,7 +35,9 @@ const initialState: DailyQuestionsState = {
     socialEngagement: 0,
     loneliness: 0,
     currentTreatment: "",
+    messageForBruno: "",
     currentStep: 0,
+    isDoneAsking: false,
 };
 
 // Create the slice with updated reducers
@@ -83,6 +87,10 @@ const dailyQuestionsSlice = createSlice({
         setCurrentStep: (state, action: PayloadAction<number>) => {
             state.currentStep = action.payload;
         },
+        setMessageForBruno: (state, action: PayloadAction<string>) => {
+            state.messageForBruno = action.payload;
+            state.isDoneAsking = true;
+        },
     },
 });
 
@@ -100,6 +108,7 @@ export const {
     setSocialEngagement,
     setLoneliness,
     setCurrentTreatment,
+    setMessageForBruno,
     setCurrentStep,
 } = dailyQuestionsSlice.actions;
 
