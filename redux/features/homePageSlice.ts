@@ -3,14 +3,20 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 const homePageSlice = createSlice({
     name: "homePageSlice",
     initialState: {
-        activePanel: "report",
+        isReportActive: true,
+        isRecommendationActive: false,
     },
     reducers: {
-        setActivePanel: (state, action: PayloadAction<string>) => {
-            state.activePanel = action.payload;
+        setReportActive: (state) => {
+            state.isReportActive = true;
+            state.isRecommendationActive = false;
+        },
+        setRecommendationActive: (state) => {
+            state.isReportActive = false;
+            state.isRecommendationActive = true;
         },
     },
 });
 
-export const { setActivePanel } = homePageSlice.actions;
+export const { setReportActive, setRecommendationActive } = homePageSlice.actions;
 export default homePageSlice.reducer;
