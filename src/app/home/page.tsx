@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import SignupPopup from "@/components/SignupPopup";
 import { pagePadding } from "../globalStyles";
+import DailyStepper from "@/components/DailySteps";
+import Recommendations from "./components/Recommendations";
+import Stepper from "@/components/Stepper";
 
 const HomePage = () => {
     // const { data: session, status } = useSession();
@@ -44,6 +47,10 @@ const HomePage = () => {
 
     const loginPopupStatus = useSelector((state: RootState) => state.popupReducer.isLoginPopupOpen);
     const isUserAuthorized = useSelector((state: RootState) => state.userReducer.isAuthenticated);
+    const isReportOpen = useSelector((state: RootState) => state.homePageSlice.isReportActive);
+    const isRecommendationActive = useSelector(
+        (state: RootState) => state.homePageSlice.isRecommendationActive
+    );
     const dispatch = useDispatch();
 
     return (
@@ -63,6 +70,7 @@ const HomePage = () => {
                     <div className="mt-10">
                         <MainBigButtons />
                     </div>
+                    {/*  */}
                 </div>
 
                 {/* To show in desktop view */}
@@ -71,9 +79,10 @@ const HomePage = () => {
                         <AIGreetHistory />
                         <LineGraph />
                     </div>
-
                     <div className="h-[2px] w-full bg-black/20 mt-12 rounded-sm"></div>
                     <MainBigButtons />
+                    {isReportOpen && <DailyStepper />}
+                    {isRecommendationActive && <Recommendations />}
                 </div>
             </div>
         </div>

@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import mongoose from "mongoose";
 import { faker } from "@faker-js/faker";
 import User from "@/models/User"; // Adjust the import path as needed
 import dbConnect from "@/lib/db";

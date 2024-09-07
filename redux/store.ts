@@ -2,16 +2,21 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./features/userSlice";
 import popupReducer from "./features/popupSlice";
 import pagesReducer from "./features/pagesSlice";
-// import initialQsnsSlice from "./features/initialQsnsSlice";
+
 import dailyQuestionsSlice from "./features/dailyQuestionsSlice";
+import homePageSlice from "./features/homePageSlice";
+import initialQsnSlice from "./features/initialQsnSlice";
+import graphSlice from "./features/graphSlice";
 
 export const store = configureStore({
     reducer: {
         userReducer,
-        popupReducer,   
+        popupReducer,
         pagesReducer,
-        // initialQsnsSlice,
+        initialQsnSlice,
         dailyQuestionsSlice,
+        homePageSlice,
+        graphSlice,
     },
 });
 
