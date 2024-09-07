@@ -15,15 +15,18 @@ const Age = () => {
   );
 
   const handleAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value, 10);
-    if (!isNaN(value)) {
-      dispatch(setAge(value));
+    const value = e.target.value;
+    if (value === "" || /^[0-9]*$/.test(value)) {
+      dispatch(setAge(parseInt(value)));
     }
   };
 
   const handleNext = () => {
-    if (age) {
+    if (age !== undefined) {
+      console.log(`Navigating to the next step. Current age: ${age}`);
       dispatch(setCurrentStep(currentStep + 1));
+    } else {
+      console.log("Age is undefined. Cannot proceed to the next step.");
     }
   };
 
@@ -43,9 +46,9 @@ const Age = () => {
         <button
           onClick={handleNext}
           className={`bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-300 ${
-            !age ? "opacity-50 cursor-not-allowed" : ""
+            age === undefined ? "opacity-50 cursor-not-allowed" : ""
           }`}
-          disabled={!age}
+          disabled={age === undefined} // Disable if age is undefined
         >
           Next
         </button>

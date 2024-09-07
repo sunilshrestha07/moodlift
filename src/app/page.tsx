@@ -1,4 +1,3 @@
-
 "use client";
 import Section from "@/components/Section";
 import SignupPopup from "@/components/SignupPopup";
@@ -8,18 +7,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import DailySteps from "@/components/DailySteps";
 import popupSlice, { toggleLoginPopup } from "../../redux/features/popupSlice";
+import Initstep from "@/components/Initstep";
 
 export default function Page() {
-  const loginPopupStatus = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen);
+  const loginPopupStatus = useSelector(
+    (state: RootState) => state.popupSlice.isLoginPopupOpen
+  );
   const dispatch = useDispatch();
 
   const currentUser = useSelector((state: RootState) => state.userSlice.name);
   useEffect(() => {
-    if(currentUser){
-      dispatch(toggleLoginPopup())
+    if (currentUser) {
+      dispatch(toggleLoginPopup());
     }
-  },[])
-
+  }, []);
 
   return (
     <>
@@ -32,7 +33,7 @@ export default function Page() {
           {" "}
           {/* <Initstep /> */}
           <div className="py-10">
-            <DailySteps />
+            <Initstep />
           </div>
         </div>
       </div>
