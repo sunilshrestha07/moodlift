@@ -2,7 +2,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../../redux/store";
-import { setPreviousDiagnosis, setCurrentStep } from "../../../redux/features/initialQsnSlice";
+import {
+    setPreviousDiagnosis,
+    setCurrentStep,
+    toggleIsInitialQuestionVisible,
+} from "../../../redux/features/initialQsnSlice";
 import { buttonStyles, smallButtonsPaddingStyles } from "./Gender"; // Reuse styles from Gender component
 // import Traumatic from "./Traumatic";
 
@@ -19,7 +23,7 @@ const options = [
 ];
 
 const Mentalhealth: React.FC = () => {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useDispatch();
     const selectedOptions = useSelector(
         (state: RootState) => state.initialQsnSlice.previousDiagnoses
     );
@@ -65,6 +69,7 @@ const Mentalhealth: React.FC = () => {
 
             // Move to next step
             dispatch(setCurrentStep(currentStep + 1));
+            dispatch(toggleIsInitialQuestionVisible());
         }
     };
     const userId = useSelector((state: RootState) => state.userSlice._id);
@@ -94,7 +99,7 @@ const Mentalhealth: React.FC = () => {
     return (
         <div className="flex flex-col gap-4">
             <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-                Select your mental health condition:
+                Do you have any of these mental health condition?
             </label>
             <div className={smallButtonsPaddingStyles}>
                 {options.map((option, index) => (

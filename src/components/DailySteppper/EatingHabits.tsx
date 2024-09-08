@@ -27,7 +27,7 @@ const EatingHabits = () => {
 
   return (
     <div>
-      <label className={smallButtonsPaddingStyles}>
+      <label className="block text-xs sm:text-sm lg:text-lg sm:font-medium mb-2">
         How would you describe your eating habits in the past week?
       </label>
       <div className="flex flex-wrap gap-4 mb-4 sm:pr-8">

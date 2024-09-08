@@ -25,10 +25,9 @@ const SocialEngagement = () => {
 
   return (
     <div>
-      <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-        On a scale of 1 to 10, how would you rate your level of social
-        engagement over the past week? (1 being no interaction and 10 being very
-        frequent interaction)
+      <label className="block text-xs sm:text-sm lg:text-lg sm:font-medium mb-2">
+        How would you rate your level of social engagement over the past week?
+        (1 being no interaction and 10 being very frequent interaction)
       </label>
       <div className={smallButtonsPaddingStyles}>
         {Array.from({ length: 10 }, (_, index) => index + 1).map((value) => (

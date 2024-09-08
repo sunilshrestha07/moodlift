@@ -9,6 +9,11 @@ import {
 } from "../../../redux/features/dailyQuestionsSlice";
 import Image from "next/image";
 import frontAvatar from "@/public/avatar/avatarFrontHappy.svg";
+import {
+    setRecommendationActive,
+    startRecommendationFetch,
+    toggleRecommendationLoading,
+} from "../../../redux/features/homePageSlice";
 
 const MessageForBruno = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -76,21 +81,24 @@ const MessageForBruno = () => {
                 </div>
             </label>
             <div className={`${smallButtonsPaddingStyles}`}>
-                <form onSubmit={handleSubmit} className="">
+                <form onSubmit={handleSubmit} className="flex flex-col ">
                     <input
                         id="messageForBruno"
                         type="text"
                         value={message}
                         onChange={handleChange}
-                        className="border-2 rounded-md border-black/30 w-full md:w-[50vw] h-[5rem] p-2"
+                        className="items-start border-[0.8em] rounded-md border-[#D9D9D9] bg-[#D9D9D9] w-[80vw] sm:w-[85vw] xl:w-[70vw] 2xl:w-[75vw] h-[3rem] sm:h-[5rem] focus:outline-none p-2 placeholder:text-xs sm:placeholder:text-lg"
                         aria-label="Message for Bruno"
+                        placeholder="(Message) Let Bruno understand you"
                     />
-                    <button
-                        type="submit"
-                        className="bg-slate-400 p-4 mt-2 rounded hover:bg-slate-500 transition-colors"
-                    >
-                        Done
-                    </button>
+                    <div className="flex justify-end mt-4">
+                        <button
+                            type="submit"
+                            className="bg-blue-500 hover:bg-blue-600 py-2 px-4  mt-2 rounded  transition duration-300 "
+                        >
+                            Next
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

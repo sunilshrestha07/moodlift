@@ -20,7 +20,7 @@ const Navbar = () => {
    const router = useRouter();
 
    const userData = useSelector((state: RootState) => state.userSlice);
-   const [isShown, setIsShown] = useState<boolean>(true);
+   const [isShown, setIsShown] = useState<boolean>(false);
 
    // State to manage the dropdown visibility
    const [isDropdownOpen, setIsDropdownOpen] = useState(false);

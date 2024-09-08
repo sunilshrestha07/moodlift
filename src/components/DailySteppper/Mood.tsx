@@ -27,9 +27,8 @@ const Mood = () => {
 
   return (
     <div>
-      <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-        On a scale of 1 to 10, how would you rate your overall mood over the
-        past week?
+      <label className="block text-xs sm:text-sm lg:text-lg sm:font-medium mb-2">
+        How would you rate your overall mood over the past week?
       </label>
       <div className={smallButtonsPaddingStyles}>
         {Array.from({ length: 10 }, (_, index) => index + 1).map((value) => (

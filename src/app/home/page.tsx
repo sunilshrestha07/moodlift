@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AIGreetHistory } from "./components/AIGreetHistory";
 import LineGraph from "./components/LineGraph";
 import MainBigButtons from "./components/MainBigButtons";
@@ -24,14 +24,13 @@ import {
 } from "../../../redux/features/graphDataSlice";
 
 const HomePage = () => {
+    const [isFetched, setFetched] = useState(false);
     const loginPopupStatus = useSelector((state: RootState) => state.popupSlice.isLoginPopupOpen);
-    // const isUserAuthorized = useSelector((state: RootState) => state.userSlice.isAuthenticated);
     const isReportOpen = useSelector((state: RootState) => state.homePageSlice.isReportActive);
     const isRecommendationActive = useSelector(
         (state: RootState) => state.homePageSlice.isRecommendationActive
     );
     const dispatch = useDispatch();
-    // const currentUser = useSelector((state: RootState) => state.userSlice);
     const isInitialQuestionVisible = useSelector(
         (state: RootState) => state.initialQsnSlice.isInitialQuestionVisible
     );
@@ -39,6 +38,7 @@ const HomePage = () => {
     const currentUser = useSelector((state: RootState) => state.userSlice.name);
 
     const userId = useSelector((state: RootState) => state.userSlice._id);
+    const userAge = useSelector((state: RootState) => state.userSlice.age);
 
     useEffect(() => {
         if (currentUser) {
@@ -75,12 +75,24 @@ const HomePage = () => {
             // console.log(dataForGraph);
         };
         fetchLineData();
+
+        const getUserFromBackend = async () => {
+            const res = await fetch(`/api/user/${userId}/getUser`);
+            const user = await res.json();
+
+            // need to be done
+            console.log({ user: user });
+            setFetched(true);
+        };
+        getUserFromBackend();
     }, []);
 
     return (
         <div>
             {!currentUser && loginPopupStatus && <SignupPopup />}
-            {isInitialQuestionVisible && isAuthenticated && <NewUserPopup />}
+            {!isFetched && userAge && isAuthenticated && isInitialQuestionVisible && (
+                <NewUserPopup />
+            )}
 
             {!currentUser && loginPopupStatus && <SignupPopup />}
             <div className={`relative ${pagePadding} bg-[#E4F3FF] min-h-[100vh] py-6`}>
