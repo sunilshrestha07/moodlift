@@ -2,29 +2,56 @@
 
 import React, { useEffect, useState } from "react";
 import { RootState } from "../../../../redux/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GoogleGenerativeAI, GenerateContentResult } from "@google/generative-ai";
+import { startRecommendationFetch } from "../../../../redux/features/homePageSlice";
 
 const Recommendations = () => {
     const [apiRes, setAiRes] = useState<string>();
+    const [userInfos, setUserInfos] = useState("");
     const isRecommendationLoading = useSelector(
         (state: RootState) => state.homePageSlice.isRecommendationLoading
     );
     const fetchRecommendation = useSelector(
         (state: RootState) => state.homePageSlice.fetchRecommendation
     );
+    const fetchUserActivities = useSelector(
+        (state: RootState) => state.homePageSlice.fetchUserActivities
+    );
+    const isRecommendationActive = useSelector(
+        (state: RootState) => state.homePageSlice.isRecommendationActive
+    );
+    const dispatch = useDispatch();
     const genAI = new GoogleGenerativeAI("AIzaSyDRThm0aYUHqxAyyFVt8p0ufVFS0pS-0t4");
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const userId = useSelector((state: RootState) => state.userSlice._id);
 
-    const prompt = `you are a professional psychiatrist and i want a recommendation and feedback from you. my name is `;
+    useEffect(() => {
+        const getActivitiesOfUser = async () => {
+            const res = await fetch(`/api/user/${userId}/getUser`);
+            const response = await res.json();
+
+            console.log({ response: response.activityInfo });
+            const stringActivityInfo = JSON.stringify(response.activityInfo);
+            console.log({ stringifiedData: stringActivityInfo });
+
+            setUserInfos(stringActivityInfo);
+            setTimeout(() => {
+                dispatch(startRecommendationFetch());
+            }, 1200);
+        };
+
+        getActivitiesOfUser();
+    }, [isRecommendationActive]);
 
     useEffect(() => {
         const getResFromGemini = async () => {
-            const result: GenerateContentResult = await model.generateContent(prompt);
+            const result: GenerateContentResult = await model.generateContent(
+                `you are a friendly male professional psychiatrist named Bruno and i want a recommendation and feedback from you. my data is as follows. I want you to analyze all this data of me and give me feedback and recommendation based on the trends and patterns you see. Keep the response within 50 words and use a tone of language that is considerate of soft hearted people ${userInfos}`
+            );
             const resText = result.response.text();
-            setAiRes(resText);
 
-            console.log(resText);
+            setAiRes(resText);
         };
 
         getResFromGemini();

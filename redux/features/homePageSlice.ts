@@ -6,7 +6,10 @@ const homePageSlice = createSlice({
         isReportActive: true,
         isRecommendationActive: false,
         isRecommendationLoading: false,
-        fetchRecommendation: 99,
+        fetchRecommendation: false,
+        fetchUserActivities: false,
+        fetchUserMessage: false,
+        aiMessages: [""],
     },
     reducers: {
         setReportActive: (state) => {
@@ -21,7 +24,16 @@ const homePageSlice = createSlice({
             state.isRecommendationLoading = !state.isRecommendationLoading;
         },
         startRecommendationFetch: (state) => {
-            state.fetchRecommendation = state.fetchRecommendation - 1;
+            state.fetchRecommendation = true;
+        },
+        startFetchUserActivities: (state) => {
+            state.fetchUserActivities = true;
+        },
+        startFetchUserMessage: (state) => {
+            state.fetchUserMessage = true;
+        },
+        setAiMessages: (state, action: PayloadAction<string[]>) => {
+            state.aiMessages = action.payload;
         },
     },
 });
@@ -31,5 +43,8 @@ export const {
     setRecommendationActive,
     toggleRecommendationLoading,
     startRecommendationFetch,
+    startFetchUserActivities,
+    startFetchUserMessage,
+    setAiMessages,
 } = homePageSlice.actions;
 export default homePageSlice.reducer;

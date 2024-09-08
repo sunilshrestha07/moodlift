@@ -1,11 +1,22 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import sideAvatar from "../../../public/avatar/avatarSideHappy.png";
 import sideAvatar from "@/public/avatar/avatarSideHappy.svg";
 
 import MessageComponent from "./MessageComponent";
+import { GenerateContentResult, GoogleGenerativeAI } from "@google/generative-ai";
+import {
+    startFetchUserMessage,
+    startRecommendationFetch,
+} from "../../../../redux/features/homePageSlice";
+import { RootState, RootStateType } from "../../../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 
 export const AIGreetHistory = () => {
+    // const isReportActive = useSelector((state:RootState)=>state.)
+    // useEffect(() => {}, [isReportActive]);
     return (
         // row-span-2 md:col-span-2
         <div className="bg-black/10 relative backdrop-blur-3xl rounded-md p-4 col-span-1 h-full w-full overflow-hidden">
@@ -17,6 +28,9 @@ export const AIGreetHistory = () => {
                 </button>
             </div>
             <div className="overflow-auto h-full space-y-3 pb-12 pt-2">
+                {/* {aiMessages.map((message, index) => (
+                    <MessageComponent key={index} message={message} />
+                ))} */}
                 <MessageComponent message={"It's nice to know you are enjoying the day."} />
                 <MessageComponent
                     message={

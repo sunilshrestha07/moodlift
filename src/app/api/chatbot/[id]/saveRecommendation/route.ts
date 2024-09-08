@@ -11,7 +11,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
 
         // Parse the request body
         const userId = params.id;
-        const newMessage = await req.json(); // Changed from 'message' to 'newMessage'
+        const { newMessage } = await req.json(); // Changed from 'message' to 'newMessage'
 
         // Validate input
         if (!userId || !newMessage) {
@@ -28,10 +28,10 @@ export async function POST(req: Request, { params }: { params: { id: string } })
         }
 
         // Add the new message in a FIFO manner (maintaining only last 5 messages)
-        if (user.chatbotMessage.length >= 5) {
-            user.chatbotMessage.shift(); // Remove the oldest message
+        if (user.chatbotRecommendation.length >= 5) {
+            user.chatbotRecommendation.shift(); // Remove the oldest message
         }
-        user.chatbotMessage.push(newMessage); // Add the new message
+        user.chatbotRecommendation.push(newMessage); // Add the new message
 
         // Save the updated user document
         await user.save();
@@ -39,7 +39,7 @@ export async function POST(req: Request, { params }: { params: { id: string } })
         return NextResponse.json(
             {
                 message: "Message added successfully",
-                chatbotMessages: user.chatbotMessage,
+                chatbotRecommendation: user.chatbotRecommendation,
             },
             { status: 200 }
         );
