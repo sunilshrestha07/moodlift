@@ -130,9 +130,7 @@ const HomePage = () => {
     return (
         <div>
             {!currentUser && loginPopupStatus && <SignupPopup />}
-            {!isFetched && userAge && isAuthenticated && isInitialQuestionVisible && (
-                <NewUserPopup />
-            )}
+            {userAge && isAuthenticated && isInitialQuestionVisible && <NewUserPopup />}
 
             {!currentUser && loginPopupStatus && <SignupPopup />}
             <div className={`relative ${pagePadding} bg-[#E4F3FF] min-h-[100vh] py-6`}>
