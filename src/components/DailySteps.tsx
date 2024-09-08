@@ -91,33 +91,29 @@ const DailyStepper = () => {
 
     // Remove the handleClick function and button for navigation
 
-  return (
-    <>
-      <div className="flex mb-10 sm:mb-0 ">
-        <div className="mt-8 bg-white p-4 sm:p-6 rounded-lg shadow-lg w-full">
-          <h2 className="text-xs sm:text-xl sm:font-semibold mb-4">
-            Please complete this daily questionnaire
-          </h2>
-          <button
-            onClick={() => handleClick("prev")}
-            className={`bg-[#D9D9D9] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 text-xs md:text-sm rounded mb-6 ${
-              currentStep === 0 ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          >
-            Previous
-          </button>
-          <div>
-            <Stepper
-              steps={steps}
-              currentStep={currentStep}
-              handleClick={() => {}}
-            />
-          </div>
-          <div>{displaySteps(currentStep)}</div>
-        </div>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div className="flex mb-10 sm:mb-[8vh] ">
+                <div className="mt-8 bg-white p-4 sm:p-6 rounded-lg shadow-lg w-full">
+                    <h2 className="text-xs sm:text-xl sm:font-semibold mb-4">
+                        Please complete this daily questionnaire
+                    </h2>
+                    <button
+                        onClick={() => handleClick("prev")}
+                        className={`bg-[#D9D9D9] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 text-xs md:text-sm rounded mb-6 ${
+                            currentStep === 0 ? "opacity-50 cursor-not-allowed" : ""
+                        }`}
+                    >
+                        Previous
+                    </button>
+                    <div>
+                        <Stepper steps={steps} currentStep={currentStep} handleClick={() => {}} />
+                    </div>
+                    <div>{displaySteps(currentStep)}</div>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default DailyStepper;
