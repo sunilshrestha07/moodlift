@@ -82,14 +82,14 @@ const MessageForBruno = () => {
             type="text"
             value={message}
             onChange={handleChange}
-            className="items-start border-[0.8em] rounded-md border-[#D9D9D9] bg-[#D9D9D9] w-[80vw] sm:w-[85vw] xl:w-[70vw] 2xl:w-[75vw] h-[5rem] focus:outline-none p-2"
+            className="items-start border-[0.8em] rounded-md border-[#D9D9D9] bg-[#D9D9D9] w-[80vw] sm:w-[85vw] xl:w-[70vw] 2xl:w-[75vw] h-[3rem] sm:h-[5rem] focus:outline-none p-2 placeholder:text-xs sm:placeholder:text-lg"
             aria-label="Message for Bruno"
             placeholder="(Message) Let Bruno understand you"
           />
           <div className="flex justify-end mt-4">
             <button
               type="submit"
-              className="bg-slate-400 p-4 mt-2 rounded hover:bg-slate-500 transition-colors"
+              className="bg-blue-500 hover:bg-blue-600 py-2 px-4  mt-2 rounded  transition duration-300 "
             >
               Next
             </button>

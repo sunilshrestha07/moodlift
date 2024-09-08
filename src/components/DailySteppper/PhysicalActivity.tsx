@@ -27,7 +27,7 @@ const PhysicalActivity = () => {
 
   return (
     <div>
-      <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
+      <label className="block text-xs sm:text-sm lg:text-lg sm:font-medium mb-2">
         How frequently have you engaged in physical activity or exercise in the
         past week?
       </label>

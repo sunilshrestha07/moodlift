@@ -1,10 +1,24 @@
+"use client";
 import React from "react";
 import Arrow from "@/public/icons/Arrow3.svg";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import { toggleLoginPopup } from "../../redux/features/popupSlice";
+import SignupPopup from "./SignupPopup";
 const Steps = () => {
+  const loginPopupStatus = useSelector(
+    (state: RootState) => state.popupSlice.isLoginPopupOpen
+  );
+  const currentUser = useSelector((state: RootState) => state.userSlice.name);
+  const dispatch = useDispatch();
+  const handlePopup = () => {
+    dispatch(toggleLoginPopup());
+  };
   return (
     <>
       <div className="cl">
+        {!currentUser && loginPopupStatus && <SignupPopup />}
         <div className="worker px-[10vw] sm:px-[14vw] my-4">
           <h2 className="texter items-center text-[4vh] md:text-[6vh] font-semibold mb-[2vh] md:mb-[8vh] sm:my-6">
             How it works?
@@ -12,11 +26,11 @@ const Steps = () => {
 
           <div className="relative grid grid-cols-12 gap-x-3 md:gap-x-5 items-center mb-[4vh] sm:mb-[6vh] lg:mb-[8vh] xl:mb-[10vh]">
             <div className="col-span-6 md:col-span-4 2xl:col-span-3 flex justify-center">
-              <div className="w-full p-5 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] text-4xl md:text-6xl bg-white flex justify-center items-center rounded-[1vw] shadow-md">
+              <div className="w-full p-5 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] text-xl sm:text-4xl md:text-5xl lg:text-6xl bg-white flex justify-center items-center rounded-[1vw] ">
                 1.
               </div>
             </div>
-            <div className="col-span-6 md:col-span-8 2xl:col-span-9 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] flex flex-col bg-blue-100 rounded-[1vw] shadow-md pl-[2vw] md:pl-[4vw] py-2 sm:py-4 md:py-6 lg:py-8">
+            <div className="col-span-6 md:col-span-8 2xl:col-span-9 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] flex flex-col bg-blue-100  rounded-[1vw]  pl-[2vw] md:pl-[4vw] py-2 sm:py-4 md:py-6 lg:py-8">
               <h5 className="w-full text-[3vw] md:text-xl lg:text-2xl font-semibold bg-opacity-30">
                 Sign in
               </h5>
@@ -25,7 +39,7 @@ const Steps = () => {
                 Sign in with Google account so that we can keep your data synced
                 up across the devices.
               </p>
-              <p className="text-[0.6rem] sm:text-[0.80rem] lg:text-[1rem] mt-[1vh] lg:mt-[2vh]">
+              <p className="text-[0.6rem] sm:text-[0.80rem] lg:text-[1rem] mt-[.6vh] sm:mt-0 lg:mt-[1vh] xl:mt-[2vh]">
                 Or, you can continue as a{" "}
                 <span className="font-semibold underline">Guest.</span>
               </p>
@@ -36,11 +50,11 @@ const Steps = () => {
 
           <div className="relative grid grid-cols-12 gap-x-5 items-center mb-[4vh] sm:mb-[6vh] lg:mb-[8vh] xl:mb-[10vh]">
             <div className="col-span-6 md:col-span-4 2xl:col-span-3 flex justify-center">
-              <div className="w-full p-5 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] text-4xl md:text-6xl bg-white flex justify-center items-center rounded-[1vw] shadow-md">
+              <div className="w-full p-5 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] text-xl sm:text-4xl md:text-5xl lg:text-6xl bg-white flex justify-center items-center rounded-[1vw] ">
                 2.
               </div>
             </div>
-            <div className="col-span-6 md:col-span-8 2xl:col-span-9 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] flex flex-col bg-blue-100 rounded-[1vw] shadow-md pl-[2vw] md:pl-[4vw] py-2 sm:py-4 md:py-6 lg:py-8">
+            <div className="col-span-6 md:col-span-8 2xl:col-span-9 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] flex flex-col bg-blue-100 rounded-[1vw]  pl-[2vw] md:pl-[4vw] py-2 sm:py-4 md:py-6 lg:py-8">
               <h5 className="w-full text-[3vw] md:text-xl lg:text-2xl font-semibold bg-opacity-30">
                 Set your Goal
               </h5>
@@ -54,11 +68,11 @@ const Steps = () => {
 
           <div className="relative grid grid-cols-12 gap-x-5 items-center mb-[4vh] sm:mb-[6vh] lg:mb-[8vh] xl:mb-[10vh]">
             <div className="col-span-6 md:col-span-4 2xl:col-span-3 flex justify-center">
-              <div className="w-full p-5 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] text-4xl md:text-6xl bg-white flex justify-center items-center rounded-[1vw] shadow-md">
+              <div className="w-full p-5 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] text-xl sm:text-4xl md:text-5xl lg:text-6xl bg-white flex justify-center items-center rounded-[1vw] ">
                 3.
               </div>
             </div>
-            <div className="col-span-6 md:col-span-8 2xl:col-span-9 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] flex flex-col bg-blue-100 rounded-[1vw] shadow-md pl-[2vw] md:pl-[4vw] py-2 sm:py-4 md:py-6 lg:py-8">
+            <div className="col-span-6 md:col-span-8 2xl:col-span-9 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] flex flex-col bg-blue-100 rounded-[1vw]  pl-[2vw] md:pl-[4vw] py-2 sm:py-4 md:py-6 lg:py-8">
               <h5 className="w-full text-[3vw] md:text-xl lg:text-2xl font-semibold bg-opacity-30">
                 Show up regularly
               </h5>
@@ -73,11 +87,11 @@ const Steps = () => {
 
           <div className="relative grid grid-cols-12 gap-x-5 items-center mb-[4vh] sm:mb-[6vh] lg:mb-[8vh] xl:mb-[10vh]">
             <div className="col-span-6 md:col-span-4 2xl:col-span-3 flex justify-center">
-              <div className="w-full p-5 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] text-4xl md:text-6xl bg-white flex justify-center items-center rounded-[1vw] shadow-md">
+              <div className="w-full p-5 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] text-xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl bg-white flex justify-center items-center rounded-[1vw] ">
                 4.
               </div>
             </div>
-            <div className="col-span-6 md:col-span-8 2xl:col-span-9 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] flex flex-col bg-blue-100 rounded-[1vw] shadow-md pl-[2vw] md:pl-[4vw] py-2 sm:py-4 md:py-6 lg:py-8">
+            <div className="col-span-6 md:col-span-8 2xl:col-span-9 h-[24vh] sm:h-[26vh] lg:h-[30vh] 2xl:h-[28vh] flex flex-col bg-blue-100 rounded-[1vw]  pl-[2vw] md:pl-[4vw] py-2 sm:py-4 md:py-6 lg:py-8">
               <h5 className="w-full text-[3vw] md:text-xl lg:text-2xl font-semibold bg-opacity-30">
                 That’s it
               </h5>
@@ -96,9 +110,12 @@ const Steps = () => {
           <p className="text-gray-800 text-center text-sm sm:text-base md:text-lg lg:text-xl">
             You’re ready? Let’s get you going.
           </p>
-          <button className="bg-indigo-500 text-white font-semibold py-4 text-center w-[50vw] sm:w-[40vw] md:w-[30vw] lg:w-[16vw] rounded-xl flex items-center justify-center space-x-2 shadow-md hover:bg-indigo-600">
+          <button
+            onClick={handlePopup}
+            className="bg-indigo-500 text-white font-semibold py-4 text-center w-[50vw] sm:w-[40vw] md:w-[30vw] lg:w-[16vw] rounded-xl flex items-center justify-center space-x-2 shadow-md hover:bg-indigo-600"
+          >
             <span className="text-xs sm:text-sm md:text-base lg:text-lg">
-              Signup / Guest
+              Signup
             </span>
             <Image
               src={Arrow}
