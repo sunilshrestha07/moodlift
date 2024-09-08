@@ -99,7 +99,7 @@ const Mentalhealth: React.FC = () => {
     return (
         <div className="flex flex-col gap-4">
             <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
-                Select your mental health condition:
+                Do you have any of these mental health condition?
             </label>
             <div className={smallButtonsPaddingStyles}>
                 {options.map((option, index) => (

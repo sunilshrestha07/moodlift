@@ -27,7 +27,7 @@ const SleepDisturbance = () => {
 
   return (
     <div>
-      <label className="block text-xs sm:text-sm lg:text-lg font-medium mb-2">
+      <label className="block text-xs sm:text-sm lg:text-lg sm:font-medium mb-2">
         How often have you experienced disturbances during sleep (e.g., waking
         up frequently, trouble falling asleep)?
       </label>

@@ -28,7 +28,7 @@ const Section = () => {
                                 <br />
                                 <span> specially turned in for you.</span>
                             </div>
-                            <div className="mt-[4vh] sm:mt-[6vh] 2xl:mt-[8vh]  w-[16vw] ">
+                            <div className="mt-[4vh] sm:mt-[6vh] lg:mt-[10vh] 2xl:mt-[8vh]  w-[16vw] ">
                                 {/* lg:mt-[18vh] */}
                                 <button>
                                     <Image
