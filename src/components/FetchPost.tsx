@@ -83,9 +83,6 @@ export default function Allpost({ refetchdata }: any) {
 
    //handel like
    const handelLike = async (postId: string, userId: string) => {
-      {!currentUser}{
-         alert("Please login to like")
-      }
       setIsLiking(true);
    
        // Optimistic UI update
@@ -123,9 +120,6 @@ export default function Allpost({ refetchdata }: any) {
 
    //handel comment submit
 const handelcommentSubmit = async (post: string, user: string) => {
-   if(!currentUser){
-     alert("Please login to comment")
-   }
    try {
       setIsuploading((prev) => ({ ...prev, [post]: true }));
       const formdata = {
