@@ -11,6 +11,7 @@ import loading from "@/public/icons/loading.svg";
 const Recommendations = () => {
     const [apiRes, setAiRes] = useState<string>();
     const [userInfos, setUserInfos] = useState("");
+    const [isLoading, setLoading] = useState(false);
     const isRecommendationLoading = useSelector(
         (state: RootState) => state.homePageSlice.isRecommendationLoading
     );
@@ -31,6 +32,7 @@ const Recommendations = () => {
 
     useEffect(() => {
         const getActivitiesOfUser = async () => {
+            setLoading(true);
             const res = await fetch(`/api/user/${userId}/getUser`);
             const response = await res.json();
 
@@ -51,11 +53,12 @@ const Recommendations = () => {
     useEffect(() => {
         const getResFromGemini = async () => {
             const result: GenerateContentResult = await model.generateContent(
-                `you are a friendly male professional psychiatrist named Bruno and i want a recommendation and feedback from you. my data is as follows. I want you to analyze all this data of me and give me feedback and recommendation based on the trends and patterns you see. Keep the response within 50 words and use a tone of language that is considerate of soft hearted people ${userInfos}`
+                `you are a friendly male professional psychiatrist named Bruno and i want a recommendation and feedback from you. my data is as follows. I want you to analyze all this data of me and give me feedback and recommendation based on the trends and patterns you see. Keep the response within 100 words and use a tone of language that is considerate of soft hearted people ${userInfos}`
             );
             const resText = result.response.text();
 
             setAiRes(resText);
+            setLoading(false);
         };
 
         setTimeout(() => {
@@ -64,11 +67,17 @@ const Recommendations = () => {
     }, [fetchRecommendation]);
 
     return (
-        <div className="mt-8 bg-white p-6 rounded-lg shadow-lg w-full min-h-[20rem]">
-            {isRecommendationLoading && <div className="">Loading...</div>}
-            {isRecommendationLoading && <Image src={loading} alt="loading" className="h-8 w-8" />}
-            <h2 className="text-xl font-semibold mb-4 ">Previous Recommendations</h2>
-            <p>{apiRes}</p>
+        <div className="mt-8 bg-white p-8 rounded-lg shadow-lg w-full min-h-[20rem]">
+            {/* {isRecommendationLoading && <div className="">Loading...</div>} */}
+            {isLoading && (
+                <Image
+                    src={loading}
+                    alt="loading"
+                    className="h-8 w-8 animate-spin absolute left-[45%]"
+                />
+            )}
+            <h2 className="text-xl font-semibold mb-4 "> Recommendation from Bruno</h2>
+            <p className=" text-sm md:text-lg font-normal">{apiRes}</p>
         </div>
     );
 };
