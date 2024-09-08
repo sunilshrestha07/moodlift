@@ -12,6 +12,8 @@ const Recommendations = () => {
     const [apiRes, setAiRes] = useState<string>();
     const [userInfos, setUserInfos] = useState("");
     const [isLoading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+
     const isRecommendationLoading = useSelector(
         (state: RootState) => state.homePageSlice.isRecommendationLoading
     );
@@ -67,7 +69,19 @@ const Recommendations = () => {
             );
             const resText = result2.response.text();
 
-            // const;
+            const getAllMessagesFromBruno = async () => {
+                const res = await fetch(`/api/chatbot/${userId}/saveMessage`, {
+                    method: "POST", // Changed from 'type' to 'method'
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    // body: JSON.stringify({ newMessage: aiRes }), // Added body with newMessage
+                });
+                const message = await res.json();
+                const messages = message.chatbotMessage;
+                console.log({ brunoMessage: messages });
+            };
+            getAllMessagesFromBruno();
         };
 
         setTimeout(() => {
@@ -78,7 +92,6 @@ const Recommendations = () => {
 
     return (
         <div className="mt-8 bg-white p-8 rounded-lg shadow-lg w-full min-h-[20rem]">
-            {/* {isRecommendationLoading && <div className="">Loading...</div>} */}
             {isLoading && (
                 <Image
                     src={loading}
