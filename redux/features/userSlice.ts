@@ -6,6 +6,7 @@ export type User = {
     email?: string;
     avatar?: string;
     isAuthenticated?: boolean;
+    age?: string;
 };
 
 const userSlice = createSlice({
@@ -16,6 +17,7 @@ const userSlice = createSlice({
         email: "",
         _id: "",
         avatar: "",
+        age: "",
     },
     reducers: {
         setAuthenticated: (state) => {
@@ -35,6 +37,9 @@ const userSlice = createSlice({
             state.email = action.payload.email || "";
             state.avatar = action.payload.avatar || "";
             state.isAuthenticated = true;
+        },
+        setAge: (state, action: PayloadAction<string>) => {
+            state.age = action.payload;
         },
     },
 });

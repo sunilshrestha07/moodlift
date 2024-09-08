@@ -9,10 +9,10 @@ const config: Config = {
     theme: {
         extend: {
             boxShadow: {
-                alldirection: "0 2px 14px -2px rgba(0, 0, 0, 0.15)",
+                alldirection: "0 2px 14px 2px rgba(0, 0, 0, 0.15)",
                 buttonShadow: "0 4px 14px -2px rgba(0, 0, 0, 0.15)",
                 smallButtonShadow: "0 2px 6px 0px rgba(0, 0, 0, 0.15)",
-                navbarShadow: "0 4px 14px -2px rgba(0, 0, 0, 0.25)",
+                navbarShadow: "0 4px 14px 2px rgba(0, 0, 0, 0.25)",
             },
             colors: {
                 thoughts: "rgba(173, 62, 255, 1)",

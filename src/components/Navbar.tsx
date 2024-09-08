@@ -54,33 +54,26 @@ const Navbar = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <a
+                                    <Link
                                         href="/communitypost"
                                         className="hover:text-blue-600 text-xs lg:text-base"
                                         onClick={() => dispatch(setActivePage("/communitypost"))}
                                     >
                                         Community
-                                    </a>
-                                </li>
-                                <li className="hidden sm:block">
-                                    <a
-                                        href="#"
-                                        className="hover:text-blue-600 text-xs lg:text-base"
-                                        onClick={() => dispatch(setActivePage("#"))}
-                                    >
-                                        Meditation
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </nav>
 
                         <div className="gapper flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-4">
-                            <button
-                                className="hidden sm:block bg-[#6F5FFF] rounded-lg px-3 md:px-[3vw] lg:px-11 py-2 text-white items-center text-xs sm:text-sm"
-                                onClick={toggleLoginPopupFunction}
-                            >
-                                Login
-                            </button>
+                            {!userData.isAuthenticated && (
+                                <button
+                                    className="hidden sm:block bg-[#6F5FFF] rounded-lg px-3 md:px-[3vw] lg:px-11 py-2 text-white items-center text-xs sm:text-sm"
+                                    onClick={toggleLoginPopupFunction}
+                                >
+                                    Login
+                                </button>
+                            )}
 
                             <div className="rounded-full box-border w-8 h-8 sm:w-10 sm:h-10 bg-[#D9D9D9] overflow-hidden">
                                 {userData.avatar ? (
@@ -127,19 +120,15 @@ const Navbar = () => {
 
                         {/* This is the dropdown menu */}
                         {isDropdownOpen && (
-                            <div className="flex flex-col absolute top-full left-0 mt-2 w-full bg-white rounded-lg p-4 sm:hidden z-50">
-                                <a
-                                    href="#"
-                                    className="hover:text-blue-600 text-xs lg:text-base mb-2"
-                                >
-                                    Meditation
-                                </a>
-                                <button
-                                    className="bg-[#6F5FFF] rounded-lg px-3 py-2 text-white text-xs sm:text-sm"
-                                    onClick={toggleLoginPopupFunction}
-                                >
-                                    Login
-                                </button>
+                            <div className="w-full h-full bg-black/50 fixed top-0 left-0 -z-10">
+                                <div className="flex flex-col absolute top-[7vh] right-4 mt-2 w-[50vw] bg-white rounded-lg p-4 sm:hidden z-50">
+                                    <button
+                                        className="bg-[#6F5FFF] rounded-lg px-3 py-2 text-white text-xs sm:text-sm"
+                                        onClick={toggleLoginPopupFunction}
+                                    >
+                                        Login
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>
