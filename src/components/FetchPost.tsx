@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Post } from "../../interface";
+import { Post, User } from "../../interface";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
@@ -11,6 +11,10 @@ import celebration from "@/public/party.png";
 import thoughts from "@/public/thought.png";
 import more from "@/public/more.png";
 import anonymous from "@/public/anonymous.png"
+import check from "@/public/check.png";
+import ContactPopup from "./ContactPopup";
+import { toggleContactPopup } from "../../redux/features/contactSlice";
+import { setUserForContactPopup } from "../../redux/features/certifiedSlice";
 
 // images
 const thoughtImg = trophy;
@@ -30,6 +34,7 @@ export default function Allpost({ refetchdata }: any) {
    const [isLiking, setIsLiking] = useState<boolean>(false);
    const [isfetching, setIsfetching] = useState<boolean>(false);
    const currentUser = useSelector((state: RootState) => state.userSlice._id);
+   const iscontactPopupOpen = useSelector((state: RootState) => state.contactSlice.iscontactPopupOpen);
    const dispatch = useDispatch();
 
    const initalcomment = 1;
@@ -179,9 +184,18 @@ const handelcommentSubmit = async (post: string, user: string) => {
       }
    };
 
+   //handel popup
+   const handelShowProfile =(user:User)=>{
+      dispatch(toggleContactPopup())
+      dispatch(setUserForContactPopup(user))
+   }
+
    return (
       <>
          <div className="">
+            <div className="">
+            {iscontactPopupOpen && <ContactPopup/>}
+            </div>
             <div className="w-full">
                {isfetching ? (
                   <div className=" w-full h-full flex justify-center items-center">
@@ -211,11 +225,30 @@ const handelcommentSubmit = async (post: string, user: string) => {
                                           ):(
                                              <div className="">
                                                 { item.user.avatar ? (
-                                                   <img
-                                                      className=" w-[30px] sm:w-[40px] aspect-square overflow-hidden object-cover rounded-full"
-                                                      src={item.user.avatar}
-                                                      alt=""
-                                                   />
+                                                   <div className="">
+                                                      {item.user.isCertified ? (
+                                                         <div className="">
+                                                            <div className="">
+                                                               <img
+                                                               className=" w-[30px] sm:w-[40px] aspect-square overflow-hidden object-cover rounded-full cursor-pointer"
+                                                               onClick={()=>handelShowProfile(item.user)}
+                                                               src={item.user.avatar}
+                                                               alt=""
+                                                            />
+                                                       </div>
+                                                         </div>
+                                                      ):(
+                                                         <div className="">
+                                                            <div className="">
+                                                               <img
+                                                               className=" w-[30px] sm:w-[40px] aspect-square overflow-hidden object-cover rounded-full"
+                                                               src={item.user.avatar}
+                                                               alt=""
+                                                            />
+                                                         </div>
+                                                         </div>
+                                                      )}
+                                                   </div>
                                           ) : (
                                              <div className="w-[30px] sm:w-[40px] aspect-square overflow-hidden object-cover rounded-full bg-blue-500">
                                                 {item.user.name.slice(0, 1)}
@@ -223,15 +256,20 @@ const handelcommentSubmit = async (post: string, user: string) => {
                                           )}
                                              </div>
                                           )}
-                                          <div className="">
+                                          <div className=" ">
                                              {item.isAnonymous ? (
                                                 <p className="capitalize font-medium text-sm sm:text-xl">
                                                    Anonymous
                                                 </p>
                                              ):(
-                                                <p className="capitalize font-medium text-sm sm:text-xl">
+                                                <div className=" flex justify-center items-center">
+                                                   <p className="capitalize font-medium text-sm sm:text-xl flex">
                                                    {item.user.name}
+                                                   <p>{item.user.isCertified && (
+                                                      <img className="w-4 sm:w-5 aspect-square object-contain overflow-hidden ml-2 items-end " src={check.src} alt="" />
+                                                   )}</p>
                                                 </p>
+                                                </div>
                                              )}
                                           </div>
                                        </div>

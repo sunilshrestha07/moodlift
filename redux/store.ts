@@ -9,6 +9,8 @@ import initialQsnSlice from "./features/initialQsnSlice";
 import popupSlice from "./features/popupSlice";
 import pagesSlice from "./features/pagesSlice";
 import graphDataSlice from "./features/graphDataSlice";
+import contactSlice from "./features/contactSlice";
+import certifiedSlice from "./features/certifiedSlice";
 
 // Configuration for Redux Persist
 const persistConfig = {
@@ -20,6 +22,8 @@ const persistConfig = {
 
 // Combine all reducers
 const rootReducer = combineReducers({
+    contactSlice,
+    certifiedSlice,
     userSlice,
     popupSlice,
     pagesSlice,

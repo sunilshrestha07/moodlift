@@ -36,6 +36,13 @@ const userSlice = createSlice({
             state.avatar = action.payload.avatar || "";
             state.isAuthenticated = true;
         },
+        setLogoutUser: (state) => {
+            state._id = "";
+            state.name = "";
+            state.email = "";
+            state.avatar = "";
+            state.isAuthenticated = false;
+        }
     },
 });
 
@@ -44,5 +51,6 @@ export const {
     removeAuthenticated,
     setUserForGoogleSignup,
     setUserForBackendConfirmation,
+    setLogoutUser
 } = userSlice.actions;
 export default userSlice.reducer;
