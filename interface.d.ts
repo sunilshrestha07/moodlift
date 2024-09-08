@@ -3,6 +3,8 @@ export interface User {
     name: string;
     avatar: string;
     createdAt: string;
+    isCertified: boolean
+    email: string
   }
   
   export interface Comment {

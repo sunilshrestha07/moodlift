@@ -38,6 +38,13 @@ const userSlice = createSlice({
             state.avatar = action.payload.avatar || "";
             state.isAuthenticated = true;
         },
+        setLogoutUser: (state) => {
+            state._id = "";
+            state.name = "";
+            state.email = "";
+            state.avatar = "";
+            state.isAuthenticated = false;
+        },
         setAge: (state, action: PayloadAction<string>) => {
             state.age = action.payload;
         },
@@ -49,5 +56,6 @@ export const {
     removeAuthenticated,
     setUserForGoogleSignup,
     setUserForBackendConfirmation,
+    setLogoutUser
 } = userSlice.actions;
 export default userSlice.reducer;
