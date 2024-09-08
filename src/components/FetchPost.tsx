@@ -83,7 +83,10 @@ export default function Allpost({ refetchdata }: any) {
 
    //handel like
    const handelLike = async (postId: string, userId: string) => {
-       setIsLiking(true);
+      {!currentUser}{
+         alert("Please login to like")
+      }
+      setIsLiking(true);
    
        // Optimistic UI update
        setPost(prevPosts =>
@@ -120,29 +123,30 @@ export default function Allpost({ refetchdata }: any) {
 
    //handel comment submit
 const handelcommentSubmit = async (post: string, user: string) => {
-   if(currentUser){
-      try {
-         setIsuploading((prev) => ({ ...prev, [post]: true }));
-         const formdata = {
-                        user,
-                        post,
-                        message: message[post] || "",
-                    };
-
-                    const res = await axios.post("/api/comments", formdata);
-         if (res.status === 200) {
-           refetch(); // Fetch the latest data to ensure consistency
-           setMessage((prevMessage) => ({ ...prevMessage, [post]: "" }));
-               setIsuploading((prev) => ({ ...prev, [post]: false }));
-         }
-       } catch (error: any) {
-         setIsuploading((prev) => ({ ...prev, [post]: false }));
-           console.log("Error submitting comment", error.message);
-       } finally {
-         setIsLiking(false);
-         setIsuploading((prev) => ({ ...prev, [post]: false }));
-       }
+   if(!currentUser){
+     alert("Please login to comment")
    }
+   try {
+      setIsuploading((prev) => ({ ...prev, [post]: true }));
+      const formdata = {
+                     user,
+                     post,
+                     message: message[post] || "",
+                 };
+
+                 const res = await axios.post("/api/comments", formdata);
+      if (res.status === 200) {
+        refetch(); // Fetch the latest data to ensure consistency
+        setMessage((prevMessage) => ({ ...prevMessage, [post]: "" }));
+            setIsuploading((prev) => ({ ...prev, [post]: false }));
+      }
+    } catch (error: any) {
+      setIsuploading((prev) => ({ ...prev, [post]: false }));
+        console.log("Error submitting comment", error.message);
+    } finally {
+      setIsLiking(false);
+      setIsuploading((prev) => ({ ...prev, [post]: false }));
+    }
 };
 
   

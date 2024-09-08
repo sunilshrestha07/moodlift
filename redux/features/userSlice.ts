@@ -56,6 +56,7 @@ export const {
     removeAuthenticated,
     setUserForGoogleSignup,
     setUserForBackendConfirmation,
-    setLogoutUser
+    setLogoutUser,
+    setAge
 } = userSlice.actions;
 export default userSlice.reducer;
