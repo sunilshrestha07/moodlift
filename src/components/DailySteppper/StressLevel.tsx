@@ -8,10 +8,10 @@ import {
   setCurrentStep,
 } from "../../../redux/features/dailyQuestionsSlice"; // Update import based on your slice
 
-export const buttonStyles = `shrink-0 text-xs md:text-sm 2xl:text-lg px-6 sm:px-10 md:px-12 2xl:px-16 py-4 sm:py-6 bg-white border shadow-smallButtonShadow rounded-lg text-black hover:bg-blue-100 focus:bg-blue-100 transition duration-300`;
+export const buttonStyles = `shrink-0 text-xs md:text-sm 2xl:text-lg px-9 sm:px-10 md:px-12 2xl:px-16 py-4 sm:py-6 bg-white border shadow-smallButtonShadow rounded-lg text-black hover:bg-blue-100 focus:bg-blue-100 transition duration-300`;
 
 export const smallButtonsPaddingStyles =
-  "flex flex-wrap gap-4 sm:gap-5 md:gap-6 mt-8 mb-4 sm:pr-8";
+  "flex flex-wrap gap-2 pr-2 sm:gap-5 md:gap-6 mt-8 mb-4 sm:pr-8";
 
 const StressLevel = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -35,8 +35,8 @@ const StressLevel = () => {
 
   return (
     <div>
-      <label className="block  text-xs sm:text-sm lg:text-lg font-medium  mb-2">
-        On a scale of 1 to 10, how stressed have you felt in the past week?
+      <label className="block  text-xs sm:text-sm lg:text-lg sm:font-medium  mb-2">
+        How stressed have you felt in the past week?
       </label>
       <div className={smallButtonsPaddingStyles}>
         {Array.from({ length: 10 }, (_, i) => i + 1).map((level) => (
