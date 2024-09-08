@@ -26,8 +26,8 @@ export default function Page() {
         <>
             <div className="">
                 
-                {!currentUser &&  <Section />}
-                {!currentUser &&  <Steps />}
+                <Section />
+                 <Steps />
 
                 {!currentUser && loginPopupStatus && <SignupPopup />}
 
