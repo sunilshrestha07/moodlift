@@ -16,13 +16,13 @@ const NewUserPopup = () => {
 
     return (
         <>
-            <div className="fixed top-0 right-0 w-[100%] h-[100%] z-20 bg-black/15 backdrop-blur-md px-[5vw] py-[10vh] md:px-[8vw] md:pt-[15vh] ">
+            <div className="fixed top-0 right-0 w-[100%] h-[100%] z-20 bg-black/15 backdrop-blur-md  ">
                 <div
-                    className="h-full w-full bg-black/10 absolute px-[5vw]"
+                    className="h-full w-full bg-black/10 absolute "
                     onClick={handlePopupToggle}
                 ></div>
-                <div className=" space-y-5 relative z-20">
-                    <div className="flex flex-wrap gap-4 items-center justify-center">
+                <div className="absolute space-y-5 top-[15vh] px-[5vw] z-20">
+                    <div className="flex xl:flex-wrap gap-4 items-center justify-center">
                         <Image
                             src={avatarFront}
                             alt="avatar"
