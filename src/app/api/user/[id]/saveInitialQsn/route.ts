@@ -43,7 +43,6 @@ export async function POST(req: Request, { params }: { params: { id: string } })
         //   );
 
         await user.save();
-
         return NextResponse.json({
             message: "data added successfully",
         });
