@@ -26,9 +26,9 @@ export default function RootLayout({
             <body className={`${poppins.className}`}>
                 <ReduxProvider>
                     <Navbar />
-                    <div className="absolute">
+                    {/* <div className="absolute">
                         <Image src={blurBlob} alt="blob" />
-                    </div>
+                    </div> */}
                     {children}
                 </ReduxProvider>
             </body>
