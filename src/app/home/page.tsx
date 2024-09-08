@@ -130,7 +130,8 @@ const HomePage = () => {
     return (
         <div>
             {!currentUser && loginPopupStatus && <SignupPopup />}
-            {!isFetched && userAge && isAuthenticated && isInitialQuestionVisible && (
+
+            {isFetched && !userAge && isAuthenticated && isInitialQuestionVisible && (
                 <NewUserPopup />
             )}
 
