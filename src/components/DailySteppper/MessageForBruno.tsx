@@ -9,9 +9,14 @@ import {
 } from "../../../redux/features/dailyQuestionsSlice";
 import Image from "next/image";
 import frontAvatar from "@/public/avatar/avatarFrontHappy.svg";
+import {
+    setRecommendationActive,
+    startRecommendationFetch,
+    toggleRecommendationLoading,
+} from "../../../redux/features/homePageSlice";
 
 const MessageForBruno = () => {
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useDispatch();
     const [message, setMessage] = useState("");
     const userId = useSelector((state: RootState) => state.userSlice._id);
     const dailyQuestionsState = useSelector(
@@ -33,6 +38,11 @@ const MessageForBruno = () => {
             }
 
             const data = await res.json();
+
+            dispatch(setRecommendationActive());
+            dispatch(toggleRecommendationLoading());
+            dispatch(startRecommendationFetch());
+
             console.log("Activity saved successfully:", data);
         } catch (error) {
             console.error("Error saving activity:", error);
