@@ -68,7 +68,7 @@ export default function MakePost() {
                     <div className="font-medium text-lg md:text-xl px-3 sm:px-5 mt-10 mb-6">
                         Create a Post
                     </div>
-                    <form onSubmit={currentUser ? handlePostSubmit : ()=>alert("Please login to post")}>
+                    <form onSubmit={ handlePostSubmit}>
                         <div className="shadow-alldirection p-5 rounded-lg bg-white">
                             <div className=" flex w-full justify-between">
                                 <div className="flex flex-row gap-3 flex-wrap">
