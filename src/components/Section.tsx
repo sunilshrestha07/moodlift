@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { sectionPadding } from "@/app/globalStyles";
 import Avatar from "@/public/imagesforlandingpage/Avatar.svg";
@@ -7,12 +9,21 @@ import GetStarted from "@/public/imagesforlandingpage/GetStarted.svg";
 import Community from "@/public/imagesforlandingpage/Community.svg";
 import Mindfullness from "@/public/imagesforlandingpage/Mindfullness.svg";
 
+
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import SignupPopup from "./SignupPopup";
 const Section = () => {
+    const loginPopupStatus = useSelector(
+        (state: RootState) => state.popupSlice.isLoginPopupOpen
+      );
+      const currentUser = useSelector((state: RootState) => state.userSlice.name);
     const padding = `px-10vw`;
     return (
         <>
             <section className={`${sectionPadding}  py-[22px] w-full  h-full`}>
+            {!currentUser && loginPopupStatus && <SignupPopup />}
                 <div className="grid grid-10-90  gap-y-4 sm:gap-y-7">
                     <div className="row-span-1 grid lg:grid-cols-2 gap-x-16 gap-y-8  lg:gap-y-0 ">
                         <div className="sidebar  order-1  lg:order-2 sm:col-span-1 bg-[#6F5FFF] rounded-3xl sm:rounded-[54px]  flex flex-col p-[8%] 2xl:p-[10%]   ">
