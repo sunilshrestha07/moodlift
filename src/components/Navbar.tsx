@@ -30,6 +30,7 @@ const Navbar = () => {
     };
 
     const handelLogout = () => {
+        router.push("/")
       dispatch(setLogoutUser())
       window.location.reload()
       setIsShown(!isShown);
@@ -38,7 +39,6 @@ const Navbar = () => {
 
    const handelShow = () => {
       setIsShown(!isShown);
-      router.push("/");
    };
 
     return (

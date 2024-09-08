@@ -107,7 +107,7 @@ export default function Allpost({ refetchdata }: any) {
        };
    
        try {
-         const res = await axios.put(`/api/post/postId`, formdata);
+         const res = await axios.put(`/api/post/${postId}`, formdata);
          if (res.status === 200) {
            refetch(); // Fetch the latest data to ensure consistency
          }

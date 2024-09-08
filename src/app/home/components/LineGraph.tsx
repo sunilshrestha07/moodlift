@@ -173,27 +173,15 @@ const LineGraph = () => {
                                 },
                             ],
                         }}
+
                     />
                 )}
+
                 {isSleepSelected && isGraphDone && (
                     <Line
                         options={options}
                         data={{
                             labels: [
-                                // graphDate[0],
-                                // graphDate[1],
-                                // graphDate[2],
-                                // graphDate[3],
-                                // graphDate[4],
-                                // graphDate[5],
-                                // graphDate[6],
-                                // graphDate[7],
-                                // graphDate[8],
-                                // graphDate[9],
-                                // graphDate[10],
-                                // graphDate[11],
-                                // graphDate[12],
-                                // graphDate[13],
                                 graphDate[13],
                                 graphDate[12],
                                 graphDate[11],

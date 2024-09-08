@@ -95,7 +95,7 @@ const DailyStepper = () => {
 
   return (
     <>
-      <div className="flex ">
+      <div className="flex mb-10 sm:mb-0 ">
         <div className="mt-8 bg-white p-4 sm:p-6 rounded-lg shadow-lg w-full">
           <h2 className="text-xs sm:text-xl sm:font-semibold mb-4">
             Please complete this daily questionnaire
