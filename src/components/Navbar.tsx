@@ -177,6 +177,87 @@ const Navbar = () => {
                          onClick={handelShow}>
                            Profile
                         </button></Link>
+                            <Image
+                                src={logo}
+                                className="logo h-[4vh] md:h-[5vh] min-h-[2rem] w-auto object-contain"
+                                alt="Logo"
+                            />
+                        </Link>
+
+                        <nav className="w-auto h-[4vh] min-h-[2.5rem] flex ml-0 xl:ml-auto lg:mr-[10vw]">
+                            <ul className="nav-items flex md:ml-0 lg:gap-x-[20%] md:gap-x-4 gap-x-2 text-black items-center">
+                                <li>
+                                    <Link
+                                        href="/home"
+                                        className="hover:text-blue-600 text-xs lg:text-base"
+                                        onClick={() => dispatch(setActivePage("/home"))}
+                                    >
+                                        Home
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        href="/communitypost"
+                                        className="hover:text-blue-600 text-xs lg:text-base"
+                                        onClick={() => dispatch(setActivePage("/communitypost"))}
+                                    >
+                                        Community
+                                    </Link>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div className="gapper flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-4">
+                            {!userData.isAuthenticated && (
+                                <button
+                                    className="hidden sm:block bg-[#6F5FFF] rounded-lg px-3 md:px-[3vw] lg:px-11 py-2 text-white items-center text-xs sm:text-sm"
+                                    onClick={toggleLoginPopupFunction}
+                                >
+                                    Login
+                                </button>
+                            )}
+
+                            <div className="rounded-full box-border w-8 h-8 sm:w-10 sm:h-10 bg-[#D9D9D9] overflow-hidden">
+                                {userData.avatar ? (
+                                    <div className="">
+                                        <img
+                                            src={userData.avatar}
+                                            className="rounded-full w-full h-full object-cover"
+                                            alt="User Image"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="">
+                                        <img
+                                            src={userSvg.src}
+                                            className="rounded-full h-[100%] w-[100%] object-contain overflow-hidden"
+                                            alt="User Icon"
+                                        />
+                                    </div>
+                                )}
+                            </div>
+
+                            <button
+                                className="cursor-pointer right-2 mt-1 text-xl sm:hidden"
+                                onClick={handleSvgClick}
+                            >
+                                <span className="sr-only">Toggle Menu Navigation</span>
+                                <svg
+                                    width="1.2em"
+                                    height="1.6em"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M4 6H20M4 12H20M4 18H20"
+                                        stroke="#000000"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </button>
                         </div>
                         <button
                            className="bg-[#ebebf0] rounded-lg px-3 py-2 text-red-500 text-xs sm:text-sm outline-1 outline outline-gray-300 font-medium "
@@ -190,6 +271,24 @@ const Navbar = () => {
          </header>
       </div>
    );
+                        {/* This is the dropdown menu */}
+                        {isDropdownOpen && (
+                            <div className="w-full h-full bg-black/50 fixed top-0 left-0 -z-10">
+                                <div className="flex flex-col absolute top-[7vh] right-4 mt-2 w-[50vw] bg-white rounded-lg p-4 sm:hidden z-50">
+                                    <button
+                                        className="bg-[#6F5FFF] rounded-lg px-3 py-2 text-white text-xs sm:text-sm"
+                                        onClick={toggleLoginPopupFunction}
+                                    >
+                                        Login
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </header>
+        </div>
+    );
 };
 
 export default Navbar;

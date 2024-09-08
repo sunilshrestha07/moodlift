@@ -44,7 +44,10 @@ const userSlice = createSlice({
             state.email = "";
             state.avatar = "";
             state.isAuthenticated = false;
-        }
+        },
+        setAge: (state, action: PayloadAction<string>) => {
+            state.age = action.payload;
+        },
     },
 });
 
