@@ -22,6 +22,7 @@ import {
     setGraphStressLevel,
     setGraphSleepQuality,
 } from "../../../redux/features/graphDataSlice";
+import { setAiMessages, startFetchUserMessage } from "../../../redux/features/homePageSlice";
 
 const HomePage = () => {
     const [isFetched, setFetched] = useState(false);
@@ -36,6 +37,9 @@ const HomePage = () => {
     );
     const isAuthenticated = useSelector((state: RootState) => state.userSlice.isAuthenticated);
     const currentUser = useSelector((state: RootState) => state.userSlice.name);
+    const fetchUserMessage = useSelector(
+        (state: RootState) => state.homePageSlice.fetchUserMessage
+    );
 
     const userId = useSelector((state: RootState) => state.userSlice._id);
     const userAge = useSelector((state: RootState) => state.userSlice.age);
@@ -85,7 +89,43 @@ const HomePage = () => {
             setFetched(true);
         };
         getUserFromBackend();
+        dispatch(startFetchUserMessage());
     }, []);
+
+    // useEffect(() => {
+    //     const getSavedMessagesFromDb = async () => {
+    //         const res = await fetch(`/api/chatbot/${userId}/getMessage`);
+    //         const message = await res.json();
+    //         console.log({ messageFromDB: message });
+    //     };
+    //     getSavedMessagesFromDb();
+
+    //     dispatch(setAiMessages(message));
+    // }, [fetchUserMessage]);
+
+    useEffect(() => {
+        const getSavedMessagesFromDb = async () => {
+            try {
+                const res = await fetch(`/api/chatbot/${userId}/getMessage`);
+                if (!res.ok) {
+                    throw new Error("Failed to fetch messages");
+                }
+                const data = await res.json();
+                console.log({ messageFromDB: data });
+
+                // Assuming the API returns an object with a 'messages' array
+                if (Array.isArray(data.chatbotMessage)) {
+                    dispatch(setAiMessages(data.chatbotMessage));
+                } else {
+                    console.error("Unexpected data format from API");
+                }
+            } catch (error) {
+                console.error("Error fetching messages:", error);
+            }
+        };
+
+        getSavedMessagesFromDb();
+    }, [fetchUserMessage]);
 
     return (
         <div>

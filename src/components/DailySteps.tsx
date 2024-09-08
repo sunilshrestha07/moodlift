@@ -21,77 +21,75 @@ import { setCurrentStep } from "../../redux/features/dailyQuestionsSlice"; // Up
 import MessageForBruno from "./DailySteppper/MessageForBruno";
 
 const DailyStepper = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const currentStep = useSelector(
-    (state: RootState) => state.dailyQuestionsSlice.currentStep
-  ); // Access state from the dailyQuestionsSlice
-  const [isClient, setIsClient] = useState(false);
+    const dispatch = useDispatch<AppDispatch>();
+    const currentStep = useSelector((state: RootState) => state.dailyQuestionsSlice.currentStep); // Access state from the dailyQuestionsSlice
+    const [isClient, setIsClient] = useState(false);
 
-  const steps: string[] = [
-    "Mood",
-    "Mood Duration",
-    "Stress Level",
-    "Sleep Quality",
-    "Sleep Hours",
-    "Anxiety Symptoms",
-    "Sleep Disturbance",
-    "Physical Activity",
-    "Energy Levels",
-    "Eating Habits",
-    "Social Engagement",
-    "Loneliness",
-    "Current Treatment",
-  ];
+    const steps: string[] = [
+        "Mood",
+        "Mood Duration",
+        "Stress Level",
+        "Sleep Quality",
+        "Sleep Hours",
+        "Anxiety Symptoms",
+        "Sleep Disturbance",
+        "Physical Activity",
+        "Energy Levels",
+        "Eating Habits",
+        "Social Engagement",
+        "Loneliness",
+        "Current Treatment",
+    ];
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
-  const displaySteps = (step: number): React.ReactNode => {
-    if (!isClient) return null;
-    switch (step) {
-      case 0:
-        return <Mood />;
-      case 1:
-        return <MoodDuration />;
-      case 2:
-        return <StressLevel />;
-      case 3:
-        return <SleepQuality />;
-      case 4:
-        return <SleepHours />;
-      case 5:
-        return <SleepDisturbance />;
-      case 6:
-        return <AnxietySymptoms />;
-      case 7:
-        return <PhysicalActivity />;
-      case 8:
-        return <EnergyLevels />;
-      case 9:
-        return <EatingHabits />;
-      case 10:
-        return <SocialEngagement />;
-      case 11:
-        return <Loneliness />;
-      case 12:
-        return <CurrentTreatment />;
-      case 13:
-        return <MessageForBruno />;
-      default:
-        return null;
-    }
-  };
-  const handleClick = (direction: string) => {
-    let newStep = currentStep;
-    if (direction === "prev") {
-      newStep = Math.max(currentStep - 1, 0);
-    }
+    const displaySteps = (step: number): React.ReactNode => {
+        if (!isClient) return null;
+        switch (step) {
+            case 0:
+                return <Mood />;
+            case 1:
+                return <MoodDuration />;
+            case 2:
+                return <StressLevel />;
+            case 3:
+                return <SleepQuality />;
+            case 4:
+                return <SleepHours />;
+            case 5:
+                return <SleepDisturbance />;
+            case 6:
+                return <AnxietySymptoms />;
+            case 7:
+                return <PhysicalActivity />;
+            case 8:
+                return <EnergyLevels />;
+            case 9:
+                return <EatingHabits />;
+            case 10:
+                return <SocialEngagement />;
+            case 11:
+                return <Loneliness />;
+            case 12:
+                return <CurrentTreatment />;
+            case 13:
+                return <MessageForBruno />;
+            default:
+                return null;
+        }
+    };
+    const handleClick = (direction: string) => {
+        let newStep = currentStep;
+        if (direction === "prev") {
+            newStep = Math.max(currentStep - 1, 0);
+        }
 
-    dispatch(setCurrentStep(newStep));
-  };
+        dispatch(setCurrentStep(newStep));
+    };
 
-  // Remove the handleClick function and button for navigation
+    // Remove the handleClick function and button for navigation
 
   return (
     <>
