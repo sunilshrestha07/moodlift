@@ -15,7 +15,7 @@ export default function Page() {
     // const currentUser = useSelector((state: RootState) => state.userSlice);
     const dispatch = useDispatch();
 
-    const currentUser = useSelector((state: RootState) => state.userSlice.age);
+    const currentUser = useSelector((state: RootState) => state.userSlice._id);
     useEffect(() => {
         if (currentUser) {
             dispatch(toggleLoginPopup());
@@ -25,8 +25,10 @@ export default function Page() {
     return (
         <>
             <div className="">
-                <Section />
-                <Steps />
+                
+                {!currentUser &&  <Section />}
+                {!currentUser &&  <Steps />}
+
                 {!currentUser && loginPopupStatus && <SignupPopup />}
 
                 {/* {loginPopupStatus && <SignupPopup />} */}
