@@ -45,6 +45,11 @@ const userSchema = new mongoose.Schema(
                 type: String,
             },
         ],
+        chatbotRecommendation: [
+            {
+                type: String,
+            },
+        ],
         activityInfo: [
             {
                 date: { type: Date, default: Date.now },
@@ -63,53 +68,53 @@ const userSchema = new mongoose.Schema(
                 currentTreatment: String,
             },
         ],
-        isCertified:{
-            type:Boolean,
-            default:false
+        isCertified: {
+            type: Boolean,
+            default: false,
         },
-        verificationDocuments:[
+        verificationDocuments: [
             {
                 fullname: {
                     type: String,
-                  },
-                  officialemail: {
+                },
+                officialemail: {
                     type: String,
-                  },
-                  phone: {
+                },
+                phone: {
                     type: Number,
-                  },
-                  address: {
+                },
+                address: {
                     type: String,
-                  },
-                  licence: {
+                },
+                licence: {
                     type: String,
-                  },
-                  expiryDate: {
+                },
+                expiryDate: {
                     type: Date,
-                  },
-                  province: {
+                },
+                province: {
                     type: String,
-                  },
-                  licenceImage: {
+                },
+                licenceImage: {
                     type: String,
-                  },
-                  educationImage: {
+                },
+                educationImage: {
                     type: String,
-                  },
-                  photoId: {
+                },
+                photoId: {
                     type: String,
-                  },
-                  workplace: {
+                },
+                workplace: {
                     type: String,
-                  },
-                  experience: {
+                },
+                experience: {
                     type: Number,
-                  },
-                  specializations: {
+                },
+                specializations: {
                     type: String,
-                  },
-            }
-        ]
+                },
+            },
+        ],
     },
     { timestamps: true }
 );

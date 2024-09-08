@@ -38,6 +38,8 @@ const MessageForBruno = () => {
             }
 
             const data = await res.json();
+
+            dispatch(setRecommendationActive());
             console.log("Activity saved successfully:", data);
         } catch (error) {
             console.error("Error saving activity:", error);
