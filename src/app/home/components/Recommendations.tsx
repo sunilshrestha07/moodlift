@@ -61,8 +61,18 @@ const Recommendations = () => {
             setLoading(false);
         };
 
+        const generateMessage = async () => {
+            const result2: GenerateContentResult = await model.generateContent(
+                `you are a friendly male professional psychiatrist named Bruno and you give a sweet ad funny comment or conversation on the baisis of  Keep the response within 15 to 20 word ${userInfos}`
+            );
+            const resText = result2.response.text();
+
+            // const;
+        };
+
         setTimeout(() => {
             getResFromGemini();
+            generateMessage();
         }, 1200);
     }, [fetchRecommendation]);
 
