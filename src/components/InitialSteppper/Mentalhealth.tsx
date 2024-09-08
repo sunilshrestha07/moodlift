@@ -33,6 +33,9 @@ const Mentalhealth: React.FC = () => {
     const traumaticEvents = useSelector(
         (state: RootState) => state.initialQsnSlice.traumaticEvents
     );
+    const currentUserId = useSelector(
+        (state: RootState) => state.userSlice._id
+    );
 
     const handleOptionClick = (option: string) => {
         if (selectedOptions.includes(option)) {

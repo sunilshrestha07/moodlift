@@ -101,13 +101,6 @@ const SignupPopup = () => {
                     <div>or</div>
                     <div className="w-full h-[2px] bg-black rounded-md"></div>
                 </div>
-                <div className="mt-4">
-                    <div className="bg-gray-400 py-4 px-6 h-10 w-full flex items-center justify-center shadow-buttonShadow rounded-lg cursor-pointer gap-3">
-                        <div className="select-none text-xs md:text-sm">
-                            Continue as Guest
-                        </div>
-                    </div>
-                </div>
 
                 <div className="text-sm font-light mt-16">
                     <p>You can either log in with Google or Continue as a Guest</p>

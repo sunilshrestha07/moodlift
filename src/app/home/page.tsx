@@ -23,6 +23,7 @@ import {
     setGraphSleepQuality,
 } from "../../../redux/features/graphDataSlice";
 import { setAiMessages, startFetchUserMessage } from "../../../redux/features/homePageSlice";
+import { setAge } from "../../../redux/features/userSlice";
 
 const HomePage = () => {
     const [isFetched, setFetched] = useState(false);
@@ -87,6 +88,7 @@ const HomePage = () => {
             // need to be done
             console.log({ user: user });
             setFetched(true);
+            dispatch(setAge(user.age))
         };
         getUserFromBackend();
         dispatch(startFetchUserMessage());
