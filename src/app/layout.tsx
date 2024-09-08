@@ -3,6 +3,8 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import Navbar from "../components/Navbar";
 import ReduxProvider from "../../redux/features/ReduxProvider";
+import blurBlob from "@/public/blobs/blueBlob.svg";
+import Image from "next/image";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -24,6 +26,9 @@ export default function RootLayout({
             <body className={`${poppins.className}`}>
                 <ReduxProvider>
                     <Navbar />
+                    <div className="absolute">
+                        <Image src={blurBlob} alt="blob" />
+                    </div>
                     {children}
                 </ReduxProvider>
             </body>

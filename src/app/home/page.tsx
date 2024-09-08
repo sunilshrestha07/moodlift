@@ -11,7 +11,6 @@ import SignupPopup from "@/components/SignupPopup";
 import { pagePadding } from "../globalStyles";
 import DailyStepper from "@/components/DailySteps";
 import Recommendations from "./components/Recommendations";
-import Stepper from "@/components/Stepper";
 import NewUserPopup from "../NewUserPopups/NewUserPopup";
 import { toggleLoginPopup } from "../../../redux/features/popupSlice";
 import {
@@ -23,6 +22,7 @@ import {
     setGraphSleepQuality,
 } from "../../../redux/features/graphDataSlice";
 import { setAiMessages, startFetchUserMessage } from "../../../redux/features/homePageSlice";
+import Image from "next/image";
 
 const HomePage = () => {
     const [isFetched, setFetched] = useState(false);
