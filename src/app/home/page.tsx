@@ -106,29 +106,29 @@ const HomePage = () => {
     //     dispatch(setAiMessages(message));
     // }, [fetchUserMessage]);
 
-    useEffect(() => {
-        const getSavedMessagesFromDb = async () => {
-            try {
-                const res = await fetch(`/api/chatbot/${userId}/getMessage`);
-                if (!res.ok) {
-                    throw new Error("Failed to fetch messages");
-                }
-                const data = await res.json();
-                console.log({ messageFromDB: data });
+    // useEffect(() => {
+    //     const getSavedMessagesFromDb = async () => {
+    //         try {
+    //             const res = await fetch(`/api/chatbot/${userId}/getMessage`);
+    //             if (!res.ok) {
+    //                 throw new Error("Failed to fetch messages");
+    //             }
+    //             const data = await res.json();
+    //             console.log({ messageFromDB: data });
 
-                // Assuming the API returns an object with a 'messages' array
-                if (Array.isArray(data.chatbotMessage)) {
-                    dispatch(setAiMessages(data.chatbotMessage));
-                } else {
-                    console.error("Unexpected data format from API");
-                }
-            } catch (error) {
-                console.error("Error fetching messages:", error);
-            }
-        };
+    //             // Assuming the API returns an object with a 'messages' array
+    //             if (Array.isArray(data.chatbotMessage)) {
+    //                 dispatch(setAiMessages(data.chatbotMessage));
+    //             } else {
+    //                 console.error("Unexpected data format from API");
+    //             }
+    //         } catch (error) {
+    //             console.error("Error fetching messages:", error);
+    //         }
+    //     };
 
-        getSavedMessagesFromDb();
-    }, [fetchUserMessage]);
+    //     getSavedMessagesFromDb();
+    // }, [fetchUserMessage]);
 
     return (
         <div>
