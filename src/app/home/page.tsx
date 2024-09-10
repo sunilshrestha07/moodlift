@@ -11,7 +11,6 @@ import SignupPopup from "@/components/SignupPopup";
 import { pagePadding } from "../globalStyles";
 import DailyStepper from "@/components/DailySteps";
 import Recommendations from "./components/Recommendations";
-import Stepper from "@/components/Stepper";
 import NewUserPopup from "../NewUserPopups/NewUserPopup";
 import { toggleLoginPopup } from "../../../redux/features/popupSlice";
 import {
@@ -22,7 +21,9 @@ import {
     setGraphStressLevel,
     setGraphSleepQuality,
 } from "../../../redux/features/graphDataSlice";
+//
 import { setAiMessages, startFetchUserMessage } from "../../../redux/features/homePageSlice";
+import Image from "next/image";
 import { setAge } from "../../../redux/features/userSlice";
 
 const HomePage = () => {
@@ -88,7 +89,7 @@ const HomePage = () => {
             // need to be done
             console.log({ user: user });
             setFetched(true);
-            dispatch(setAge(user.age))
+            dispatch(setAge(user.age));
         };
         getUserFromBackend();
         dispatch(startFetchUserMessage());
@@ -105,29 +106,29 @@ const HomePage = () => {
     //     dispatch(setAiMessages(message));
     // }, [fetchUserMessage]);
 
-    useEffect(() => {
-        const getSavedMessagesFromDb = async () => {
-            try {
-                const res = await fetch(`/api/chatbot/${userId}/getMessage`);
-                if (!res.ok) {
-                    throw new Error("Failed to fetch messages");
-                }
-                const data = await res.json();
-                console.log({ messageFromDB: data });
+    // useEffect(() => {
+    //     const getSavedMessagesFromDb = async () => {
+    //         try {
+    //             const res = await fetch(`/api/chatbot/${userId}/getMessage`);
+    //             if (!res.ok) {
+    //                 throw new Error("Failed to fetch messages");
+    //             }
+    //             const data = await res.json();
+    //             console.log({ messageFromDB: data });
 
-                // Assuming the API returns an object with a 'messages' array
-                if (Array.isArray(data.chatbotMessage)) {
-                    dispatch(setAiMessages(data.chatbotMessage));
-                } else {
-                    console.error("Unexpected data format from API");
-                }
-            } catch (error) {
-                console.error("Error fetching messages:", error);
-            }
-        };
+    //             // Assuming the API returns an object with a 'messages' array
+    //             if (Array.isArray(data.chatbotMessage)) {
+    //                 dispatch(setAiMessages(data.chatbotMessage));
+    //             } else {
+    //                 console.error("Unexpected data format from API");
+    //             }
+    //         } catch (error) {
+    //             console.error("Error fetching messages:", error);
+    //         }
+    //     };
 
-        getSavedMessagesFromDb();
-    }, [fetchUserMessage]);
+    //     getSavedMessagesFromDb();
+    // }, [fetchUserMessage]);
 
     return (
         <div>

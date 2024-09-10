@@ -17,6 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 export const AIGreetHistory = () => {
     // const isReportActive = useSelector((state:RootState)=>state.)
     // useEffect(() => {}, [isReportActive]);
+    useEffect(() => {}, []);
+
     return (
         // row-span-2 md:col-span-2
         <div className="bg-black/10 relative backdrop-blur-3xl rounded-md p-4 col-span-1 h-full w-full overflow-hidden">
